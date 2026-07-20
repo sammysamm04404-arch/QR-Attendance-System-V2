@@ -1,0 +1,468 @@
+/* =========================================================
+   HISTORY PAGE BASE STYLES
+========================================================= */
+
+.history-container{
+    padding:30px;
+    background:#f8fafc;
+    min-height:100vh;
+}
+
+.history-header{
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+    color:white;
+    padding:35px;
+    border-radius:22px;
+    margin-bottom:30px;
+    box-shadow:0 20px 45px rgba(37,99,235,.18);
+}
+
+.history-header h1{
+    font-size:36px;
+    font-weight:700;
+    margin-bottom:8px;
+}
+
+.history-header p{
+    font-size:15px;
+    opacity:.9;
+}
+
+/* ==========================
+   STATISTICS
+========================== */
+
+.history-stats{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:16px;
+    margin-bottom:30px;
+}
+
+.history-stat-card{
+    background:#fff;
+    border-radius:20px;
+    padding:24px;
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    position:relative;
+    overflow:hidden;
+    transition:.3s;
+}
+
+.history-stat-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(90deg,#2563eb,#4f46e5);
+}
+
+.history-stat-card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 20px 40px rgba(37,99,235,.15);
+}
+
+.history-stat-card h3{
+    font-size:15px;
+    color:#64748b;
+    margin-bottom:10px;
+}
+
+.history-stat-card span{
+    font-size:32px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+/* ==========================
+   FILTERS (Optimized Desktop Layout)
+========================== */
+
+.history-filters{
+    background:#fff;
+    padding:22px;
+    border-radius:18px;
+    display:grid;
+    grid-template-columns:2fr 1fr 1fr 1fr; /* Defines 4 clean structural columns */
+    gap:14px;
+    margin-bottom:28px;
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    align-items: center; /* Vertically aligns elements perfectly with each other */
+}
+
+.history-filters input,
+.history-filters select{
+    width:100%; /* FIX: Changed from 80% to 100% to fill grid lanes flush */
+    padding:12px 14px;
+    border:1px solid #dbe4ef;
+    border-radius:10px;
+    outline:none;
+    font-size:14px;
+    background:white;
+    transition:.25s;
+    box-sizing: border-box;
+}
+
+.history-filters input:focus,
+.history-filters select:focus{
+    border-color:#2563eb;
+    box-shadow:0 0 0 4px rgba(37,99,235,.12);
+}
+
+.history-filters button {
+    display: flex;
+    width: max-content;
+    min-width: 130px; 
+    padding: 12px 20px;
+    justify-self: start;
+    align-items: center; 
+    justify-content: center;
+    gap: 8px;
+    background: #EF4444;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+    transition: background-color 0.2s ease;
+    box-sizing: border-box;
+    white-space: nowrap;
+}
+
+.history-filters button:hover {
+    background: #DC2626;
+}
+
+/* ==========================
+   TABLE
+========================== */
+
+.history-table-container{
+    background:white;
+    border-radius:18px;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+}
+
+.history-table{
+    width:100%;
+    border-collapse:collapse;
+}
+
+.history-table thead{
+    background:#2563eb;
+    color:white;
+}
+
+.history-table th{
+    padding:18px;
+    text-align:left;
+    font-size:15px;
+    font-weight:600;
+}
+
+.history-table td{
+    padding:18px;
+    border-bottom:1px solid #eef2f7;
+    color:#334155;
+}
+
+.history-table tbody tr{
+    transition:.25s;
+}
+
+.history-table tbody tr:hover{
+    background:#f8fafc;
+}
+
+.history-empty{
+    text-align:center;
+    padding:40px;
+    font-size:18px;
+    color:#64748b;
+}
+
+.history-loading{
+    padding:60px;
+    text-align:center;
+    font-size:20px;
+    color:#64748b;
+}
+
+/* ==========================
+   BADGES
+========================== */
+
+.badge{
+    padding:6px 12px;
+    border-radius:24px;
+    color:white;
+    font-size:12px;
+    font-weight:600;
+    display:inline-block;
+}
+
+.badge.check-in{
+    background:#22c55e;
+}
+
+.badge.break{
+    background:#f59e0b;
+}
+
+.badge.break-over{
+    background:#3b82f6;
+}
+
+.badge.check-out{
+    background:#ef4444;
+}
+
+/* ==========================
+   PAGINATION
+========================== */
+
+.pagination{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:14px;
+    margin-top:24px;
+    flex-wrap:wrap;
+}
+
+.pagination button{
+    padding:10px 18px;
+    border:none;
+    border-radius:10px;
+    background:#2563eb;
+    color:white;
+    cursor:pointer;
+    font-size:14px;
+    transition:.25s;
+}
+
+.pagination button:hover:not(:disabled){
+    background:#1d4ed8;
+}
+
+.pagination button:disabled{
+    background:#94a3b8;
+    cursor:not-allowed;
+}
+
+.pagination span{
+    font-size:14px;
+    font-weight:600;
+}
+
+/* =========================================================
+   TABLET CONFIGURATIONS (768px Width Screens)
+========================================================= */
+
+@media (max-width:768px){
+    .history-container{padding:16px;}
+    .history-header{padding:22px;border-radius:18px;margin-bottom:20px;}
+    .history-header h1{font-size:28px;}
+    .history-header p{font-size:14px;}
+
+    .history-stats{
+        display:grid;
+        grid-template-columns:repeat(2,1fr);
+        gap:12px;
+        margin-bottom:20px;
+    }
+
+    .history-stat-card{padding:16px;border-radius:16px;}
+    .history-stat-card h3{font-size:12px;}
+    .history-stat-card span{font-size:22px;}
+
+    /* --- FILTERS MOBILE CONVERSION --- */
+    .history-filters {
+        display: grid;
+        /* Creates a proportional split: Left side is wider, Right side is narrower */
+        grid-template-columns: 1.8fr 1.2fr; 
+        gap: 10px;
+        padding: 14px;
+        border-radius: 14px;
+        margin-bottom: 20px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+    }
+
+    /* ROW 1: Search and Action Filter side-by-side */
+    .history-filters input[type="text"] {
+        grid-column: 1;
+        grid-row: 1;
+        padding: 10px 12px;
+        width: 100%;
+    }
+
+    .history-filters select {
+        grid-column: 2;
+        grid-row: 1;
+        padding: 10px 8px;
+        width: 100%;
+        font-size: 13px;
+        color: #334155;
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+    }
+
+    /* ROW 2: Date Picker and Clear Button side-by-side */
+    .history-filters input[type="date"] {
+        grid-column: 1;
+        grid-row: 2;
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 13px;
+        color: #334155;
+        background-color: #f8fafc;
+        border: 1px solid #e2e8f0;
+    }
+
+    .history-filters button {
+        grid-column: 2;
+        grid-row: 2;
+        width: 100%; /* Perfectly matches the width of the Select dropdown above it */
+        padding: 10px 12px;
+        font-size: 13px;
+        height: 100%; /* Ensures identical height matching the date input box */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        white-space: nowrap;
+    }
+
+    .history-filters input::placeholder {
+        color: #94a3b8;
+    }
+
+    /* --- TABLE STYLES --- */
+    .history-table-container{
+        overflow:hidden;
+    }
+
+    .history-table{
+        width:100%;
+        table-layout:fixed;
+        min-width:100%;
+    }
+
+    .history-table th,
+    .history-table td{
+        padding:10px 5px;
+        font-size:12px;
+        vertical-align:middle;
+    }
+
+    .history-table th:nth-child(1),
+    .history-table td:nth-child(1){width:7%;text-align:center;}
+    .history-table th:nth-child(2),
+    .history-table td:nth-child(2){width:18%;}
+    .history-table th:nth-child(3),
+    .history-table td:nth-child(3){width:16%;}
+    .history-table th:nth-child(4),
+    .history-table td:nth-child(4){width:22%;}
+    .history-table th:nth-child(5),
+    .history-table td:nth-child(5){
+        width:37%;
+        word-break:break-word;
+    }
+
+    .badge{
+        padding:4px 7px;
+        font-size:10px;
+        border-radius:10px;
+    }
+
+    .pagination{
+        flex-wrap:wrap;
+        gap:8px;
+    }
+}
+
+/* =========================================================
+   MOBILE CONFIGURATIONS (480px Width Screens)
+========================================================= */
+
+@media (max-width:480px){
+    .history-container{padding:10px;}
+
+    /* --- FILTERS SMALL CELL SIZE --- */
+    .history-filters {
+        padding: 10px;
+        gap: 8px;
+        margin-bottom: 16px;
+        border-radius: 12px;
+    }
+
+    .history-filters input[type="text"],
+    .history-filters select,
+    .history-filters input[type="date"],
+    .history-filters button {
+        padding: 10px 8px;
+        font-size: 12px;
+        border-radius: 8px;
+    }
+
+    /* --- MOBILE STATS --- */
+    .history-stats{
+        grid-template-columns:repeat(2,1fr);
+        gap:8px;
+    }
+
+    .history-stat-card{
+        padding:12px;
+    }
+
+    .history-stat-card h3{
+        font-size:10px;
+    }
+
+    .history-stat-card span{
+        font-size:15px;
+    }
+
+    /* --- MOBILE TABLE --- */
+    .history-table{
+        table-layout:fixed;
+    }
+
+    .history-table th,
+    .history-table td{
+        padding:7px 3px;
+        font-size:10px;
+        line-height:1.15;
+    }
+
+    .history-table th:nth-child(1),
+    .history-table td:nth-child(1){width:6%;}
+    .history-table th:nth-child(2),
+    .history-table td:nth-child(2){width:18%;}
+    .history-table th:nth-child(3),
+    .history-table td:nth-child(3){width:16%;}
+    .history-table th:nth-child(4),
+    .history-table td:nth-child(4){width:23%;}
+    .history-table th:nth-child(5),
+    .history-table td:nth-child(5){
+        width:37%;
+        word-break:break-word;
+    }
+
+    .badge{
+        padding:2px 5px;
+        font-size:9px;
+    }
+
+    .pagination{
+        flex-direction:column;
+    }
+
+    .pagination button{
+        width:100%;
+    }
+}

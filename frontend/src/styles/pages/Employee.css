@@ -1,0 +1,855 @@
+/* Base & Desktop Styles */
+
+.employees-page {
+    max-width: 1400px;
+    margin: 40px auto;
+    padding: 0 30px 60px;
+    box-sizing: border-box;
+}
+
+/* Header */
+.employee-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.employee-header h1 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 38px;
+    font-weight: 700;
+    color: #1E293B;
+    margin: 0;
+}
+
+.header-icon {
+    color: #4F46E5;
+}
+
+.employee-header p {
+    margin-top: 10px;
+    margin-bottom: 0;
+    color: #64748B;
+    font-size: 16px;
+}
+
+.add-employee-btn {
+    background: #4F46E5;
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 16px 28px;
+    font-size: 17px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .3s;
+    box-shadow: 0 12px 30px rgba(79,70,229,.25);
+    white-space: nowrap;
+}
+
+.add-employee-btn:hover {
+    transform: translateY(-3px);
+    background: #4338CA;
+}
+
+/* Search Box */
+.employee-search-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 35px;
+}
+
+.search-box {
+    width: 100%;
+    max-width: 520px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: white;
+    padding: 14px 18px;
+    border-radius: 14px;
+    box-shadow: 0 10px 25px rgba(0,0,0,.08);
+    transition: .3s;
+    box-sizing: border-box;
+}
+
+.search-box:focus-within {
+    box-shadow: 0 0 0 3px rgba(79,70,229,.2);
+}
+
+.search-icon {
+    color: #64748B;
+    font-size: 18px;
+}
+
+.search-box input {
+    flex: 1;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    background: transparent;
+}
+
+.search-box input::placeholder {
+    color: #94A3B8;
+}
+
+/* Table Lists / Rows */
+.employee-table {
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+}
+
+.employee-card {
+    background: white;
+    border-radius: 20px;
+    padding: 22px 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 10px 30px rgba(15,23,42,.08);
+    transition: .35s;
+    box-sizing: border-box;
+}
+
+.employee-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 45px rgba(79,70,229,.15);
+}
+
+.employee-left {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+}
+
+.employee-avatar {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,#6366F1,#8B5CF6);
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 38px;
+    flex-shrink: 0;
+}
+
+.employee-left h3 {
+    font-size: 22px;
+    color: #1E293B;
+    margin: 0 0 6px 0;
+}
+
+.employee-left p {
+    margin: 0;
+    color: #64748B;
+    font-size: 15px;
+}
+
+.employee-middle {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    min-width: 260px;
+    justify-content: center;
+}
+
+.role-badge,
+.status-active,
+.status-inactive {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.role-badge {
+    background: #EEF2FF;
+    color: #4F46E5;
+}
+
+.status-active {
+    background: #DCFCE7;
+    color: #15803D;
+}
+
+.status-inactive {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.employee-actions {
+    display: flex;
+    gap: 12px;
+    min-width: 120px;
+    justify-content: flex-end;
+}
+
+.employee-actions button {
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 14px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    transition: .3s;
+}
+
+.edit-btn {
+    background: #EEF2FF;
+    color: #4F46E5;
+}
+
+.edit-btn:hover {
+    background: #4F46E5;
+    color: white;
+}
+
+.table-delete-btn {
+    background: #FEE2E2;
+    color: #DC2626;
+}
+
+.table-delete-btn:hover {
+    background: #DC2626;
+    color: white;
+}
+
+/* Modals Core Overhauls */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 460px;
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 25px 60px rgba(0,0,0,.25);
+    box-sizing: border-box;
+}
+
+.modal-card h2 {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #1E293B;
+}
+
+.modal-card label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.modal-card input,
+.modal-card select {
+    width: 100%;
+    padding: 14px;
+    border: 1px solid #CBD5E1;
+    border-radius: 12px;
+    font-size: 15px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+.modal-card input:focus,
+.modal-card select:focus {
+    border-color: #4F46E5;
+}
+
+.modal-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+.cancel-btn,
+.save-btn {
+    border: none;
+    padding: 12px 22px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.cancel-btn {
+    background: #E2E8F0;
+    color: #334155;
+}
+
+.save-btn {
+    background: #4F46E5;
+    color: white;
+}
+
+.save-btn:hover {
+    background: #4338CA;
+}
+
+/* Delete Modal */
+.delete-modal {
+    width: 100%;
+    max-width: 420px;
+    background: white;
+    padding: 35px;
+    border-radius: 18px;
+    text-align: center;
+    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    box-sizing: border-box;
+}
+
+.delete-modal h2 {
+    color: #DC2626;
+    margin-top: 0;
+    margin-bottom: 18px;
+}
+
+.delete-modal p {
+    color: #334155;
+    font-size: 16px;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.delete-modal span {
+    color: #94A3B8;
+    font-size: 14px;
+    display: block;
+}
+
+.delete-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.delete-buttons button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.delete-btn {
+    background: #DC2626;
+    color: white;
+}
+
+.delete-btn:hover {
+    background: #B91C1C;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 25px;
+}
+
+.pagination button {
+    padding: 12px 22px;
+    border: none;
+    background: #4F46E5;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.pagination button:disabled {
+    background: #CBD5E1;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 15px;
+    font-weight: 600;
+    color: #334155;
+}
+
+
+/* CROSS-DEVICE RESPONSIVE REDESIGN */
+
+@media (max-width: 1200px) {
+    .employee-card {
+        padding: 20px;
+        gap: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+    .employees-page {
+        padding: 0 20px 40px;
+        margin: 24px auto;
+    }
+
+    .employee-header h1 {
+        font-size: 30px;
+    }
+
+    .employee-table {
+        gap: 18px;
+    }
+}
+
+/* Mobile Screens (768px and down) */
+@media (max-width: 768px) {
+    .employees-page {
+        padding: 14px;
+        margin: 10px auto;
+    }
+
+    /* Keeps window-style split layout row structure for header */
+    .employee-header {
+        display: flex;
+        flex-direction: row; 
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
+        margin-bottom: 24px;
+    }
+
+    .employee-header h1 {
+        font-size: 20px;
+        gap: 6px;
+    }
+
+    .employee-header p {
+        display: none; /* Hide long subtext on mobile to save space */
+    }
+
+    .add-employee-btn {
+        padding: 9px 15px;
+        font-size: 12px;
+        border-radius: 8px;
+        width: auto;
+    }
+
+    /* Search Component Stack */
+    .employee-search-container {
+        flex-direction: column;
+        align-items: stretch;
+        margin-bottom: 24px;
+    }
+
+    .search-box {
+        padding: 10px 14px;
+        border-radius: 10px;
+    }
+
+    .search-icon {
+        font-size: 16px;
+    }
+
+    .search-box input {
+        font-size: 14px;
+    }
+
+    /* FIXED SAME-LINE GRID LAYOUT FOR EMPLOYEE CARDS */
+    .employee-card {
+        display: grid;
+        grid-template-columns: 1fr auto; /* Content on left, Actions tightly on right */
+        gap: 12px;
+        padding: 16px;
+        border-radius: 14px;
+        align-items: center; /* Vertically center buttons relative to the card contents */
+    }
+
+    /* Profile Row (Top Left) */
+    .employee-left {
+        grid-column: 1;
+        grid-row: 1;
+        gap: 14px;
+        width: 100%;
+    }
+
+    .employee-avatar {
+        width: 46px;
+        height: 46px;
+        font-size: 22px;
+    }
+
+    .employee-left h3 {
+        font-size: 15px;
+        margin-bottom: 2px;
+    }
+
+    .employee-left p {
+        font-size: 12.5px;
+    }
+
+    /* Badges Row (Bottom Left) */
+    .employee-middle {
+        grid-column: 1;
+        grid-row: 2;
+        min-width: auto;
+        justify-content: flex-start;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .role-badge,
+    .status-active,
+    .status-inactive {
+        padding: 5px 10px;
+        font-size: 11px;
+        border-radius: 6px;
+        gap: 4px;
+    }
+
+    /* Action Buttons (Right Side - Spans across both content rows) */
+    .employee-actions {
+        grid-column: 2;
+        grid-row: 1 / span 2; /* Centers buttons perfectly on the right side */
+        display: flex;
+        flex-direction: row; /* Horizontal side-by-side alignment */
+        gap: 8px;
+        min-width: auto;
+        width: auto;
+        justify-content: flex-end;
+        border-top: none; /* Removed the ugly line break separator */
+        padding-top: 0;
+    }
+
+    .employee-actions button {
+        width: 36px;
+        height: 36px;
+        font-size: 14px;
+        border-radius: 8px;
+    }
+
+    /* Form Modals */
+    .modal-card, 
+    .delete-modal {
+        padding: 20px;
+        border-radius: 14px;
+    }
+
+    .modal-card h2,
+    .delete-modal h2 {
+        font-size: 16px;
+        margin-bottom: 16px;
+    }
+
+    .modal-card label {
+        font-size: 12px;
+        margin-top: 12px;
+        margin-bottom: 6px;
+    }
+
+    .modal-card input,
+    .modal-card select {
+        padding: 10px;
+        font-size: 13.5px;
+        border-radius: 8px;
+    }
+
+    .modal-buttons,
+    .delete-buttons {
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .cancel-btn,
+    .save-btn,
+    .delete-buttons button {
+        padding: 10px 16px;
+        font-size: 12.5px;
+        border-radius: 8px;
+    }
+
+    .delete-modal p {
+        font-size: 13.5px;
+    }
+
+    .delete-modal span {
+        font-size: 11.5px;
+    }
+
+    /* Pagination */
+    .pagination {
+        gap: 14px;
+        margin-top: 24px;
+    }
+
+    .pagination button {
+        padding: 9px 16px;
+        font-size: 12.5px;
+        border-radius: 8px;
+    }
+
+    .pagination span {
+        font-size: 13px;
+    }
+
+    /* Disable hover animation shifts on touch screens */
+    .employee-card:hover,
+    .add-employee-btn:hover {
+        transform: none !important;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, .08) !important;
+    }
+}
+
+/* Extra Small Screens (480px and down) */
+@media (max-width: 480px) {
+    .employees-page {
+        padding: 10px;
+    }
+
+    .employee-header h1 {
+        font-size: 17px;
+    }
+    
+    .add-employee-btn {
+        padding: 8px 12px;
+        font-size: 11.5px;
+    }
+
+    .modal-buttons,
+    .delete-buttons {
+        justify-content: space-between;
+        width: 100%;
+    }
+
+    .cancel-btn,
+    .save-btn,
+    .delete-buttons button {
+        flex: 1;
+        text-align: center;
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+}
+
+/* =====================================================
+   CORE BASE STYLES (Desktop Baseline Configuration)
+===================================================== */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(15, 23, 42, 0.45); /* Modern slate tinted overlay backing */
+    backdrop-filter: blur(4px); /* Premium application-grade glass softening */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.modal-card {
+    width: 100%;
+    max-width: 460px; /* Fluid wrapper boundary limits */
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15);
+    box-sizing: border-box;
+    animation: modalPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-card h2 {
+    margin-top: 0;
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* Form Input Layout Stack */
+.modal-card form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-card label {
+    display: block;
+    margin-top: 16px;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #334155;
+    font-size: 14px;
+}
+
+/* Normalize input fields to eliminate browser variance */
+.modal-card input,
+.modal-card select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #1e293b;
+    background-color: #ffffff;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
+}
+
+.modal-card input:focus,
+.modal-card select:focus {
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+/* Modal Actions Strip */
+.modal-buttons {
+    margin-top: 28px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.cancel-btn,
+.save-btn {
+    border: none;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
+}
+
+.cancel-btn {
+    background: #e2e8f0;
+    color: #334155;
+}
+
+.cancel-btn:hover {
+    background: #cbd5e1;
+}
+
+.save-btn {
+    background: #4f46e5;
+    color: #ffffff;
+}
+
+.save-btn:hover {
+    background: #4338ca;
+}
+
+/* Micro Pop Keyframe Animation */
+@keyframes modalPopIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+
+/* =====================================================
+   CROSS-DEVICE RESPONSIVE REDESIGN
+===================================================== */
+
+/* Mobile Viewports (768px and down) */
+@media (max-width: 768px) {
+    .modal-overlay {
+        padding: 12px; /* Generates breathing room for the virtual keyboard bounding boxes */
+    }
+
+    /* Micro-scaled container footprint */
+    .modal-card {
+        padding: 20px;
+        border-radius: 14px;
+        max-width: 400px;
+    }
+
+    .modal-card h2 {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    /* Crisp Micro Typography Scaling */
+    .modal-card label {
+        font-size: 12px;
+        margin-top: 12px;
+        margin-bottom: 4px;
+    }
+
+    .modal-card input,
+    .modal-card select {
+        padding: 10px 12px;
+        font-size: 13.5px;
+        border-radius: 8px;
+    }
+
+    /* Action Container Optimization */
+    .modal-buttons {
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .cancel-btn,
+    .save-btn {
+        padding: 10px 16px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+}
+
+/* Extra Small Devices (480px and down) */
+@media (max-width: 480px) {
+    .modal-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
+    /* FIX: Converts action strip into a fluid full-width split track 
+       so "Update Employee" text has plenty of side room without line breaks */
+    .modal-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .cancel-btn,
+    .save-btn {
+        flex: 1; /* Distributes explicit matching 50% sizing tracks */
+        text-align: center;
+        padding: 10px 8px;
+        font-size: 12px;
+        letter-spacing: -0.1px; /* Extra protection metric against text overflows */
+    }
+}

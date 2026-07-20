@@ -1,0 +1,716 @@
+.dashboard-container{
+    padding:30px;
+    background:#f8fafc;
+    min-height:100vh;
+}
+
+.dashboard-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:40px;
+    margin-bottom:35px;
+    padding:35px;
+    border-radius:22px;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+
+    color:white;
+    box-shadow:0 20px 45px rgba(37,99,235,.18);
+    animation:slideLeft .7s ease;
+
+}
+
+@keyframes slideLeft{
+
+    from{
+
+        opacity:0;
+
+        transform:translateX(-40px);
+
+    }
+
+    to{
+
+        opacity:1;
+
+        transform:translateX(0);
+
+    }
+
+}
+
+.dashboard-title{
+    font-size:40px;
+    font-weight:700;
+    margin-bottom:10px;
+}
+
+.user-name{
+    color:#fde68a;
+}
+
+.dashboard-subtitle{
+    font-size:17px;
+    opacity:.9;
+}
+
+.live-clock{
+    text-align:right;
+    background:rgba(255,255,255,.12);
+    padding:18px 25px;
+    border-radius:18px;
+    backdrop-filter:blur(12px);
+    min-width:170px;
+}
+
+.clock-label{
+    font-size:14px;
+    opacity:.8;
+}
+
+.clock-time{
+    font-size:28px;
+    font-weight:700;
+    margin-top:8px;
+}
+
+.dashboard-loading{
+    height:80vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:20px;
+}
+
+.loader{
+    width:70px;
+    height:70px;
+    border-radius:50%;
+    border:6px solid #e5e7eb;
+    border-top-color:#4f46e5;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+
+    to{
+        transform:rotate(360deg);
+    }
+
+}
+
+.stats-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:24px;
+    margin:35px 0;
+}
+
+.stat-card{
+    background:#ffffff;
+    border-radius:20px;
+    padding:28px;
+    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    transition:all .30s ease;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+}
+
+.stat-card::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:0;
+    width:100%;
+    height:5px;
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #4f46e5
+    );
+}
+
+.stat-card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 20px 45px rgba(37,99,235,.18);
+}
+
+.stat-icon{
+    width:60px;
+    height:60px;
+    border-radius:18px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+    color:white;
+    font-size:24px;
+    margin-bottom:22px;
+}
+
+.stat-title{
+    color:#64748b;
+    font-size:15px;
+    font-weight:500;
+    margin-bottom:10px;
+}
+
+.stat-value{
+    font-size:30px;
+    font-weight:700;
+    color:#0f172a;
+    letter-spacing:.5px;
+}
+
+.dashboard-bottom{
+    display:grid;
+    grid-template-columns:350px 1fr;
+    gap:25px;
+    margin-top:35px;
+}
+
+.profile-card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.profile-header{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    margin-bottom:25px;
+}
+
+.profile-avatar{
+    font-size:65px;
+    color:#2563eb;
+}
+
+.profile-header h2{
+    margin:0;
+}
+
+.profile-header p{
+    color:#64748b;
+    margin-top:5px;
+}
+
+.profile-info{
+    display:flex;
+    flex-direction:column;
+    gap:18px;
+}
+
+.profile-row{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    color:#334155;
+}
+
+.status-green{
+    color:#22c55e;
+}
+
+.progress-card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.progress-header{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    margin-bottom:25px;
+}
+
+.progress-header h2{
+    margin:0;
+}
+
+.progress-header span{
+    font-size:30px;
+    font-weight:700;
+    color:#2563eb;
+}
+
+.progress-bar{
+    width:100%;
+    height:12px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    background:#e2e8f0;
+    border-radius:20px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    transition:width 1.2s ease;
+    background:linear-gradient(
+        90deg,
+        #2563eb,
+        #4f46e5
+    );
+    border-radius:20px;
+}
+
+.progress-details{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:30px;
+    margin-top:30px;
+}
+
+.progress-details h4{
+    margin-bottom:10px;
+    color:#64748b;
+}
+
+.progress-details p{
+    margin-bottom: 10px;
+    gap: 15px;
+    font-size:24px;
+    font-weight:700;
+    color:#0f172a;
+}
+
+.weekly-chart-card{
+    background:white;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.weekly-chart-card h2{
+    margin-bottom:25px;
+}
+
+.dashboard-lower{
+    display:grid;
+    grid-template-columns:2fr 1fr;
+    gap:25px;
+    margin-top:35px;
+}
+
+.quick-actions-card{
+    background:white;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.quick-actions-card h2{
+    margin-bottom:25px;
+}
+
+.quick-actions-grid{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
+}
+
+.quick-action-btn{
+    border:none;
+    background:#f8fafc;
+    border-radius:18px;
+    padding:22px;
+    cursor:pointer;
+    transition:.3s;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:12px;
+}
+
+.quick-action-btn:hover{
+    background:#2563eb;
+    color:white;
+    transform:translateY(-6px);
+}
+
+.quick-action-icon{
+    font-size:30px;
+}
+
+.attendance-summary-card{
+    margin-top:30px;
+    background:white;
+    border-radius:22px;
+    padding:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.08);
+}
+
+.attendance-summary-card h2{
+    margin-bottom:25px;
+}
+
+.attendance-summary-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:20px;
+}
+
+.attendance-summary-item{
+    display:flex;
+    align-items:center;
+    gap:18px;
+    padding:22px;
+    border-radius:18px;
+    background:#f8fafc;
+    transition:.3s;
+}
+
+.attendance-summary-item:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 30px rgba(0,0,0,.08);
+}
+
+.attendance-summary-icon{
+    width:58px;
+    height:58px;
+    border-radius:15px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-size:24px;
+    background:linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+    color:white;
+}
+
+.attendance-summary-item h3{
+    font-size:28px;
+    margin-bottom:5px;
+    color:#0f172a;
+}
+
+.attendance-summary-item p{
+    color:#64748b;
+}
+
+/* ===== Dashboard Animation ===== */
+
+.dashboard-card,
+.profile-card,
+.progress-card,
+.weekly-chart-card,
+.summary-card,
+.quick-actions-card{
+
+    animation:fadeUp .6s ease forwards;
+    opacity:0;
+
+}
+
+.dashboard-card:nth-child(1){animation-delay:.1s;}
+.dashboard-card:nth-child(2){animation-delay:.2s;}
+.dashboard-card:nth-child(3){animation-delay:.3s;}
+
+@keyframes fadeUp{
+
+    from{
+        opacity:0;
+        transform:translateY(30px);
+    }
+
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+
+}
+
+.dashboard-card:hover,
+.profile-card:hover,
+.progress-card:hover,
+.weekly-chart-card:hover,
+.summary-card:hover,
+.quick-actions-card:hover{
+
+    transform:translateY(-6px);
+
+    transition:.3s;
+
+}
+
+/* RESPONSIVE DASHBOARD */
+
+/* ==========================================
+   OPTIMIZED RESPONSIVE DASHBOARD (Updated Font Sizes)
+   ========================================== */
+
+@media (max-width: 1200px) {
+    .dashboard-bottom {
+        grid-template-columns: 1fr;
+    }
+    .dashboard-lower {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 992px) {
+    .dashboard-container {
+        padding: 20px;
+    }
+    .dashboard-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 20px;
+        padding: 24px;
+    }
+    .dashboard-title {
+        font-size: 30px;
+    }
+    .dashboard-subtitle {
+        font-size: 14px;
+    }
+    .live-clock {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+        padding: 14px;
+    }
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    .progress-details {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+    .attendance-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* Mobile Screens (768px and down) */
+@media (max-width: 768px) {
+    .dashboard-container {
+        padding: 14px;
+    }
+
+    /* Compact Header */
+    .dashboard-header {
+        padding: 18px;
+        border-radius: 14px;
+        gap: 14px;
+    }
+    .dashboard-title {
+        font-size: 22px; /* Smaller, cleaner font size */
+        line-height: 1.3;
+        margin-bottom: 6px;
+    }
+    .dashboard-subtitle {
+        font-size: 13px;
+    }
+    .live-clock {
+        padding: 10px 16px;
+        border-radius: 12px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        text-align: left;
+        min-width: auto;
+    }
+    .clock-label {
+        font-size: 12px;
+    }
+    .clock-time {
+        font-size: 18px; /* Balanced sizing */
+        margin-top: 0;
+    }
+
+    /* 2-Column Compact Stats Grid */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+        margin: 20px 0;
+    }
+    .stat-card {
+        padding: 16px;
+        border-radius: 14px;
+    }
+    .stat-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 16px;
+        margin-bottom: 12px;
+        border-radius: 10px;
+    }
+    .stat-title {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+    .stat-value {
+        font-size: 14px; /* Scaled down */
+    }
+
+    /* Card Layout Paddings & Headings */
+    .profile-card,
+    .progress-card,
+    .weekly-chart-card,
+    .quick-actions-card,
+    .attendance-summary-card {
+        padding: 18px;
+        border-radius: 14px;
+    }
+    .profile-header h2,
+    .progress-header h2,
+    .weekly-chart-card h2,
+    .quick-actions-card h2,
+    .attendance-summary-card h2 {
+        font-size: 16px; /* Uniform section heading sizes */
+        margin-bottom: 16px;
+    }
+
+    /* Profile Section Adjustments */
+    .profile-avatar {
+        font-size: 44px;
+    }
+    .profile-header p {
+        font-size: 13px;
+    }
+    .profile-row {
+        font-size: 13px;
+        gap: 10px;
+    }
+
+    /* Progress/Goal Tracking */
+    .progress-header span {
+        font-size: 18px;
+    }
+    .progress-bar {
+        height: 10px;
+    }
+    .progress-details {
+        margin-top: 20px;
+        gap: 14px;
+    }
+    .progress-details h4 {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
+    .progress-details p {
+        font-size: 16px;
+    }
+
+    /* Quick Actions (Hover highlight colors preserved) */
+    .quick-actions-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .quick-action-btn {
+        padding: 14px;
+        border-radius: 12px;
+        gap: 8px;
+    }
+    .quick-action-icon {
+        font-size: 20px;
+    }
+    .quick-action-btn span {
+        font-size: 12px; /* Made smaller */
+    }
+    /* Restored highlight backgrounds while removing layout jumps */
+    .quick-action-btn:hover {
+        background: #2563eb;
+        color: white;
+        transform: none !important; 
+    }
+
+    /* Attendance Summary Row Items */
+    .attendance-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+    .attendance-summary-item {
+        padding: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        border-radius: 12px;
+    }
+    .attendance-summary-icon {
+        width: 38px;
+        height: 38px;
+        font-size: 16px;
+        border-radius: 8px;
+    }
+    .attendance-summary-item h3 {
+        font-size: 16px; /* Crisp smaller numbers */
+        margin-bottom: 2px;
+    }
+    .attendance-summary-item p {
+        font-size: 12px;
+    }
+
+    /* Neutralize blocky card pop-ups on tiny screen clicks */
+    .stat-card:hover,
+    .attendance-summary-item:hover,
+    .dashboard-card:hover,
+    .profile-card:hover,
+    .progress-card:hover,
+    .weekly-chart-card:hover,
+    .quick-actions-card:hover {
+        transform: none !important;
+        box-shadow: 0 10px 30px rgba(15, 23, 42, .08) !important;
+    }
+}
+
+/* Extra Small Devices (480px and down) */
+@media (max-width: 480px) {
+    .dashboard-container {
+        padding: 10px;
+    }
+    .dashboard-header {
+        padding: 14px;
+    }
+    .dashboard-title {
+        font-size: 18px;
+    }
+    .dashboard-subtitle {
+        font-size: 12px;
+    }
+    .live-clock {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 4px;
+    }
+    .clock-time {
+        font-size: 16px;
+    }
+
+    /* Safely stack to 1 column only on very narrow screens */
+    .stats-grid,
+    .quick-actions-grid,
+    .attendance-summary-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .quick-action-btn {
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px;
+        padding: 12px;
+    }
+}

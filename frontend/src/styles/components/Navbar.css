@@ -1,0 +1,233 @@
+.navbar {
+    height: 70px;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #4f46e5
+    );
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;
+    color: white;
+    box-shadow: 0 3px 12px rgba(0,0,0,.15);
+}
+
+/* Flex group for structural alignment */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 13px; /* Spaces out your hamburger icon and title */
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+}
+
+.logo {
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+}
+
+.nav-link {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: .3s;
+}
+
+.nav-link:hover {
+    color: #facc15;
+}
+
+.logout-btn {
+    padding-right: 8px;
+    padding-top: 4px;
+    font-weight: 500;
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    font-weight: 600;
+    transition: .3s;
+}
+
+.logout-btn:hover {
+    color: #facc15;
+}
+
+/* Notification Link */
+.notification-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+/* Bell Wrapper */
+.notification-wrapper {
+    position: relative;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Bell Icon */
+.notification-icon {
+    font-size: 18px;
+    color: #ffffff;
+    transition: .25s ease;
+}
+
+/* Hover */
+.notification-link:hover .notification-icon {
+    color: #FFD700;
+    transform: scale(1.08);
+}
+
+/* Notification Badge */
+.notification-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ef4444;
+    color: #ffffff;
+    border-radius: 999px;
+    font-size: 10px;
+    font-weight: 700;
+    border: 2px solid #ffffff;
+    box-shadow: 0 2px 8px rgba(0,0,0,.25);
+    z-index: 100;
+}
+
+/* Mobile Menu Button */
+.menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 0;
+}
+
+/* Tablet */
+@media (max-width: 900px) {
+    .navbar {
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 18px;
+    }
+
+    .nav-links {
+        gap: 14px;
+    }
+
+    .nav-link {
+        font-size: 12px;
+    }
+
+    .logout-btn {
+        font-size: 12px;
+    }
+}
+
+/* Mobile Setup (Exactly matching your layout screen) */
+@media (max-width: 768px) {
+    .navbar {
+        position: relative;
+        height: 65px;
+        padding: 0 18px;
+    }
+
+    .logo {
+        font-size: 16px;
+    }
+
+    .menu-btn {
+        display: block;
+    }
+
+    /* Pulls menu text lists safely into their dropdown drawer overlay */
+    .nav-links {
+        position: absolute;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        background: linear-gradient(
+            135deg,
+            #2563eb,
+            #4f46e5
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 16px;
+        padding: 18px 0;
+        transform: translateY(-150%);
+        opacity: 0;
+        transition: .35s;
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .nav-link {
+        font-size: 14px;
+    }
+
+    .logout-btn {
+        font-size: 14px;
+    }
+
+    .notification-wrapper {
+        width: 32px;
+        height: 32px;
+    }
+
+    .notification-icon {
+        font-size: 18px;
+    }
+
+    .notification-count {
+        min-width: 18px;
+        height: 18px;
+        font-size: 9px;
+    }
+}
+
+/* Very Small Phones */
+@media (max-width: 420px) {
+    .logo {
+        font-size: 14px;
+    }
+
+    .nav-link {
+        font-size: 13px;
+    }
+
+    .logout-btn {
+        font-size: 13px;
+    }
+}

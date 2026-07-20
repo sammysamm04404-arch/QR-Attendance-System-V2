@@ -1,0 +1,185 @@
+.login-form-container{
+    flex:1;
+    background:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    padding:60px;
+    max-width:520px;
+    margin:auto;
+}
+
+.login-form-container h2{
+    font-size:38px;
+    font-weight:700;
+    color:#0f172a;
+    margin-bottom:10px;
+}
+
+.login-description{
+    color:var(--secondary);
+    margin-bottom:35px;
+}
+
+.input-group{
+    margin-bottom:22px;
+}
+
+.input-group label{
+    display:block;
+    margin-bottom:8px;
+    font-weight:600;
+}
+
+.input{
+    width:100%;
+    height:56px;
+    border:1px solid #dbe4f0;
+    border-radius:14px;
+    padding:0 18px;
+    font-size:15px;
+    background:#f8fafc;
+    transition:.25s;
+}
+
+.input:focus{
+    outline:none;
+    background:white;
+    border-color:#2563eb;
+    box-shadow:0 0 0 5px rgba(37,99,235,.12);
+}
+
+.error{
+    border-color:var(--danger);
+}
+
+.error-text{
+    color:var(--danger);
+    font-size:13px;
+    margin-top:5px;
+    display:block;
+}
+
+.password-wrapper{
+    position:relative;
+}
+
+.eye-btn{
+    position:absolute;
+    right:15px;
+    top:50%;
+    transform:translateY(-50%);
+    border:none;
+    background:none;
+    cursor:pointer;
+    color:#64748b;
+    font-size:18px;
+}
+
+.login-btn{
+    width:100%;
+    height:56px;
+    border:none;
+    border-radius:14px;
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+    color:white;
+    font-size:17px;
+    font-weight:700;
+    cursor:pointer;
+    transition:.25s;
+    box-shadow:0 12px 25px rgba(37,99,235,.25);
+}
+
+.login-btn:hover{
+    transform:translateY(-2px);
+}
+
+.login-btn:disabled{
+    opacity:.7;
+    cursor:not-allowed;
+}
+
+/* ---------------- Tablet ---------------- */
+
+@media(max-width:900px){
+
+    .login-form-container{
+        width:100%;
+        max-width:550px;
+        padding:40px 30px;
+    }
+
+    .login-form-container h2{
+        font-size:32px;
+    }
+
+}
+
+/* ---------------- Mobile ---------------- */
+
+@media(max-width:768px){
+
+    .login-form-container{
+        width:100%;
+        max-width:100%;
+        padding:30px 20px;
+        border-radius:18px;
+    }
+
+    .login-form-container h2{
+        font-size:28px;
+    }
+
+    .login-description{
+        font-size:15px;
+        margin-bottom:25px;
+    }
+
+    .input{
+        height:50px;
+        font-size:14px;
+    }
+
+    .login-btn{
+        height:50px;
+        font-size:15px;
+    }
+
+}
+
+/* ---------------- Small Mobile ---------------- */
+
+@media(max-width:480px){
+
+    .login-form-container{
+        padding:25px 15px;
+    }
+
+    .login-form-container h2{
+        font-size:24px;
+    }
+
+    .login-description{
+        font-size:14px;
+    }
+
+    .input-group{
+        margin-bottom:18px;
+    }
+
+    .input{
+        height:46px;
+        font-size:13px;
+        padding:0 15px;
+    }
+
+    .eye-btn{
+        font-size:16px;
+    }
+
+    .login-btn{
+        height:46px;
+        font-size:14px;
+    }
+
+}

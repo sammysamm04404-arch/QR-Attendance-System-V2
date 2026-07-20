@@ -1,0 +1,387 @@
+/* =====================================================
+   BASE & DESKTOP STYLES (Fluid Default Structure)
+===================================================== */
+.notifications-page {
+    padding: 40px;
+    background: #f4f7fb;
+    min-height: 100vh;
+    box-sizing: border-box;
+}
+
+.notifications-card {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 28px;
+    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+}
+
+.notifications-header {
+    margin-bottom: 25px;
+}
+
+.notifications-header h1 {
+    margin: 0;
+    font-size: 36px; /* Scaled down slightly from 42px for cleaner baseline */
+    font-weight: 700;
+    color: #0f172a;
+}
+
+.empty-notification {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    height: 220px;
+    font-size: 20px;
+    color: #6b7280;
+}
+
+.notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+    padding: 22px;
+    border-radius: 14px;
+    margin-bottom: 18px;
+    transition: .25s;
+}
+
+.notification-item.unread {
+    background: #eef5ff;
+    border-left: 6px solid #2563eb;
+}
+
+.notification-item.read {
+    background: #f8fafc;
+    opacity: .75;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-content h3 {
+    margin: 0;
+    font-size: 20px; /* Optimized down from 24px */
+    color: #111827;
+    margin-bottom: 8px;
+}
+
+.notification-content p {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.6;
+    font-size: 15px; /* Optimized down from 17px */
+}
+
+.notification-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.resolve-btn, 
+.mark-read-btn {
+    border: none;
+    padding: 11px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+    white-space: nowrap;
+}
+
+.resolve-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.resolve-btn:hover {
+    background: #1d4ed8;
+}
+
+.mark-read-btn {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.mark-read-btn:hover {
+    background: #d1d5db;
+}
+
+/* Modal Fluid Configurations */
+.resolve-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.resolve-modal {
+    width: 100%;
+    max-width: 560px; /* Turned from absolute width into a responsive max boundary */
+    background: #fff;
+    border-radius: 18px;
+    padding: 30px;
+    box-shadow: 0 18px 45px rgba(0,0,0,.18);
+    box-sizing: border-box;
+}
+
+.resolve-modal h2 {
+    margin: 0;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.resolve-modal p {
+    margin-top: 0;
+    margin-bottom: 25px;
+    color: #6b7280;
+    font-size: 15px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #111827;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 15px;
+    outline: none;
+    transition: .2s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+}
+
+.resolve-buttons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 14px;
+    margin-top: 28px;
+}
+
+.cancel-btn,
+.submit-btn {
+    border: none;
+    padding: 12px 22px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.cancel-btn {
+    background: #e5e7eb;
+    color: #111827;
+}
+
+.cancel-btn:hover {
+    background: #d1d5db;
+}
+
+.submit-btn {
+    background: #2563eb;
+    color: white;
+}
+
+.submit-btn:hover {
+    background: #1d4ed8;
+}
+
+
+/* =====================================================
+   CROSS-DEVICE RESPONSIVE REDESIGN
+===================================================== */
+
+@media (max-width: 992px) {
+    .notifications-page {
+        padding: 24px;
+    }
+    
+    .notifications-card {
+        padding: 20px;
+    }
+
+    .notifications-header h1 {
+        font-size: 30px;
+    }
+
+    .resolve-modal {
+        padding: 24px;
+        max-width: 480px;
+    }
+}
+
+/* Mobile Screens (768px and down) */
+@media (max-width: 768px) {
+    .notifications-page {
+        padding: 14px;
+    }
+
+    .notifications-card {
+        padding: 16px;
+        border-radius: 14px;
+    }
+
+    /* Small Clean Header Typography */
+    .notifications-header {
+        margin-bottom: 18px;
+    }
+    
+    .notifications-header h1 {
+        font-size: 22px;
+    }
+
+    .empty-notification {
+        height: 160px;
+        font-size: 16px;
+    }
+
+    /* Reflow items vertically so text & buttons have room */
+    .notification-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 14px;
+        border-radius: 10px;
+        margin-bottom: 12px;
+    }
+
+    .notification-item.unread {
+        border-left-width: 4px; /* Scaled down border block marker */
+    }
+
+    /* Micro-Sized Notification Typography */
+    .notification-content h3 {
+        font-size: 14.5px;
+        margin-bottom: 5px;
+    }
+
+    .notification-content p {
+        font-size: 12.5px;
+        line-height: 1.5;
+    }
+
+    /* Compact Mobile Utility Actions Row */
+    .notification-actions {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 8px;
+    }
+
+    .resolve-btn, 
+    .mark-read-btn {
+        padding: 7px 14px; /* Sleek micro button framing */
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
+    /* Micro-Scaled Resolve Form Modal */
+    .resolve-modal {
+        padding: 18px;
+        border-radius: 14px;
+    }
+
+    .resolve-modal h2 {
+        font-size: 16px;
+        margin-bottom: 6px;
+    }
+
+    .resolve-modal p {
+        font-size: 12px;
+        margin-bottom: 16px;
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    .form-group label {
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 9px;
+        font-size: 13px;
+        border-radius: 7px;
+    }
+
+    .resolve-buttons {
+        margin-top: 20px;
+        gap: 10px;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+        padding: 10px 16px;
+        font-size: 12.5px;
+        border-radius: 7px;
+    }
+}
+
+/* Extra Small Mobile Devices (480px and down) */
+@media (max-width: 480px) {
+    .notifications-page {
+        padding: 10px;
+    }
+
+    .notifications-header h1 {
+        font-size: 19px;
+    }
+
+    /* Distribute actions evenly across layout row on tiny widths */
+    .notification-actions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+    }
+
+    .resolve-btn, 
+    .mark-read-btn {
+        width: 100%;
+        text-align: center;
+        padding: 8px 10px;
+    }
+
+    /* Modal Form Action buttons split screen width flawlessly */
+    .resolve-buttons {
+        justify-content: space-between;
+    }
+
+    .cancel-btn,
+    .submit-btn {
+        flex: 1;
+        text-align: center;
+        padding: 9px 12px;
+        font-size: 12px;
+    }
+}

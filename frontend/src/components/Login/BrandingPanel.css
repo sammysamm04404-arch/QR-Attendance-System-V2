@@ -1,0 +1,160 @@
+.branding-panel{
+    flex:1;
+    background:#2563eb;
+    color:white;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+    padding:60px;
+}
+
+.branding-logo{
+    width:90px;
+    height:90px;
+    border-radius:22px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:white;
+    color:#2563eb;
+    font-size:48px;
+    margin-bottom:35px;
+    box-shadow:0 25px 45px rgba(0,0,0,.15);
+    animation:floatLogo 4s ease infinite;
+}
+
+@keyframes floatLogo{
+    0%{
+        transform:translateY(0);
+    }
+
+    50%{
+        transform:translateY(-10px);
+    }
+
+    100%{
+        transform:translateY(0);
+    }
+}
+
+.branding-panel h1{
+    font-size:42px;
+    margin-bottom:20px;
+}
+
+.branding-panel p{
+    font-size:18px;
+    opacity:.9;
+}
+
+.branding-features{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.branding-features div{
+    display:flex;
+    align-items:center;
+    gap:15px;
+    font-size:18px;
+}
+
+/* ---------------- Tablet ---------------- */
+
+@media(max-width:900px){
+
+    .branding-panel{
+        width:100%;
+        padding:40px 30px;
+        align-items:center;
+        text-align:center;
+        gap:30px;
+    }
+
+    .branding-logo{
+        width:75px;
+        height:75px;
+        font-size:40px;
+        margin-bottom:20px;
+    }
+
+    .branding-panel h1{
+        font-size:34px;
+    }
+
+    .branding-panel p{
+        font-size:16px;
+    }
+
+    .branding-features{
+        width:100%;
+        align-items:center;
+    }
+
+    .branding-features div{
+        font-size:16px;
+    }
+
+}
+
+/* ---------------- Mobile ---------------- */
+
+@media(max-width:768px){
+
+    .branding-panel{
+        padding:30px 20px;
+    }
+
+    .branding-logo{
+        width:65px;
+        height:65px;
+        font-size:34px;
+    }
+
+    .branding-panel h1{
+        font-size:28px;
+    }
+
+    .branding-panel p{
+        font-size:15px;
+    }
+
+    .branding-features{
+        gap:14px;
+    }
+
+    .branding-features div{
+        font-size:15px;
+        gap:10px;
+    }
+
+}
+
+/* ---------------- Small Mobile ---------------- */
+
+@media(max-width:480px){
+
+    .branding-panel{
+        padding:25px 15px;
+    }
+
+    .branding-logo{
+        width:58px;
+        height:58px;
+        font-size:30px;
+    }
+
+    .branding-panel h1{
+        font-size:24px;
+    }
+
+    .branding-panel p{
+        font-size:14px;
+    }
+
+    .branding-features div{
+        font-size:14px;
+    }
+
+}

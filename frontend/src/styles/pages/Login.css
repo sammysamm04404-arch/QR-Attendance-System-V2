@@ -1,0 +1,47 @@
+.login-page{
+    min-height:100vh;
+    display:flex;
+    background:linear-gradient(
+        135deg,
+        #eef5ff,
+        #ffffff
+    );
+}
+
+/* Laptop */
+
+@media (max-width:1200px){
+    .login-page{
+        padding:20px;
+    }
+}
+
+/* Tablet */
+
+@media(max-width:900px){
+    .login-page{
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+        padding:20px;
+        gap:20px;
+    }
+}
+
+/* Mobile */
+
+@media(max-width:768px){
+    .login-page{
+        padding:15px;
+        gap:15px;
+    }
+}
+
+/* Small Mobile */
+
+@media(max-width:480px){
+    .login-page{
+        padding:10px;
+        gap:10px;
+    }
+}
