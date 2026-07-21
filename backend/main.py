@@ -19,8 +19,22 @@ from app.routers.attendance_admin  import router as attendance_admin
 from app.routers.notification_router import router as notification_router
 from app.routers.attendance_correction_router import router as attendance_correction_router
 from app.routers.admin_corrections import router as admin_corrections
+import asyncio
+from contextlib import asynccontextmanager
+from app.services.notification_scheduler import (notification_scheduler,)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+
+    asyncio.create_task(
+        notification_scheduler()
+    )
+
+    yield
+
 
 app = FastAPI(
+    lifespan=lifespan
     title="QR Attendance API"
 )
 
