@@ -121,10 +121,10 @@ def get_attendance(
 
                 if (
 
-                    cin.scan_time.hour > 9
+                    cin.scan_time.hour > 10
                     or
                     (
-                        cin.scan_time.hour == 9
+                        cin.scan_time.hour == 10
                         and cin.scan_time.minute > 30
                     )
 

@@ -12,34 +12,24 @@ def create_incomplete_attendance_notification(
     user: User
 ):
 
-    yesterday = datetime.now(timezone.utc).date() - timedelta(days=1)
+    yesterday = datetime.now().date() - timedelta(days=1)
 
     records = (
-        db.query(Attendance)
-        .filter(
-            Attendance.user_id == user.id
+    db.query(Attendance)
+    .filter(
+            Attendance.user_id == user.id,
+            Attendance.scan_time >= datetime.combine(yesterday, datetime.min.time()),
+            Attendance.scan_time < datetime.combine(yesterday + timedelta(days=1), datetime.min.time())
         )
         .all()
     )
 
-    yesterday_records = [
-
-        record
-
-        for record in records
-
-        if record.scan_time.date() == yesterday
-
-    ]
-
-    if not yesterday_records:
-        return
-
+    
     check_in = next(
 
         (
             record
-            for record in yesterday_records
+            for record in records
             if record.action == "Check In"
         ),
 
@@ -51,7 +41,7 @@ def create_incomplete_attendance_notification(
 
         (
             record
-            for record in yesterday_records
+            for record in records
             if record.action == "Check Out"
         ),
 
@@ -65,19 +55,15 @@ def create_incomplete_attendance_notification(
     existing = (
 
         db.query(Notification)
-
         .filter(
 
             Notification.user_id == user.id,
-
             Notification.type == "attendance",
-
+            Notification.attendance_date == datetime.combine(yesterday, datetime.min.time()),
             Notification.is_closed == False
-
+            
         )
-
         .first()
-
     )
 
     if existing:
@@ -102,4 +88,12 @@ def create_incomplete_attendance_notification(
 
     db.add(notification)
 
-    db.commit()
+    try:
+        
+        db.commit()
+
+    except Exception as e:
+        
+        db.rollback()
+        print("Notification Error:", e)
+        raise
