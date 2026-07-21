@@ -42,7 +42,7 @@ function Notifications() {
 
             console.log(error.response.data);
 
-            alert(error.response?.data?.detail);
+            toast.error(error.response?.data?.detail);
 
         }
 
@@ -105,7 +105,7 @@ function Notifications() {
 
         console.log(error.response?.data);
 
-        alert(error.response?.data?.detail);
+        toast.error(error.response?.data?.detail);
 
     }
 
