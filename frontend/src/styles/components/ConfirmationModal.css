@@ -152,7 +152,7 @@
     /* Keeps buttons neatly right-aligned on a single row */
     .modal-buttons {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
         align-items: center;
         gap: 10px;
     }
