@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import toast from "react-hot-toast";
+import Loader from "../Loader/Loader";
 
 function CorrectionDetailsModal({
 
@@ -106,7 +107,7 @@ function CorrectionDetailsModal({
             <div className="modal-overlay">
 
                 <div className="correction-modal">
-                    <h3>Loading...</h3>
+                    <Loader />
                 </div>
 
             </div>

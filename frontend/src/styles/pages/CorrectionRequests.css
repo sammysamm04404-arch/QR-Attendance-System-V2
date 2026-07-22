@@ -178,10 +178,13 @@
 
 .correction-modal {
     width: 100%;
-    max-width: 640px;                  
+    max-width: 640px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
     background: #fff;
     border-radius: 18px;
-    padding: 28px;
+    padding: 24px;
     box-sizing: border-box;
     box-shadow: 0 20px 50px rgba(0,0,0,.25);
     animation: modalScaleUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
@@ -193,22 +196,34 @@
 }
 
 .modal-header {
-    margin-bottom: 20px;
+    margin-bottom: 16px;
     border-bottom: 1px solid #eef2f7;
     padding-bottom: 12px;
+    flex-shrink: 0;
 }
 
 .modal-header h2 {
     color: #1e293b;
     margin: 0;
-    font-size: 21px;
+    font-size: 20px;
     font-weight: 700;
 }
 
 .modal-body {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 14px;
+    overflow-y: auto;
+    padding-right: 2px;
+}
+
+/* Custom subtle scrollbar for modal body */
+.modal-body::-webkit-scrollbar {
+    width: 4px;
+}
+.modal-body::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
 }
 
 .detail-row {
@@ -240,24 +255,24 @@
 
 .detail-column p {
     background: #f8fafc;
-    padding: 12px 14px;
+    padding: 10px 12px;
     border-radius: 8px;
     color: #334155;
     margin: 0;
-    font-size: 14px;
+    font-size: 13.5px;
     line-height: 1.5;
     border: 1px solid #eef2f7;
 }
 
 .modal-body textarea {
     width: 100%;
-    min-height: 100px;
+    min-height: 80px;
     border: 1px solid #dbe4ef;
     border-radius: 8px;
-    padding: 12px;
+    padding: 10px 12px;
     resize: none;
     outline: none;
-    font-size: 14px;
+    font-size: 13.5px;
     color: #1e293b;
     box-sizing: border-box;
     transition: border-color 0.2s ease;
@@ -269,15 +284,16 @@
 
 .modal-buttons {
     display: flex;
-    gap: 12px;
-    margin-top: 4px;
+    gap: 10px;
+    margin-top: 12px;
+    flex-shrink: 0;
 }
 
 .approve-btn, 
 .reject-btn, 
 .close-btn {
     border: none;
-    padding: 12px;
+    padding: 11px;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
@@ -292,7 +308,7 @@
 .reject-btn { flex: 1; background: #ef4444; color: #fff; }
 .reject-btn:hover { background: #dc2626; }
 
-.close-btn { width: 100%; background: #64748b; color: #fff; margin-top: 10px; }
+.close-btn { width: 100%; background: #64748b; color: #fff; margin-top: 8px; }
 .close-btn:hover { background: #475569; }
 
 
@@ -356,58 +372,39 @@
 
     .correction-modal {
         padding: 20px;
+        max-height: 85vh;
     }
 
     .modal-header {
-        margin-bottom: 14px;
-        padding-bottom: 10px;
+        margin-bottom: 12px;
+        padding-bottom: 8px;
     }
 
     .modal-body {
-        gap: 12px;
-    }
-
-    .detail-row {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 2px;
-        border-bottom: 1px solid #f1f5f9;
-        padding-bottom: 8px;
-    }
-    
-    .detail-row:last-of-type {
-        border-bottom: none;
-        padding-bottom: 0;
-    }
-
-    .detail-column strong {
-        margin-bottom: 4px;
+        gap: 10px;
     }
 
     .detail-column p {
-        padding: 10px 12px;
+        padding: 8px 10px;
         font-size: 13px;
     }
 
     .modal-body textarea {
-        min-height: 85px;
-        padding: 10px;
-        font-size: 13.5px;
+        min-height: 75px;
+        padding: 8px 10px;
+        font-size: 13px;
     }
 
     .approve-btn,
     .reject-btn,
     .close-btn {
         padding: 10px; 
-        font-size: 13.5px;
+        font-size: 13px;
         border-radius: 6px;
-    }
-
-    .close-btn {
-        margin-top: 6px;
     }
 }
 
+/* SMALL MOBILE SPECIFIC FIX (< 480px) */
 @media (max-width: 480px) {
     .correction-page {
         padding: 16px;
@@ -448,14 +445,16 @@
         font-size: 9.5px;
     }
 
+    /* Modal Mobile Bottom-Sheet Optimization */
     .modal-overlay {
         padding: 0; 
         align-items: flex-end;
     }
 
     .correction-modal {
-        padding: 16px;
-        border-radius: 16px 16px 0 0;
+        padding: 16px 16px 14px;
+        border-radius: 20px 20px 0 0;
+        max-height: 82vh; /* Keeps modal inside viewport with headroom */
         animation: slideUpSheet 0.3s cubic-bezier(0.32, 0.94, 0.6, 1);
     }
 
@@ -465,7 +464,7 @@
     }
 
     .modal-header {
-        margin-bottom: 12px;
+        margin-bottom: 10px;
         padding-bottom: 8px;
     }
 
@@ -474,23 +473,31 @@
     }
 
     .modal-body {
-        gap: 10px;
+        gap: 8px;
     }
 
+    /* Keep detail rows side-by-side to save critical vertical space */
     .detail-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
         padding-bottom: 6px;
+        border-bottom: 1px solid #f1f5f9;
+        gap: 8px;
     }
 
     .detail-row strong {
-        font-size: 11.5px;
+        font-size: 12px;
     }
 
     .detail-row span {
-        font-size: 12.5px;
+        font-size: 12px;
+        text-align: right;
     }
 
     .detail-column strong {
-        font-size: 11.5px;
+        font-size: 12px;
+        margin-bottom: 4px;
     }
 
     .detail-column p {
@@ -500,26 +507,30 @@
     }
 
     .modal-body textarea {
-        min-height: 70px;
+        min-height: 60px;
         padding: 8px 10px;
+        font-size: 12px;
+        border-radius: 6px;
+    }
+
+    /* Keep action buttons side-by-side instead of stacking 3 vertical rows */
+    .modal-buttons {
+        flex-direction: row;
+        gap: 8px;
+        margin-top: 8px;
+    }
+
+    .approve-btn,
+    .reject-btn {
+        padding: 9px;
         font-size: 12.5px;
         border-radius: 6px;
     }
 
-    .modal-buttons {
-        flex-direction: column;
-        gap: 8px;
-    }
-
-    .approve-btn,
-    .reject-btn,
     .close-btn {
-        padding: 10px;
-        font-size: 13px;
+        padding: 9px;
+        font-size: 12.5px;
         border-radius: 6px;
-    }
-    
-    .close-btn {
-        margin-top: 2px;
+        margin-top: 6px;
     }
 }
