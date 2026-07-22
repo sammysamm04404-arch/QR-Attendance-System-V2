@@ -203,6 +203,17 @@
     background: #F8FAFC;
 }
 
+.employee-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.employee-email {
+  font-size: 12px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
 /* Status Badges */
 .status {
     padding: 6px 14px;
@@ -592,21 +603,30 @@
     /* TABLE CRUNCH SAFEGUARDS */
     .attendance-table th,
     .attendance-table td {
-        font-size: 10.5px;
-        padding: 8px 4px;
+        font-size: 9.5px;       /* Slightly reduced font size for crisp fit */
+        padding: 6px 3px;       /* Tight horizontal padding to save space */
+        white-space: nowrap;    /* Prevents cells from wrapping and squishing the table */
+    }
+
+    /* Completely hide employee email on small screens */
+    .employee-email {
+        display: none;
     }
 
     .status {
-        padding: 2px 5px;
-        font-size: 9.5px;
+        padding: 2px 4px;
+        font-size: 8.5px;
+        border-radius: 4px;
+        display: inline-block;
     }
 
     .view-btn {
-        padding: 3px 6px;
+        padding: 4px 8px;
         font-size: 9px;
         border-radius: 4px;
+        white-space: nowrap;    /* Ensures 'View' text stays on 1 line */
     }
-
+    
     /* COMPACT PAGINATION ARCHITECTURE */
     .attendance-pagination {
         justify-content: space-between;

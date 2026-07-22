@@ -420,8 +420,8 @@
 
     /* Micro button scaling for small device viewports */
     .action-button {
-        padding: 7px 12px;
-        font-size: 10px;
+        padding: 8px 12px;
+        font-size: 11px;
         flex: 1 1 auto; /* Allows crisp alignment on narrow viewports */
         text-align: center;
     }

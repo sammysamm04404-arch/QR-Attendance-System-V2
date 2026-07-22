@@ -36,12 +36,14 @@ function AttendanceTable({
                             <tr key={index}>
 
                                 <td>
-
-                                    <strong>
-                                        {row.employee}
-                                    </strong>
-                                    <br/>
-                                    {row.email}
+                                    <div className="employee-info">
+                                        <strong>
+                                            {row.employee}
+                                        </strong>
+                                        <span className="employee-email">
+                                            {row.email}
+                                        </span>
+                                    </div>
 
                                 </td>
 
