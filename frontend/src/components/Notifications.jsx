@@ -8,7 +8,7 @@ import Loader from "../components/Loader/Loader";
 
 function Notifications() {
     const [notifications, setNotifications] = useState([]);
-    const [loading, setLoading] = useState(true); // Prevents premature empty state flash
+    const [loading, setLoading] = useState(true);
     const [showResolveModal, setShowResolveModal] = useState(false);
     const [selectedNotification, setSelectedNotification] = useState(null);
     const [reason, setReason] = useState("Forgot Check Out");
@@ -19,7 +19,7 @@ function Notifications() {
         fetchNotifications();
 
         const notificationTimer = setInterval(() => {
-            fetchNotifications(false); // Background polling (doesn't trigger screen loader)
+            fetchNotifications(false);
         }, 30000);
 
         return () => {
@@ -37,7 +37,7 @@ function Notifications() {
             toast.error(error.response?.data?.detail);
         } finally {
             if (showLoader) {
-                setLoading(false); // Turn off loader after initial fetch finishes
+                setLoading(false);
             }
         }
     };
@@ -46,6 +46,8 @@ function Notifications() {
         try {
             await api.put(`/notifications/${id}/read`);
             fetchNotifications(false);
+            // Notify Navbar to instantly update the unread counter badge
+            window.dispatchEvent(new Event("unreadCountUpdated"));
         } catch (error) {
             console.log(error);
         }
@@ -70,6 +72,8 @@ function Notifications() {
 
             fetchNotifications(false);
             setShowResolveModal(false);
+            // Notify Navbar to update counter in case status changed
+            window.dispatchEvent(new Event("unreadCountUpdated"));
 
             toast.success(
                 "Attendance correction request sent successfully."
@@ -81,7 +85,6 @@ function Notifications() {
         }
     };
 
-    // Show Loader while fetching initial notification data
     if (loading) {
         return (
             <div>
@@ -118,20 +121,23 @@ function Notifications() {
                                     <p>{notification.message}</p>
                                 </div>
 
-                                {!notification.is_read && (
-                                    <div className="notification-actions">
-                                        {notification.title ===
-                                            "Attendance Incomplete" && (
-                                            <button
-                                                className="resolve-btn"
-                                                onClick={() =>
-                                                    handleResolve(notification)
-                                                }
-                                            >
-                                                Resolve Now
-                                            </button>
-                                        )}
+                                {/* Actions container is rendered if there is any active action */}
+                                <div className="notification-actions">
+                                    {/* Resolve button stays visible even after notification is read */}
+                                    {notification.title ===
+                                        "Attendance Incomplete" && (
+                                        <button
+                                            className="resolve-btn"
+                                            onClick={() =>
+                                                handleResolve(notification)
+                                            }
+                                        >
+                                            Resolve Now
+                                        </button>
+                                    )}
 
+                                    {/* Mark Read button disappears only after being clicked */}
+                                    {!notification.is_read && (
                                         <button
                                             className="mark-read-btn"
                                             onClick={() =>
@@ -140,8 +146,8 @@ function Notifications() {
                                         >
                                             Mark Read
                                         </button>
-                                    </div>
-                                )}
+                                    )}
+                                </div>
                             </div>
                         ))
                     )}
