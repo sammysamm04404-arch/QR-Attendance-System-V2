@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 
 import Navbar from "../components/Navbar";
-
 import api from "../services/api";
 
 import AttendanceHeader from "../components/AttendanceManagement/AttendanceHeader";
@@ -10,11 +9,11 @@ import AttendanceTable from "../components/AttendanceManagement/AttendanceTable"
 import AttendancePagination from "../components/AttendanceManagement/AttendancePagination";
 import AttendanceDetailsModal from "../components/AttendanceManagement/AttendanceDetailsModal";
 import AttendanceSummary from "../components/AttendanceManagement/AttendanceSummary";
+import Loader from "../components/Loader/Loader";
 
 import "../styles/pages/AttendanceManagement.css";
 
 function AttendanceManagement() {
-
     const [attendance, setAttendance] = useState([]);
     const [search, setSearch] = useState("");
     const [status, setStatus] = useState("All");
@@ -23,9 +22,10 @@ function AttendanceManagement() {
     const [toDate, setToDate] = useState("");
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const [selectedAttendance,setSelectedAttendance]=useState(null);
-    const [detailsOpen,setDetailsOpen]=useState(false);
+    const [selectedAttendance, setSelectedAttendance] = useState(null);
+    const [detailsOpen, setDetailsOpen] = useState(false);
     const [atmsummary, setATMSummary] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetchAttendance();
@@ -38,55 +38,51 @@ function AttendanceManagement() {
         toDate
     ]);
 
-    const fetchAttendance = async () => {
+    const fetchAttendance = async (showLoader = true) => {
+        if (showLoader) {
+            setLoading(true);
+        }
+        try {
+            const params = new URLSearchParams();
 
-    try {
+            params.append("page", page);
+            params.append("limit", 10);
 
-        const params = new URLSearchParams();
+            if (search) params.append("search", search);
+            if (status !== "All") params.append("status", status);
+            if (singleDate) params.append("single_date", singleDate);
+            if (fromDate) params.append("from_date", fromDate);
+            if (toDate) params.append("to_date", toDate);
 
-        params.append("page", page);
-        params.append("limit", 10);
+            const response = await api.get(
+                `/admin/attendance?${params.toString()}`
+            );
 
-        if (search)
-            params.append("search", search);
-
-        if (status !== "All")
-            params.append("status", status);
-
-        if (singleDate)
-            params.append("single_date", singleDate);
-
-        if (fromDate)
-            params.append("from_date", fromDate);
-
-        if (toDate)
-            params.append("to_date", toDate);
-
-        const response = await api.get(
-            `/admin/attendance?${params.toString()}`
-        );
-
-        setAttendance(response.data.attendance);
-        setTotalPages(response.data.total_pages);
-        setATMSummary(response.data.summary);
-
-    }
-
-    catch (error) {
-        console.log(error);
-    }
-
+            setAttendance(response.data.attendance);
+            setTotalPages(response.data.total_pages);
+            setATMSummary(response.data.summary);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
-    return(
+    if (loading) {
+        return (
+            <div>
+                <Navbar />
+                <Loader />
+            </div>
+        );
+    }
 
+    return (
         <>
-
-            <Navbar/>
+            <Navbar />
 
             <div className="attendance-page">
-
-                <AttendanceHeader/>
+                <AttendanceHeader />
 
                 <AttendanceSummary
                     atmsummary={atmsummary}
@@ -107,7 +103,7 @@ function AttendanceManagement() {
 
                 <AttendanceTable
                     attendance={attendance}
-                    onView={(row)=>{
+                    onView={(row) => {
                         setSelectedAttendance(row);
                         setDetailsOpen(true);
                     }}
@@ -122,15 +118,11 @@ function AttendanceManagement() {
                 <AttendanceDetailsModal
                     open={detailsOpen}
                     attendance={selectedAttendance}
-                    onClose={()=>setDetailsOpen(false)}
+                    onClose={() => setDetailsOpen(false)}
                 />
-
             </div>
-
         </>
-
     );
-
 }
 
 export default AttendanceManagement;

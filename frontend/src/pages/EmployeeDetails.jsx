@@ -9,6 +9,7 @@ import EmployeeProfileCard from "../components/EmployeeDetails/EmployeeProfileCa
 import EmployeeTodayCard from "../components/EmployeeDetails/EmployeeTodayCard";
 import EmployeeSummaryCard from "../components/EmployeeDetails/EmployeeSummaryCard";
 import EmployeeHistoryTable from "../components/EmployeeDetails/EmployeeHistoryTable";
+import Loader from "../components/Loader/Loader";
 
 import "../styles/pages/EmployeeDetails.css";
 
@@ -39,7 +40,7 @@ function EmployeeDetails() {
 
     if(!employeeData){
 
-        return <h2>Loading...</h2>;
+        return <Loader />
 
     }
 

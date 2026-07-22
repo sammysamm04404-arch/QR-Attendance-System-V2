@@ -7,6 +7,7 @@ import AdminStats from "../components/Admin/AdminStats";
 import AdminChart from "../components/Admin/AdminCharts";
 import RecentActivity from "../components/Admin/RecentActivity";
 import QuickAdminActions from "../components/Admin/QuickAdminActions";
+import Loader from "../components/Loader/Loader";
 
 import "../styles/pages/AdminDashboard.css";
 
@@ -46,11 +47,7 @@ function AdminDashboard() {
 
                 <Navbar />
 
-                <h2 style={{ padding: "30px" }}>
-
-                    Loading Admin Dashboard...
-
-                </h2>
+                <Loader />
 
             </div>
 
