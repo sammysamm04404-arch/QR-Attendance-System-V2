@@ -37,9 +37,7 @@ function AttendanceTable({
 
                                 <td>
                                     <div className="employee-info">
-                                        <strong>
                                             {row.employee}
-                                        </strong>
                                         <span className="employee-email">
                                             {row.email}
                                         </span>

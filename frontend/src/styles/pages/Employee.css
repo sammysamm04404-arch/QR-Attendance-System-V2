@@ -1,25 +1,25 @@
 /* Base & Desktop Styles */
 
 .employees-page {
-    max-width: 1400px;
-    margin: 40px auto;
-    padding: 0 30px 60px;
+    max-width: 1200px;
+    margin: 24px auto;
+    padding: 0 20px 40px;
     box-sizing: border-box;
 }
 
-/* Header */
+/* Header Section */
 .employee-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 35px;
+    margin-bottom: 20px;
 }
 
 .employee-header h1 {
     display: flex;
     align-items: center;
-    gap: 12px;
-    font-size: 38px;
+    gap: 10px;
+    font-size: 26px;
     font-weight: 700;
     color: #1E293B;
     margin: 0;
@@ -30,68 +30,73 @@
 }
 
 .employee-header p {
-    margin-top: 10px;
+    margin-top: 4px;
     margin-bottom: 0;
     color: #64748B;
-    font-size: 16px;
+    font-size: 14px;
 }
 
+/* Compact Add Employee Button */
 .add-employee-btn {
     background: #4F46E5;
     color: white;
     border: none;
-    border-radius: 14px;
-    padding: 16px 28px;
-    font-size: 17px;
+    border-radius: 10px;
+    padding: 9px 16px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: .3s;
-    box-shadow: 0 12px 30px rgba(79,70,229,.25);
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
     white-space: nowrap;
 }
 
 .add-employee-btn:hover {
-    transform: translateY(-3px);
+    transform: translateY(-1px);
     background: #4338CA;
+    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
 }
 
-/* Search Box */
+/* Search Container */
 .employee-search-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 35px;
+    margin-bottom: 16px;
 }
 
 .search-box {
     width: 100%;
-    max-width: 520px;
+    max-width: 420px;
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     background: white;
-    padding: 14px 18px;
-    border-radius: 14px;
-    box-shadow: 0 10px 25px rgba(0,0,0,.08);
-    transition: .3s;
+    padding: 9px 14px;
+    border: 1px solid #E2E8F0;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
 .search-box:focus-within {
-    box-shadow: 0 0 0 3px rgba(79,70,229,.2);
+    border-color: #4F46E5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
 }
 
 .search-icon {
     color: #64748B;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .search-box input {
     flex: 1;
     border: none;
     outline: none;
-    font-size: 15px;
+    font-size: 14px;
     background: transparent;
+    color: #1E293B;
 }
 
 .search-box input::placeholder {
@@ -102,75 +107,82 @@
 .employee-table {
     display: flex;
     flex-direction: column;
-    gap: 28px;
+    gap: 10px; /* Reduced gap to eliminate white space */
 }
 
 .employee-card {
     background: white;
-    border-radius: 20px;
-    padding: 22px 28px;
+    border: 1px solid #F1F5F9;
+    border-radius: 12px;
+    padding: 12px 18px; /* Tighter padding */
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 10px 30px rgba(15,23,42,.08);
-    transition: .35s;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    transition: all 0.2s ease;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .employee-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 18px 45px rgba(79,70,229,.15);
+    transform: translateY(-2px);
+    border-color: #CBD5E1;
+    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.08);
 }
 
 .employee-left {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 14px;
     flex: 1;
 }
 
+/* Scaled-down Avatar */
 .employee-avatar {
-    width: 70px;
-    height: 70px;
+    width: 42px;
+    height: 42px;
     border-radius: 50%;
-    background: linear-gradient(135deg,#6366F1,#8B5CF6);
+    background: linear-gradient(135deg, #6366F1, #8B5CF6);
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 38px;
+    font-size: 18px;
+    font-weight: 600;
     flex-shrink: 0;
 }
 
 .employee-left h3 {
-    font-size: 22px;
+    font-size: 15px;
+    font-weight: 600;
     color: #1E293B;
-    margin: 0 0 6px 0;
+    margin: 0 0 2px 0;
 }
 
 .employee-left p {
     margin: 0;
     color: #64748B;
-    font-size: 15px;
+    font-size: 13px;
 }
 
 .employee-middle {
     display: flex;
     align-items: center;
-    gap: 15px;
-    min-width: 260px;
+    gap: 10px;
+    min-width: 220px;
     justify-content: center;
 }
 
+/* Badges */
 .role-badge,
 .status-active,
 .status-inactive {
     display: flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 18px;
-    border-radius: 30px;
-    font-size: 14px;
+    gap: 6px;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
     font-weight: 600;
     white-space: nowrap;
 }
@@ -192,22 +204,22 @@
 
 .employee-actions {
     display: flex;
-    gap: 12px;
-    min-width: 120px;
+    gap: 8px;
+    min-width: 90px;
     justify-content: flex-end;
 }
 
 .employee-actions button {
-    width: 48px;
-    height: 48px;
+    width: 34px;
+    height: 34px;
     border: none;
-    border-radius: 14px;
+    border-radius: 8px;
     cursor: pointer;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 18px;
-    transition: .3s;
+    font-size: 14px;
+    transition: all 0.2s ease;
 }
 
 .edit-btn {
@@ -234,7 +246,8 @@
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.45);
+    background: rgba(15, 23, 42, 0.45);
+    backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -245,59 +258,74 @@
 
 .modal-card {
     width: 100%;
-    max-width: 460px;
-    background: white;
-    border-radius: 20px;
-    padding: 35px;
-    box-shadow: 0 25px 60px rgba(0,0,0,.25);
+    max-width: 440px;
+    background: #ffffff;
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
     box-sizing: border-box;
+    animation: modalPopIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .modal-card h2 {
     margin-top: 0;
-    margin-bottom: 25px;
+    margin-bottom: 20px;
+    font-size: 20px;
+    font-weight: 700;
     color: #1E293B;
+}
+
+.modal-card form {
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-card label {
     display: block;
-    margin-top: 18px;
-    margin-bottom: 8px;
+    margin-top: 14px;
+    margin-bottom: 6px;
     font-weight: 600;
     color: #334155;
+    font-size: 13px;
 }
 
 .modal-card input,
 .modal-card select {
     width: 100%;
-    padding: 14px;
+    padding: 10px 12px;
     border: 1px solid #CBD5E1;
-    border-radius: 12px;
-    font-size: 15px;
+    border-radius: 10px;
+    font-size: 14px;
+    color: #1E293B;
+    background-color: #ffffff;
     outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
     box-sizing: border-box;
 }
 
 .modal-card input:focus,
 .modal-card select:focus {
     border-color: #4F46E5;
+    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
 }
 
 .modal-buttons {
-    margin-top: 30px;
+    margin-top: 24px;
     display: flex;
     justify-content: flex-end;
-    gap: 15px;
+    gap: 10px;
 }
 
 .cancel-btn,
 .save-btn {
     border: none;
-    padding: 12px 22px;
-    border-radius: 12px;
-    cursor: pointer;
+    padding: 10px 18px;
+    border-radius: 10px;
+    font-size: 13.5px;
     font-weight: 600;
-    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    white-space: nowrap;
 }
 
 .cancel-btn {
@@ -305,9 +333,13 @@
     color: #334155;
 }
 
+.cancel-btn:hover {
+    background: #CBD5E1;
+}
+
 .save-btn {
     background: #4F46E5;
-    color: white;
+    color: #ffffff;
 }
 
 .save-btn:hover {
@@ -317,47 +349,49 @@
 /* Delete Modal */
 .delete-modal {
     width: 100%;
-    max-width: 420px;
+    max-width: 400px;
     background: white;
-    padding: 35px;
-    border-radius: 18px;
+    padding: 28px;
+    border-radius: 16px;
     text-align: center;
-    box-shadow: 0 20px 50px rgba(0,0,0,.25);
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
     box-sizing: border-box;
+    animation: modalPopIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .delete-modal h2 {
     color: #DC2626;
     margin-top: 0;
-    margin-bottom: 18px;
+    margin-bottom: 14px;
+    font-size: 20px;
 }
 
 .delete-modal p {
     color: #334155;
-    font-size: 16px;
+    font-size: 14px;
     margin-top: 0;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
 }
 
 .delete-modal span {
     color: #94A3B8;
-    font-size: 14px;
+    font-size: 13px;
     display: block;
 }
 
 .delete-buttons {
-    margin-top: 30px;
+    margin-top: 24px;
     display: flex;
     justify-content: center;
-    gap: 14px;
+    gap: 12px;
 }
 
 .delete-buttons button {
-    padding: 12px 24px;
+    padding: 10px 20px;
     border: none;
-    border-radius: 12px;
+    border-radius: 10px;
     cursor: pointer;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -370,24 +404,36 @@
     background: #B91C1C;
 }
 
+@keyframes modalPopIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
 /* Pagination */
 .pagination {
-    margin-top: 35px;
+    margin-top: 24px;
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 25px;
+    gap: 18px;
 }
 
 .pagination button {
-    padding: 12px 22px;
+    padding: 8px 16px;
     border: none;
     background: #4F46E5;
     color: white;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
-    font-size: 14px;
+    font-size: 13px;
+    transition: background-color 0.2s ease;
 }
 
 .pagination button:disabled {
@@ -396,7 +442,7 @@
 }
 
 .pagination span {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
     color: #334155;
 }
@@ -413,143 +459,102 @@
 
 @media (max-width: 992px) {
     .employees-page {
-        padding: 0 20px 40px;
-        margin: 24px auto;
+        padding: 0 16px 30px;
+        margin: 18px auto;
     }
 
     .employee-header h1 {
-        font-size: 30px;
-    }
-
-    .employee-table {
-        gap: 18px;
+        font-size: 22px;
     }
 }
 
 /* Mobile Screens (768px and down) */
 @media (max-width: 768px) {
     .employees-page {
-        padding: 14px;
-        margin: 10px auto;
+        padding: 12px;
+        margin: 8px auto;
     }
 
-    /* Keeps window-style split layout row structure for header */
     .employee-header {
-        display: flex;
-        flex-direction: row; 
-        justify-content: space-between;
-        align-items: center;
-        gap: 12px;
-        margin-bottom: 24px;
+        margin-bottom: 16px;
     }
 
     .employee-header h1 {
-        font-size: 20px;
-        gap: 6px;
+        font-size: 18px;
     }
 
     .employee-header p {
-        display: none; /* Hide long subtext on mobile to save space */
+        display: none;
     }
 
     .add-employee-btn {
-        padding: 9px 15px;
-        font-size: 12px;
+        padding: 8px 12px;
+        font-size: 12.5px;
         border-radius: 8px;
-        width: auto;
     }
 
-    /* Search Component Stack */
-    .employee-search-container {
-        flex-direction: column;
-        align-items: stretch;
-        margin-bottom: 24px;
-    }
-
-    .search-box {
-        padding: 10px 14px;
+    /* Fixed grid layout for mobile cards */
+    .employee-card {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 10px;
+        padding: 12px 14px;
         border-radius: 10px;
     }
 
-    .search-icon {
-        font-size: 16px;
-    }
-
-    .search-box input {
-        font-size: 14px;
-    }
-
-    /* FIXED SAME-LINE GRID LAYOUT FOR EMPLOYEE CARDS */
-    .employee-card {
-        display: grid;
-        grid-template-columns: 1fr auto; /* Content on left, Actions tightly on right */
-        gap: 12px;
-        padding: 16px;
-        border-radius: 14px;
-        align-items: center; /* Vertically center buttons relative to the card contents */
-    }
-
-    /* Profile Row (Top Left) */
     .employee-left {
         grid-column: 1;
         grid-row: 1;
-        gap: 14px;
-        width: 100%;
+        gap: 10px;
     }
 
     .employee-avatar {
-        width: 46px;
-        height: 46px;
-        font-size: 22px;
+        width: 36px;
+        height: 36px;
+        font-size: 15px;
     }
 
     .employee-left h3 {
-        font-size: 15px;
-        margin-bottom: 2px;
+        font-size: 14px;
     }
 
     .employee-left p {
-        font-size: 12.5px;
+        font-size: 12px;
     }
 
-    /* Badges Row (Bottom Left) */
     .employee-middle {
         grid-column: 1;
         grid-row: 2;
         min-width: auto;
         justify-content: flex-start;
-        width: 100%;
-        gap: 8px;
+        gap: 6px;
     }
 
     .role-badge,
     .status-active,
     .status-inactive {
-        padding: 5px 10px;
+        padding: 4px 8px;
         font-size: 11px;
         border-radius: 6px;
-        gap: 4px;
     }
 
-    /* Action Buttons (Right Side - Spans across both content rows) */
     .employee-actions {
         grid-column: 2;
-        grid-row: 1 / span 2; /* Centers buttons perfectly on the right side */
-        display: flex;
-        flex-direction: row; /* Horizontal side-by-side alignment */
-        gap: 8px;
-        min-width: auto;
-        width: auto;
-        justify-content: flex-end;
-        border-top: none; /* Removed the ugly line break separator */
-        padding-top: 0;
+        grid-row: 1 / span 2;
+        align-items: center;
+        gap: 6px;
     }
 
     .employee-actions button {
-        width: 36px;
-        height: 36px;
-        font-size: 14px;
-        border-radius: 8px;
+        width: 32px;
+        height: 32px;
+        font-size: 13px;
+        border-radius: 6px;
+    }
+
+    .employee-card:hover,
+    .add-employee-btn:hover {
+        transform: none !important;
     }
 
     /* Form Modals */
@@ -626,23 +631,10 @@
 
 /* Extra Small Screens (480px and down) */
 @media (max-width: 480px) {
-    .employees-page {
-        padding: 10px;
-    }
-
-    .employee-header h1 {
-        font-size: 17px;
-    }
-    
-    .add-employee-btn {
-        padding: 8px 12px;
-        font-size: 11.5px;
-    }
-
     .modal-buttons,
     .delete-buttons {
-        justify-content: space-between;
         width: 100%;
+        gap: 8px;
     }
 
     .cancel-btn,
@@ -650,7 +642,7 @@
     .delete-buttons button {
         flex: 1;
         text-align: center;
-        padding: 9px 12px;
+        padding: 9px 8px;
         font-size: 12px;
     }
 }

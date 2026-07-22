@@ -603,7 +603,7 @@
     /* TABLE CRUNCH SAFEGUARDS */
     .attendance-table th,
     .attendance-table td {
-        font-size: 9.5px;       /* Slightly reduced font size for crisp fit */
+        font-size: 9px;       /* Slightly reduced font size for crisp fit */
         padding: 6px 3px;       /* Tight horizontal padding to save space */
         white-space: nowrap;    /* Prevents cells from wrapping and squishing the table */
     }
@@ -624,7 +624,7 @@
         padding: 4px 8px;
         font-size: 9px;
         border-radius: 4px;
-        white-space: nowrap;    /* Ensures 'View' text stays on 1 line */
+        white-space: nowrap;   
     }
     
     /* COMPACT PAGINATION ARCHITECTURE */
