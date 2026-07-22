@@ -1,14 +1,12 @@
-/* =====================================================
-   1. BASE & DESKTOP STYLES (Fluid Default Structure)
-===================================================== */
+/* BASE & DESKTOP STYLES (Fluid Default Structure)*/
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.6); /* Rich dark overlay */
-    backdrop-filter: blur(4px);        /* Smooth background blur */
+    background: rgba(15, 23, 42, 0.6); 
+    backdrop-filter: blur(4px);        
     display: flex;
     justify-content: center;
-    align-items: center !important;    /* STRICT RULE: Always locks to true center */
+    align-items: center !important;    
     z-index: 9999;
     padding: 20px;
     box-sizing: border-box;
@@ -42,11 +40,15 @@
     margin-bottom: 24px;
 }
 
+/* FORCED SINGLE ROW: Ensures buttons NEVER wrap onto multiple lines */
 .modal-buttons {
-    display: flex;
+    display: flex !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap !important;
     justify-content: flex-end;
     align-items: center;
     gap: 12px;
+    width: 100%;
 }
 
 .cancel-btn,
@@ -58,7 +60,8 @@
     font-size: 14.5px;
     font-weight: 600;
     transition: background 0.2s ease;
-    white-space: nowrap;
+    white-space: nowrap; 
+    box-sizing: border-box;
 }
 
 .cancel-btn {
@@ -91,9 +94,7 @@
     }
 }
 
-/* =====================================================
-   2. RESPONSIVE OPTIMIZATIONS
-===================================================== */
+/* RESPONSIVE OPTIMIZATIONS */
 
 /* Tablet Viewports (768px and down) */
 @media (max-width: 768px) {
@@ -128,13 +129,13 @@
 /* Extra Small Mobile Devices (480px and down) */
 @media (max-width: 480px) {
     .modal-overlay {
-        padding: 24px 20px; /* Generous padding ensures it never touches screen edges */
+        padding: 20px 16px; 
         align-items: center !important;
     }
 
     .modal-container {
-        width: 90%;          /* Guarantees clean breathing room on left and right */
-        max-width: 340px;    /* Compact size suitable for small displays */
+        width: 100%;
+        max-width: 340px;   
         padding: 20px;
         border-radius: 14px;
     }
@@ -149,22 +150,25 @@
         margin-bottom: 20px;
     }
 
-    /* Keeps buttons neatly right-aligned on a single row */
     .modal-buttons {
-        display: flex;
-        justify-content: flex-end;
+        display: flex !important;
+        flex-direction: row !important;
+        flex-wrap: nowrap !important;
+        justify-content: space-between;
         align-items: center;
-        gap: 10px;
+        gap: 8px;
+        width: 100%;
     }
 
-    /* Compact, proportional button sizes (no full-width stretching) */
     .cancel-btn,
     .confirm-btn {
-        flex: initial;       /* Prevents full-width flex stretching */
-        width: auto;         /* Fits content perfectly */
-        padding: 9px 16px;   /* Clean touch padding */
-        font-size: 13.5px;
+        flex: 1;             
+        min-width: 0;        
+        width: auto;
+        padding: 10px 12px;  
+        font-size: 13px;
         border-radius: 8px;
         text-align: center;
+        white-space: nowrap;
     }
 }

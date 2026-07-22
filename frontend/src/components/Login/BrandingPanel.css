@@ -1,160 +1,167 @@
-.branding-panel{
-    flex:1;
-    background:#2563eb;
-    color:white;
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    padding:60px;
+/* BRANDING PANEL BASE (Desktop Structure) */
+.branding-panel {
+    flex: 1;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 50px;
+    box-sizing: border-box;
 }
 
-.branding-logo{
-    width:90px;
-    height:90px;
-    border-radius:22px;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:white;
-    color:#2563eb;
-    font-size:48px;
-    margin-bottom:35px;
-    box-shadow:0 25px 45px rgba(0,0,0,.15);
-    animation:floatLogo 4s ease infinite;
+/* Unified Proportional Logo Container */
+.branding-logo {
+    width: 80px;
+    height: 80px;
+    border-radius: 20px;          
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: white;
+    color: #2563eb;
+    font-size: 38px;              
+    line-height: 1;               
+    margin-bottom: 30px;
+    box-shadow: 0 20px 40px rgba(0,0,0,.15);
+    animation: floatLogo 4s ease infinite;
+    flex-shrink: 0;
 }
 
-@keyframes floatLogo{
-    0%{
-        transform:translateY(0);
+/* Safeguard for SVG / Image icons rendered inside the logo */
+.branding-logo svg,
+.branding-logo img {
+    width: 1em;
+    height: 1em;
+    object-fit: contain;
+}
+
+@keyframes floatLogo {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+    100% { transform: translateY(0); }
+}
+
+.branding-panel h1 {
+    font-size: 38px;
+    margin-bottom: 16px;
+    font-weight: 700;
+}
+
+.branding-panel p {
+    font-size: 16px;
+    opacity: .9;
+    line-height: 1.5;
+}
+
+.branding-features {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.branding-features div {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 16px;
+}
+
+/* RESPONSIVE OPTIMIZATIONS */
+
+/* ---------------- Tablet (900px and down) ---------------- */
+@media (max-width: 900px) {
+    .branding-panel {
+        width: 100%;
+        padding: 35px 25px;
+        align-items: center;
+        text-align: center;
+        gap: 25px;
     }
 
-    50%{
-        transform:translateY(-10px);
+    .branding-logo {
+        width: 66px;
+        height: 66px;
+        font-size: 32px;
+        border-radius: 16px;       
+        margin-bottom: 18px;
     }
 
-    100%{
-        transform:translateY(0);
+    .branding-panel h1 {
+        font-size: 30px;
+    }
+
+    .branding-panel p {
+        font-size: 15px;
+    }
+
+    .branding-features {
+        width: 100%;
+        align-items: center;
+    }
+
+    .branding-features div {
+        font-size: 15px;
     }
 }
 
-.branding-panel h1{
-    font-size:42px;
-    margin-bottom:20px;
+/* ---------------- Mobile (768px and down) ---------------- */
+@media (max-width: 768px) {
+    .branding-panel {
+        padding: 28px 20px;
+    }
+
+    .branding-logo {
+        width: 56px;
+        height: 56px;
+        font-size: 26px;
+        border-radius: 14px;       
+        margin-bottom: 14px;
+    }
+
+    .branding-panel h1 {
+        font-size: 26px;
+    }
+
+    .branding-panel p {
+        font-size: 14.5px;
+    }
+
+    .branding-features {
+        gap: 14px;
+    }
+
+    .branding-features div {
+        font-size: 14px;
+        gap: 10px;
+    }
 }
 
-.branding-panel p{
-    font-size:18px;
-    opacity:.9;
-}
-
-.branding-features{
-    display:flex;
-    flex-direction:column;
-    gap:20px;
-}
-
-.branding-features div{
-    display:flex;
-    align-items:center;
-    gap:15px;
-    font-size:18px;
-}
-
-/* ---------------- Tablet ---------------- */
-
-@media(max-width:900px){
-
-    .branding-panel{
-        width:100%;
-        padding:40px 30px;
-        align-items:center;
-        text-align:center;
-        gap:30px;
+/* ---------------- Small Mobile (480px and down) ---------------- */
+@media (max-width: 480px) {
+    .branding-panel {
+        padding: 22px 16px;
     }
 
-    .branding-logo{
-        width:75px;
-        height:75px;
-        font-size:40px;
-        margin-bottom:20px;
+    /* Fixed Small Mobile Proportions */
+    .branding-logo {
+        width: 48px;
+        height: 48px;
+        font-size: 22px;           
+        border-radius: 11px;       
+        margin-bottom: 12px;
     }
 
-    .branding-panel h1{
-        font-size:34px;
+    .branding-panel h1 {
+        font-size: 22px;
+        margin-bottom: 10px;
     }
 
-    .branding-panel p{
-        font-size:16px;
+    .branding-panel p {
+        font-size: 13.5px;
     }
 
-    .branding-features{
-        width:100%;
-        align-items:center;
+    .branding-features div {
+        font-size: 13.5px;
     }
-
-    .branding-features div{
-        font-size:16px;
-    }
-
-}
-
-/* ---------------- Mobile ---------------- */
-
-@media(max-width:768px){
-
-    .branding-panel{
-        padding:30px 20px;
-    }
-
-    .branding-logo{
-        width:65px;
-        height:65px;
-        font-size:34px;
-    }
-
-    .branding-panel h1{
-        font-size:28px;
-    }
-
-    .branding-panel p{
-        font-size:15px;
-    }
-
-    .branding-features{
-        gap:14px;
-    }
-
-    .branding-features div{
-        font-size:15px;
-        gap:10px;
-    }
-
-}
-
-/* ---------------- Small Mobile ---------------- */
-
-@media(max-width:480px){
-
-    .branding-panel{
-        padding:25px 15px;
-    }
-
-    .branding-logo{
-        width:48px;
-        height:48px;
-        font-size:20px;
-    }
-
-    .branding-panel h1{
-        font-size:24px;
-    }
-
-    .branding-panel p{
-        font-size:14px;
-    }
-
-    .branding-features div{
-        font-size:14px;
-    }
-
 }
