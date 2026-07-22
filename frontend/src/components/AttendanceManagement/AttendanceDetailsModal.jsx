@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../services/api";
 import { FaUser, FaEnvelope, FaCalendarAlt, FaClock, FaBusinessTime, FaTimes } from "react-icons/fa";
+import Loader from "../Loader/Loader";
 
 function AttendanceDetailsModal({
 
@@ -46,9 +47,7 @@ function AttendanceDetailsModal({
 
             <div className="attendance-modal-overlay">
 
-                <div className="attendance-modal">
-                    Loading...
-                </div>
+                <Loader />
 
             </div>
 
