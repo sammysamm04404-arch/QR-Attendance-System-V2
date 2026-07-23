@@ -564,19 +564,52 @@
 
     /* Tighter filter tracking optimized for micro panels */
     .attendance-filters {
-        gap: 8px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 6px; 
+        width: 100%;
+        box-sizing: border-box;
     }
 
     .attendance-search,
     .filter-group,
     .clear-filter-btn {
-        padding: 10px 12px;
-        border-radius: 10px;
-        font-size: 9px;
+        padding: 4px 8px; 
+        border-radius: 6px; 
+        height: 34px; 
+        font-size: 11.5px; 
+        box-sizing: border-box;
+        display: flex;
+        align-items: center;
     }
-    
+
+    .attendance-search input,
+    .filter-group input,
+    .filter-group select {
+        font-size: 11.5px !important;
+        padding: 0 2px;
+        height: 100%;
+        width: 100%;
+        border: none;
+        outline: none;
+        background: transparent;
+        color: #1e293b;
+    }
+
     .filter-label {
-        font-size: 9px;
+        font-size: 10px;
+        font-weight: 600;
+        color: #4f46e5;
+        margin-right: 4px;
+        white-space: nowrap;
+    }
+
+    .clear-filter-btn {
+        font-size: 11.5px;
+        font-weight: 600;
+        justify-content: center;
+        gap: 4px;
+        padding: 0 10px;
     }
 
     .attendance-atmsummary {
