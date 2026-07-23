@@ -1,144 +1,144 @@
 /* 1. BASE GLOBAL LAYOUT STRUCTURE */
 
 .correction-page {
-    padding: 30px;
-    background: #f6f8fc;
-    min-height: 100vh;
-    box-sizing: border-box;
+  padding: 30px;
+  background: #f6f8fc;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
 .correction-header {
-    margin-bottom: 25px;
+  margin-bottom: 25px;
 }
 
 .correction-header h1 {
-    font-size: 30px;
-    font-weight: 700;
-    color: #1e293b;
-    margin: 0 0 8px 0;
+  font-size: 30px;
+  font-weight: 700;
+  color: #1e293b;
+  margin: 0 0 8px 0;
 }
 
 .correction-header p {
-    color: #64748b;
-    margin: 0;
-    font-size: 15px;
+  color: #64748b;
+  margin: 0;
+  font-size: 15px;
 }
 
 /* 2. SYSTEM FILTERS CONTROL BAR (Desktop Base) */
 
 .correction-filters {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 25px;
+  flex-wrap: wrap;
 }
 
 .correction-filters input {
-    flex: 1;
-    min-width: 200px;
-    padding: 9px 14px;
-    border: 1px solid #dbe4ef;
-    border-radius: 8px;
-    outline: none;
-    font-size: 14px;
-    color: #1e293b;
-    background: #fff;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease;
+  flex: 1;
+  min-width: 200px;
+  padding: 9px 14px;
+  border: 1px solid #dbe4ef;
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+  color: #1e293b;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
 }
 
 .correction-filters select {
-    width: 180px;
-    padding: 9px 12px;
-    border-radius: 8px;
-    border: 1px solid #dbe4ef;
-    outline: none;
-    cursor: pointer;
-    font-size: 14px;
-    color: #1e293b;
-    background: #fff;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease;
+  width: 180px;
+  padding: 9px 12px;
+  border-radius: 8px;
+  border: 1px solid #dbe4ef;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  color: #1e293b;
+  background: #fff;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
 }
 
 .correction-filters input:focus,
 .correction-filters select:focus {
-    border-color: #2563eb;
+  border-color: #2563eb;
 }
 
 /* 3. DATA LOGS TABLE ARCHITECTURE */
 
 .correction-table-card {
-    background: #fff;
-    border-radius: 18px;
-    overflow: hidden;
-    box-shadow: 0 12px 35px rgba(0,0,0,.08);
-    box-sizing: border-box;
+  background: #fff;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+  box-sizing: border-box;
+  width: 100%;
 }
 
-.correction-table-responsive {
-    width: 100%;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+.correction-table-wrapper {
+  width: 100%;
+  overflow-x: hidden; /* No horizontal scrollbar */
 }
 
 .correction-table {
-    width: 100%;
-    border-collapse: collapse;
+  width: 100%;
+  border-collapse: collapse;
 }
 
 .correction-table thead {
-    background: #f8fafc;
+  background: #f8fafc;
 }
 
 .correction-table th {
-    padding: 18px;
-    text-align: left;
-    font-size: 14px;
-    color: #475569;
-    font-weight: 600;
-    white-space: nowrap;
+  padding: 18px;
+  text-align: left;
+  font-size: 14px;
+  color: #475569;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
 .correction-table td {
-    padding: 18px;
-    border-top: 1px solid #eef2f7;
-    vertical-align: middle;
-    color: #334155;
-    font-size: 14.5px;
-    white-space: nowrap;
+  padding: 18px;
+  border-top: 1px solid #eef2f7;
+  vertical-align: middle;
+  color: #334155;
+  font-size: 14.5px;
+  white-space: nowrap;
 }
 
 .correction-table tr:hover td {
-    background: #fcfdfe;
+  background: #fcfdfe;
 }
 
 .employee-info {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .employee-info strong {
-    font-size: 15px;
-    color: #1e293b;
-    font-weight: 600;
+  font-size: 15px;
+  color: #1e293b;
+  font-weight: 600;
 }
 
 .employee-info small {
-    color: #64748b;
-    margin-top: 4px;
-    font-size: 13px;
+  color: #64748b;
+  margin-top: 4px;
+  font-size: 13px;
 }
 
 .status-badge {
-    padding: 6px 14px;
-    border-radius: 30px;
-    color: #fff;
-    font-size: 13px;
-    font-weight: 600;
-    display: inline-block;
-    text-align: center;
+  padding: 6px 14px;
+  border-radius: 30px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  display: inline-block;
+  text-align: center;
 }
 
 .status-badge.pending { background: #f59e0b; }
@@ -146,160 +146,159 @@
 .status-badge.rejected { background: #ef4444; }
 
 .view-btn {
-    border: none;
-    background: #2563eb;
-    color: #fff;
-    padding: 8px 18px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 13.5px;
-    transition: all 0.2s ease;
+  border: none;
+  background: #2563eb;
+  color: #fff;
+  padding: 8px 18px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 13.5px;
+  transition: all 0.2s ease;
 }
 
 .view-btn:hover {
-    background: #1d4ed8;
+  background: #1d4ed8;
 }
 
-/* 4. SYSTEM DETAIL MODAL WINDOW (Desktop Base) */
+/* 4. MODAL WINDOW STYLES */
 
 .modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.45);
-    backdrop-filter: blur(4px);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-    padding: 20px;
-    box-sizing: border-box;
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(4px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
 .correction-modal {
-    width: 100%;
-    max-width: 640px;
-    max-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border-radius: 18px;
-    padding: 24px;
-    box-sizing: border-box;
-    box-shadow: 0 20px 50px rgba(0,0,0,.25);
-    animation: modalScaleUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  width: 100%;
+  max-width: 640px;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-radius: 18px;
+  padding: 24px;
+  box-sizing: border-box;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  animation: modalScaleUp 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 @keyframes modalScaleUp {
-    from { transform: scale(0.95); opacity: 0; }
-    to { transform: scale(1); opacity: 1; }
+  from { transform: scale(0.95); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
 
 .modal-header {
-    margin-bottom: 16px;
-    border-bottom: 1px solid #eef2f7;
-    padding-bottom: 12px;
-    flex-shrink: 0;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #eef2f7;
+  padding-bottom: 12px;
+  flex-shrink: 0;
 }
 
 .modal-header h2 {
-    color: #1e293b;
-    margin: 0;
-    font-size: 20px;
-    font-weight: 700;
+  color: #1e293b;
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .modal-body {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    overflow-y: auto;
-    padding-right: 2px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  overflow-y: auto;
+  padding-right: 2px;
 }
 
-/* Custom subtle scrollbar for modal body */
 .modal-body::-webkit-scrollbar {
-    width: 4px;
+  width: 4px;
 }
 .modal-body::-webkit-scrollbar-thumb {
-    background: #cbd5e1;
-    border-radius: 4px;
+  background: #cbd5e1;
+  border-radius: 4px;
 }
 
 .detail-row {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
 }
 
 .detail-row strong {
-    color: #64748b;
-    font-size: 14px;
-    font-weight: 600;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .detail-row span {
-    color: #1e293b;
-    font-size: 14.5px;
-    font-weight: 600;
+  color: #1e293b;
+  font-size: 14.5px;
+  font-weight: 600;
 }
 
 .detail-column strong {
-    display: block;
-    margin-bottom: 6px;
-    color: #64748b;
-    font-size: 14px;
-    font-weight: 600;
+  display: block;
+  margin-bottom: 6px;
+  color: #64748b;
+  font-size: 14px;
+  font-weight: 600;
 }
 
 .detail-column p {
-    background: #f8fafc;
-    padding: 10px 12px;
-    border-radius: 8px;
-    color: #334155;
-    margin: 0;
-    font-size: 13.5px;
-    line-height: 1.5;
-    border: 1px solid #eef2f7;
+  background: #f8fafc;
+  padding: 10px 12px;
+  border-radius: 8px;
+  color: #334155;
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+  border: 1px solid #eef2f7;
 }
 
 .modal-body textarea {
-    width: 100%;
-    min-height: 80px;
-    border: 1px solid #dbe4ef;
-    border-radius: 8px;
-    padding: 10px 12px;
-    resize: none;
-    outline: none;
-    font-size: 13.5px;
-    color: #1e293b;
-    box-sizing: border-box;
-    transition: border-color 0.2s ease;
+  width: 100%;
+  min-height: 80px;
+  border: 1px solid #dbe4ef;
+  border-radius: 8px;
+  padding: 10px 12px;
+  resize: none;
+  outline: none;
+  font-size: 13.5px;
+  color: #1e293b;
+  box-sizing: border-box;
+  transition: border-color 0.2s ease;
 }
 
 .modal-body textarea:focus {
-    border-color: #2563eb;
+  border-color: #2563eb;
 }
 
 .modal-buttons {
-    display: flex;
-    gap: 10px;
-    margin-top: 12px;
-    flex-shrink: 0;
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+  flex-shrink: 0;
 }
 
-.approve-btn, 
-.reject-btn, 
+.approve-btn,
+.reject-btn,
 .close-btn {
-    border: none;
-    padding: 11px;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    font-size: 14px;
-    transition: background-color 0.2s ease;
-    text-align: center;
+  border: none;
+  padding: 11px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.2s ease;
+  text-align: center;
 }
 
 .approve-btn { flex: 1; background: #10b981; color: #fff; }
@@ -311,226 +310,126 @@
 .close-btn { width: 100%; background: #64748b; color: #fff; margin-top: 8px; }
 .close-btn:hover { background: #475569; }
 
-
-/* 5. CROSS-DEVICE RESPONSIVE REDESIGN ENGINE */
+/* 5. PERFECT FIT MOBILE STYLES (NO HORIZONTAL SCROLL) */
 
 @media (max-width: 768px) {
-    .correction-page {
-        padding: 20px;
-    }
+  .correction-page {
+    padding: 16px 12px;
+  }
 
-    .correction-header h1 {
-        font-size: 24px;
-    }
+  .correction-header h1 {
+    font-size: 22px;
+  }
 
-    .correction-filters {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
+  .correction-filters {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
 
-    .correction-filters input,
-    .correction-filters select {
-        width: 100%;
-        min-width: 0;
-        margin: 0;
-        box-sizing: border-box;
-    }
+  /* Force table layout to fixed so columns strictly respect screen bounds */
+  .correction-table {
+    table-layout: fixed;
+    width: 100%;
+  }
 
-    .correction-table-responsive {
-        overflow-x: hidden; 
-    }
+  /* Explicit percentages so all 5 columns fit without horizontal scroll */
+  .correction-table th:nth-child(1),
+  .correction-table td:nth-child(1) { width: 25%; } /* Employee */
 
-    .correction-table th,
-    .correction-table td {
-        padding: 12px 6px;
-        font-size: 11.5px;
-    }
+  .correction-table th:nth-child(2),
+  .correction-table td:nth-child(2) { width: 20%; } /* Date */
 
-    .correction-table td:first-child {
-        max-width: 90px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-    }
+  .correction-table th:nth-child(3),
+  .correction-table td:nth-child(3) { width: 22%; } /* Req. Check Out */
 
-    .employee-info strong {
-        font-size: 12.5px;
-    }
+  .correction-table th:nth-child(4),
+  .correction-table td:nth-child(4) { width: 18%; } /* Status */
 
-    .status-badge {
-        padding: 4px 8px;
-        font-size: 10.5px;
-        border-radius: 6px;
-    }
+  .correction-table th:nth-child(5),
+  .correction-table td:nth-child(5) { width: 15%; } /* Action */
 
-    .view-btn {
-        padding: 4px 10px;
-        font-size: 11px;
-        border-radius: 5px;
-    }
+  .correction-table th,
+  .correction-table td {
+    padding: 10px 4px;
+    font-size: 10.5px;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-    .correction-modal {
-        padding: 20px;
-        max-height: 85vh;
-    }
+  .correction-table th:first-child,
+  .correction-table td:first-child {
+    text-align: left;
+    padding-left: 6px;
+  }
 
-    .modal-header {
-        margin-bottom: 12px;
-        padding-bottom: 8px;
-    }
+  .correction-table th:last-child,
+  .correction-table td:last-child {
+    padding-right: 6px;
+  }
 
-    .modal-body {
-        gap: 10px;
-    }
+  /* Hide email address on mobile to free up space */
+  .employee-info small.employee-email {
+    display: none;
+  }
 
-    .detail-column p {
-        padding: 8px 10px;
-        font-size: 13px;
-    }
+  .employee-info strong.employee-name {
+    font-size: 11px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
 
-    .modal-body textarea {
-        min-height: 75px;
-        padding: 8px 10px;
-        font-size: 13px;
-    }
+  .status-badge {
+    padding: 3px 6px;
+    font-size: 9.5px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 
-    .approve-btn,
-    .reject-btn,
-    .close-btn {
-        padding: 10px; 
-        font-size: 13px;
-        border-radius: 6px;
-    }
+  .view-btn {
+    padding: 4px 6px;
+    font-size: 10px;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+  }
 }
 
-/* SMALL MOBILE SPECIFIC FIX (< 480px) */
+/* SMALL MOBILE SCREENS (< 480px) */
 @media (max-width: 480px) {
-    .correction-page {
-        padding: 16px;
-    }
+  .correction-page {
+    padding: 12px 8px;
+  }
 
-    .correction-header h1 {
-        font-size: 21px;
-    }
+  .correction-table th,
+  .correction-table td {
+    padding: 8px 3px;
+    font-size: 10px;
+  }
 
-    .correction-header p {
-        font-size: 13px;
-    }
+  .status-badge {
+    padding: 2px 4px;
+    font-size: 9px;
+  }
 
-    .correction-filters {
-        gap: 8px;
-    }
+  .view-btn {
+    padding: 3px 5px;
+    font-size: 9.5px;
+  }
 
-    .correction-filters input,
-    .correction-filters select {
-        padding: 8px 12px;
-        font-size: 13px;
-    }
+  /* Bottom sheet modal for small screens */
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
 
-    .correction-table th,
-    .correction-table td {
-        padding: 10px 4px;
-        font-size: 10.5px;
-    }
-
-    .status-badge {
-        padding: 3px 6px;
-        font-size: 9.5px;
-        border-radius: 5px;
-    }
-
-    .view-btn {
-        padding: 3px 6px;
-        font-size: 9.5px;
-    }
-
-    /* Modal Mobile Bottom-Sheet Optimization */
-    .modal-overlay {
-        padding: 0; 
-        align-items: flex-end;
-    }
-
-    .correction-modal {
-        padding: 16px 16px 14px;
-        border-radius: 20px 20px 0 0;
-        max-height: 82vh; /* Keeps modal inside viewport with headroom */
-        animation: slideUpSheet 0.3s cubic-bezier(0.32, 0.94, 0.6, 1);
-    }
-
-    @keyframes slideUpSheet {
-        from { transform: translateY(100%); }
-        to { transform: translateY(0); }
-    }
-
-    .modal-header {
-        margin-bottom: 10px;
-        padding-bottom: 8px;
-    }
-
-    .modal-header h2 {
-        font-size: 16px;
-    }
-
-    .modal-body {
-        gap: 8px;
-    }
-
-    /* Keep detail rows side-by-side to save critical vertical space */
-    .detail-row {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        padding-bottom: 6px;
-        border-bottom: 1px solid #f1f5f9;
-        gap: 8px;
-    }
-
-    .detail-row strong {
-        font-size: 12px;
-    }
-
-    .detail-row span {
-        font-size: 12px;
-        text-align: right;
-    }
-
-    .detail-column strong {
-        font-size: 12px;
-        margin-bottom: 4px;
-    }
-
-    .detail-column p {
-        padding: 8px 10px;
-        font-size: 12px;
-        border-radius: 6px;
-    }
-
-    .modal-body textarea {
-        min-height: 60px;
-        padding: 8px 10px;
-        font-size: 12px;
-        border-radius: 6px;
-    }
-
-    /* Keep action buttons side-by-side instead of stacking 3 vertical rows */
-    .modal-buttons {
-        flex-direction: row;
-        gap: 8px;
-        margin-top: 8px;
-    }
-
-    .approve-btn,
-    .reject-btn {
-        padding: 9px;
-        font-size: 12.5px;
-        border-radius: 6px;
-    }
-
-    .close-btn {
-        padding: 9px;
-        font-size: 12.5px;
-        border-radius: 6px;
-        margin-top: 6px;
-    }
+  .correction-modal {
+    padding: 16px;
+    border-radius: 18px 18px 0 0;
+    max-height: 82vh;
+  }
 }
