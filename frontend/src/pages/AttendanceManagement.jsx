@@ -60,7 +60,7 @@ function AttendanceManagement() {
 
             // Filter out admin users from backend data if present
             const nonAdminAttendance = (response.data.attendance || []).filter(
-            (item) => item.role?.toLowerCase() !== "admin" && !item.is_admin
+            (item) => item.role !== "Admin"
             );
 
             setAttendance(nonAdminAttendance);
