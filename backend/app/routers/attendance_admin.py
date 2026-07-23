@@ -40,7 +40,6 @@ def get_attendance(
         delta = (to_date - from_date).days
         target_dates = [from_date + timedelta(days=i) for i in range(delta + 1)]
     else:
-        # Collect all unique dates present in attendance logs to retain full historical entries
         all_scans = db.query(Attendance.scan_time).all()
         if all_scans:
             target_dates = sorted(
@@ -49,11 +48,16 @@ def get_attendance(
         else:
             target_dates = [date.today()]
 
-    users = db.query(User).all()
+    # 2. EXCLUDE ADMIN USERS HERE
+    # Note: If your User model uses `role` (e.g., User.role != "admin"), use:
+    users = db.query(User).filter(User.role != "admin").all()
+
+    # (Or if your User model uses a boolean flag like `is_admin`, use instead):
+    # users = db.query(User).filter(User.is_admin == False).all()
+
     rows = []
 
     for user in users:
-        # Apply search filter
         if search:
             if (
                 search.lower() not in user.name.lower()
@@ -61,7 +65,6 @@ def get_attendance(
             ):
                 continue
 
-        # Fetch all attendance records for this user
         records = (
             db.query(Attendance)
             .filter(Attendance.user_id == user.id)
@@ -69,12 +72,10 @@ def get_attendance(
             .all()
         )
 
-        # Group existing records by date
         grouped = {}
         for r in records:
             grouped.setdefault(r.scan_time.date(), []).append(r)
 
-        # Evaluate attendance status across target dates
         for day in target_dates:
             day_records = grouped.get(day, [])
 
@@ -124,14 +125,11 @@ def get_attendance(
 
             rows.append(attendance_row)
 
-    # Filter by status if requested
     if status != "All":
         rows = [row for row in rows if row["status"] == status]
 
-    # Sort rows by date descending
     rows.sort(key=lambda x: x["date"], reverse=True)
 
-    # Pagination calculation
     total = len(rows)
     start = (page - 1) * limit
     end = start + limit
@@ -149,59 +147,4 @@ def get_attendance(
         "page": page,
         "total_pages": (total + limit - 1) // limit if limit else 1,
         "total": total,
-    }
-
-
-@router.get("/attendance/{user_id}/{attendance_date}")
-def get_attendance_details(
-    user_id: int,
-    attendance_date: str,
-    db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
-):
-    user = db.query(User).filter(User.id == user_id).first()
-
-    if not user:
-        raise HTTPException(status_code=404, detail="Employee not found.")
-
-    try:
-        parsed_date = datetime.strptime(attendance_date, "%Y-%m-%d").date()
-    except ValueError:
-        raise HTTPException(
-            status_code=400, detail="Invalid date format. Use YYYY-MM-DD."
-        )
-
-    records = (
-        db.query(Attendance)
-        .filter(Attendance.user_id == user_id)
-        .all()
-    )
-
-    day_records = [r for r in records if r.scan_time.date() == parsed_date]
-    day_records.sort(key=lambda x: x.scan_time)
-
-    check_in = next(
-        (r for r in day_records if r.action == "Check In"), None
-    )
-    check_out = next(
-        (r for r in reversed(day_records) if r.action == "Check Out"), None
-    )
-
-    return {
-        "employee": {
-            "id": user.id,
-            "name": user.name,
-            "email": user.email,
-            "status": user.status,
-        },
-        "attendance": {
-            "date": str(parsed_date),
-            # Return scan_time directly so JS `new Date(...)` can parse it properly
-            "check_in": check_in.scan_time if check_in else None,
-            "check_out": check_out.scan_time if check_out else None,
-            "working_hours": working_hours(
-                check_in.scan_time if check_in else None,
-                check_out.scan_time if check_out else None,
-            ),
-        },
     }
