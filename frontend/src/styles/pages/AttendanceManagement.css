@@ -663,7 +663,7 @@
     /* COMPACT PAGINATION ARCHITECTURE */
     .attendance-pagination {
         justify-content: space-between;
-        width: 100%;
+        width: 80%;
     }
 
     .attendance-pagination button {
