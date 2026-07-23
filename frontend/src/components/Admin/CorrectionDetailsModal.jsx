@@ -6,12 +6,14 @@ import Loader from "../Loader/Loader";
 function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
     const [details, setDetails] = useState(null);
     const [remarks, setRemarks] = useState("");
-    const [submitting, setSubmitting] = useState(false);
+    // Track specific action: null | "approve" | "reject"
+    const [submittingAction, setSubmittingAction] = useState(null);
 
     useEffect(() => {
         if (open && request) {
             setDetails(null); // Reset details on open
             setRemarks("");
+            setSubmittingAction(null);
             fetchDetails();
         }
     }, [open, request]);
@@ -29,8 +31,8 @@ function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
     };
 
     const approveRequest = async () => {
-        if (submitting) return;
-        setSubmitting(true);
+        if (submittingAction) return;
+        setSubmittingAction("approve");
 
         try {
             await api.put(
@@ -47,7 +49,7 @@ function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
         } catch (error) {
             toast.error(error.response?.data?.detail || "Something went wrong.");
         } finally {
-            setSubmitting(false);
+            setSubmittingAction(null);
         }
     };
 
@@ -57,8 +59,8 @@ function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
             return;
         }
 
-        if (submitting) return;
-        setSubmitting(true);
+        if (submittingAction) return;
+        setSubmittingAction("reject");
 
         try {
             await api.put(
@@ -85,7 +87,7 @@ function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
         } catch (error) {
             toast.error(error.response?.data?.detail || "Something went wrong.");
         } finally {
-            setSubmitting(false);
+            setSubmittingAction(null);
         }
     };
 
@@ -173,30 +175,34 @@ function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
                                 placeholder="Remarks (Required for rejection)"
                                 value={remarks}
                                 onChange={(e) => setRemarks(e.target.value)}
-                                disabled={submitting}
+                                disabled={!!submittingAction}
                             />
 
                             <div className="modal-buttons">
                                 <button
                                     className="approve-btn"
                                     onClick={approveRequest}
-                                    disabled={submitting}
+                                    disabled={!!submittingAction}
                                 >
-                                    {submitting ? "Approving..." : "Approve"}
+                                    {submittingAction === "approve"
+                                        ? "Approving..."
+                                        : "Approve"}
                                 </button>
 
                                 <button
                                     className="reject-btn"
                                     onClick={rejectRequest}
-                                    disabled={submitting}
+                                    disabled={!!submittingAction}
                                 >
-                                    {submitting ? "Rejecting..." : "Reject"}
+                                    {submittingAction === "reject"
+                                        ? "Rejecting..."
+                                        : "Reject"}
                                 </button>
 
                                 <button
                                     className="close-btn"
                                     onClick={onClose}
-                                    disabled={submitting}
+                                    disabled={!!submittingAction}
                                 >
                                     Close
                                 </button>
@@ -215,7 +221,7 @@ function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
                                 <button
                                     className="close-btn"
                                     onClick={onClose}
-                                    disabled={submitting}
+                                    disabled={!!submittingAction}
                                 >
                                     Close
                                 </button>

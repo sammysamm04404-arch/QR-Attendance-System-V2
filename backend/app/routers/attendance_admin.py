@@ -102,7 +102,7 @@ def get_attendance(
                 if cin:
                     attendance_status = "Present"
                     if cin.scan_time.hour > 10 or (
-                        cin.scan_time.hour == 10 and cin.scan_time.minute > 30
+                        cin.scan_time.hour == 10
                     ):
                         attendance_status = "Late"
                 else:
