@@ -55,15 +55,11 @@ function AttendanceManagement() {
             if (toDate) params.append("to_date", toDate);
 
             const response = await api.get(
-            `/admin/attendance?${params.toString()}`
+                `/admin/attendance?${params.toString()}`
             );
 
-            // Filter out admin users from backend data if present
-            const nonAdminAttendance = (response.data.attendance || []).filter(
-            (item) => item.role !== "Admin"
-            );
-
-            setAttendance(nonAdminAttendance);
+            // Set clean non-admin response data
+            setAttendance(response.data.attendance || []);
             setTotalPages(response.data.total_pages);
             setATMSummary(response.data.summary);
         } catch (error) {
