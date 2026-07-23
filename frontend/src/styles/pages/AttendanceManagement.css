@@ -262,35 +262,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 20px;
-    margin-top: 30px;
+    gap: 14px;
+    margin-top: 24px;
 }
 
 .attendance-pagination button {
+    padding: 10px 18px;
     border: none;
-    background: #4F46E5;
-    color: white;
-    padding: 10px 20px;
     border-radius: 10px;
+    background: #2563eb;
+    color: white;
     cursor: pointer;
-    font-weight: 600;
     font-size: 14px;
-    transition: background-color 0.2s ease;
+    transition: .25s;
+    white-space: nowrap;
 }
 
 .attendance-pagination button:hover:not(:disabled) {
-    background: #4338CA;
+    background: #1d4ed8;
 }
 
 .attendance-pagination button:disabled {
-    opacity: .4;
+    background: #94a3b8;
     cursor: not-allowed;
 }
 
 .attendance-pagination span {
-    font-size: 14.5px;
+    font-size: 14px;
     font-weight: 600;
-    color: #475569;
 }
 
 /* =====================================================
@@ -501,15 +500,13 @@
     }
 
     /* FLUID PAGINATION SCALING */
-    .attendance-pagination {
-        gap: 12px;
-        margin-top: 20px;
+    .attendace-pagination {
+        gap: 10px;
     }
 
     .attendance-pagination button {
         padding: 8px 14px;
-        font-size: 12.5px;
-        border-radius: 8px;
+        font-size: 13px;
     }
 
     .attendance-pagination span {
@@ -662,15 +659,24 @@
     
     /* COMPACT PAGINATION ARCHITECTURE */
     .attendance-pagination {
-        justify-content: space-between;
-        width: 80%;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        flex-wrap: nowrap;
     }
 
     .attendance-pagination button {
-        flex: 1;
-        text-align: center;
-        padding: 8px 10px;
+        width: auto;
+        padding: 8px 12px;
         font-size: 12px;
+        white-space: nowrap;
+    }
+
+    .attendance-pagination span {
+        font-size: 12px;
+        white-space: nowrap;
     }
 
     /* MODAL BOTTOM-SHEET PATTERN */
