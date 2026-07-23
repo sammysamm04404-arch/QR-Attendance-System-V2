@@ -1,6 +1,4 @@
-/* ==========================================================================
-   1. BASE GLOBAL LAYOUT STRUCTURE (Desktop Base)
-   ========================================================================== */
+/* 1. BASE GLOBAL LAYOUT STRUCTURE (Desktop Base) */
 
 .correction-page {
   padding: 30px;
@@ -26,9 +24,7 @@
   font-size: 15px;
 }
 
-/* ==========================================================================
-   2. SYSTEM FILTERS CONTROL BAR (Desktop Base)
-   ========================================================================== */
+/* 2. SYSTEM FILTERS CONTROL BAR (Desktop Base) */
 
 .correction-filters {
   display: flex;
@@ -73,9 +69,7 @@
   border-color: #2563eb;
 }
 
-/* ==========================================================================
-   3. DATA LOGS TABLE ARCHITECTURE (Desktop Base)
-   ========================================================================== */
+/* 3. DATA LOGS TABLE ARCHITECTURE (Desktop Base) */
 
 .correction-table-card {
   background: #fff;
@@ -169,9 +163,7 @@
   background: #1d4ed8;
 }
 
-/* ==========================================================================
-   4. MODAL WINDOW STYLES (Desktop Base)
-   ========================================================================== */
+/* 4. MODAL WINDOW STYLES (Desktop Base) */
 
 .modal-overlay {
   position: fixed;
@@ -188,7 +180,7 @@
 
 .correction-modal {
   width: 100%;
-  max-width: 640px;
+  max-width: 600px;
   max-height: 90vh;
   display: flex;
   flex-direction: column;
@@ -206,9 +198,9 @@
 }
 
 .modal-header {
-  margin-bottom: 16px;
+  margin-bottom: 12px;
   border-bottom: 1px solid #eef2f7;
-  padding-bottom: 12px;
+  padding-bottom: 10px;
   flex-shrink: 0;
 }
 
@@ -222,17 +214,17 @@
 .modal-body {
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 12px;
   overflow-y: auto;
-  padding-right: 2px;
+
+  /* HIDE SCROLLBAR */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
 }
 
+/* Chrome, Safari, Opera scrollbar removal */
 .modal-body::-webkit-scrollbar {
-  width: 4px;
-}
-.modal-body::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 4px;
+  display: none;
 }
 
 .detail-row {
@@ -275,7 +267,7 @@
 
 .modal-body textarea {
   width: 100%;
-  min-height: 80px;
+  min-height: 70px;
   border: 1px solid #dbe4ef;
   border-radius: 8px;
   padding: 10px 12px;
@@ -294,35 +286,36 @@
 .modal-buttons {
   display: flex;
   gap: 10px;
-  margin-top: 12px;
+  margin-top: 6px;
+  width: 100%;
   flex-shrink: 0;
 }
 
 .approve-btn,
 .reject-btn,
 .close-btn {
+  flex: 1; 
   border: none;
-  padding: 11px;
+  padding: 10px 12px;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
   font-size: 14px;
   transition: background-color 0.2s ease;
   text-align: center;
+  margin-top: 0;
 }
 
-.approve-btn { flex: 1; background: #10b981; color: #fff; }
+.approve-btn { background: #10b981; color: #fff; }
 .approve-btn:hover { background: #059669; }
 
-.reject-btn { flex: 1; background: #ef4444; color: #fff; }
+.reject-btn { background: #ef4444; color: #fff; }
 .reject-btn:hover { background: #dc2626; }
 
-.close-btn { width: 100%; background: #64748b; color: #fff; margin-top: 8px; }
+.close-btn { background: #64748b; color: #fff; }
 .close-btn:hover { background: #475569; }
 
-/* ==========================================================================
-   5. CROSS-DEVICE MOBILE OPTIMIZATION ENGINE
-   ========================================================================== */
+/* 5. CROSS-DEVICE MOBILE OPTIMIZATION ENGINE */
 
 /* TABLETS AND MOBILE (< 768px) */
 @media (max-width: 768px) {
@@ -492,7 +485,6 @@
     font-size: 9.5px;
   }
 
-  /* Bottom sheet modal for smaller devices */
   .modal-overlay {
     padding: 0;
     align-items: flex-end;
@@ -501,6 +493,6 @@
   .correction-modal {
     padding: 16px;
     border-radius: 18px 18px 0 0;
-    max-height: 82vh;
+    max-height: 85vh;
   }
 }

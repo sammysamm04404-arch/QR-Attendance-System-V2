@@ -139,18 +139,6 @@ function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
                     </div>
 
                     <div className="detail-row">
-                        <strong>Existing Check Out</strong>
-                        <span>
-                            {details.attendance?.check_out
-                                ? new Date(details.attendance.check_out).toLocaleTimeString([], {
-                                      hour: "2-digit",
-                                      minute: "2-digit"
-                                  })
-                                : "--"}
-                        </span>
-                    </div>
-
-                    <div className="detail-row">
                         <strong>Requested Check Out</strong>
                         <span>
                             {new Date(details.requested_checkout).toLocaleTimeString([], {
@@ -178,7 +166,7 @@ function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
                         </span>
                     </div>
 
-                    {/* Render action form ONLY when status is Pending */}
+                    {/* Action form when pending vs completed */}
                     {details.status === "Pending" ? (
                         <>
                             <textarea
@@ -204,25 +192,36 @@ function CorrectionDetailsModal({ open, request, onClose, onSuccess }) {
                                 >
                                     {submitting ? "Rejecting..." : "Reject"}
                                 </button>
+
+                                <button
+                                    className="close-btn"
+                                    onClick={onClose}
+                                    disabled={submitting}
+                                >
+                                    Close
+                                </button>
                             </div>
                         </>
                     ) : (
-                        /* Read-Only mode: display remarks if present */
-                        details.remarks && (
-                            <div className="detail-column">
-                                <strong>Admin Remarks</strong>
-                                <p>{details.remarks}</p>
-                            </div>
-                        )
-                    )}
+                        <>
+                            {details.remarks && (
+                                <div className="detail-column">
+                                    <strong>Admin Remarks</strong>
+                                    <p>{details.remarks}</p>
+                                </div>
+                            )}
 
-                    <button
-                        className="close-btn"
-                        onClick={onClose}
-                        disabled={submitting}
-                    >
-                        Close
-                    </button>
+                            <div className="modal-buttons">
+                                <button
+                                    className="close-btn"
+                                    onClick={onClose}
+                                    disabled={submitting}
+                                >
+                                    Close
+                                </button>
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </div>
