@@ -121,33 +121,34 @@ function Notifications() {
                                     <p>{notification.message}</p>
                                 </div>
 
-                                {/* Actions container is rendered if there is any active action */}
-                                <div className="notification-actions">
-                                    {/* Resolve button stays visible even after notification is read */}
-                                    {notification.title ===
-                                        "Attendance Incomplete" && (
-                                        <button
-                                            className="resolve-btn"
-                                            onClick={() =>
-                                                handleResolve(notification)
-                                            }
-                                        >
-                                            Resolve Now
-                                        </button>
-                                    )}
+                                {/* Only render action buttons if notification is NOT closed */}
+                                {!notification.is_closed && (
+                                    <div className="notification-actions">
+                                        {/* Resolve button displays only if attendance is incomplete & not closed */}
+                                        {notification.title === "Attendance Incomplete" && (
+                                            <button
+                                                className="resolve-btn"
+                                                onClick={() =>
+                                                    handleResolve(notification)
+                                                }
+                                            >
+                                                Resolve Now
+                                            </button>
+                                        )}
 
-                                    {/* Mark Read button disappears only after being clicked */}
-                                    {!notification.is_read && (
-                                        <button
-                                            className="mark-read-btn"
-                                            onClick={() =>
-                                                markAsRead(notification.id)
-                                            }
-                                        >
-                                            Mark Read
-                                        </button>
-                                    )}
-                                </div>
+                                        {/* Mark Read button displays only if unread & not closed */}
+                                        {!notification.is_read && (
+                                            <button
+                                                className="mark-read-btn"
+                                                onClick={() =>
+                                                    markAsRead(notification.id)
+                                                }
+                                            >
+                                                Mark Read
+                                            </button>
+                                        )}
+                                    </div>
+                                )}
                             </div>
                         ))
                     )}
