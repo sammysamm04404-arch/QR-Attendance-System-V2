@@ -7,6 +7,7 @@ import AdminStats from "../components/Admin/AdminStats";
 import AdminChart from "../components/Admin/AdminCharts";
 import RecentActivity from "../components/Admin/RecentActivity";
 import QuickAdminActions from "../components/Admin/QuickAdminActions";
+import Attendance from "../pages/Attendance";
 import Loader from "../components/Loader/Loader";
 
 import "../styles/pages/AdminDashboard.css";
