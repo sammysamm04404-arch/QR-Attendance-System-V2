@@ -116,6 +116,18 @@
     z-index: 100;
 }
 
+.setting-icon {
+    font-size: 18px;
+    position: relative;
+    color: #ffffff;
+    transition: .25s ease;
+}
+
+.setting-icon:hover {
+    color: #FFD700;
+    transform: scale(1.08);
+}
+
 /* Mobile Menu Button */
 .menu-btn {
     display: none;

@@ -149,8 +149,8 @@ function Navbar() {
                             </div>
                         </Link>
                     )}
-                    <Link to="/settings" onClick={() => setMenuOpen(false)}>
-                        <FaCog />
+                    <Link className="notification-link" to="/settings" onClick={() => setMenuOpen(false)}>
+                        <FaCog className="setting-icon" />
                     </Link>
                 </div>
             </nav>
