@@ -12,6 +12,12 @@ function Profile() {
 
     const [profile, setProfile] = useState(null);
     const [loading, setLoading] = useState(true);
+    const [showEditModal, setShowEditModal] = useState(false);
+
+    const [editData, setEditData] = useState({
+        name: "",
+        email: ""
+    });
 
     const fetchProfile = async () => {
 
@@ -34,6 +40,39 @@ function Profile() {
     useEffect(() => {
         fetchProfile();
     }, []);
+
+    const handleInputChange = (e) => {
+
+        const { name, value } = e.target;
+        setEditData(prev => ({ ...prev, [name]: value }));
+
+    };
+
+    const updateProfile = async () => {
+
+        if (!editData.name.trim()) {
+            toast.error("Name is required.");
+            return;
+        }
+
+        if (!editData.email.trim()) {
+            toast.error("Email is required.");
+            return;
+        }
+
+        try {
+            await api.put("/profile", editData);
+            toast.success("Profile updated successfully.");
+            setShowEditModal(false);
+            fetchProfile();
+        }
+
+        catch (error) {
+            console.log(error);
+            toast.error( error.response?.data?.detail || "Unable to update profile.");
+        }
+
+    };
 
     if (loading) {
 
@@ -91,7 +130,7 @@ function Profile() {
 
                     </div>
 
-                    <button className="edit-profile-btn">
+                    <button className="edit-profile-btn" onClick={() => { setEditData({ name: profile.name, email: profile.email }); setShowEditModal(true);}}>
                         <FaEdit />
                         Edit Profile
                     </button>
@@ -235,6 +274,48 @@ function Profile() {
                 </div>
 
             </div>
+
+            {
+                showEditModal && (
+
+                    <div className="profile-modal-overlay">
+
+                        <div className="profile-modal">
+
+                            <h2>Edit Profile</h2>
+
+                            <div className="profile-form-group">
+
+                                <label>Full Name</label>
+                                <input type="text" name="name" value={editData.name} onChange={handleInputChange}/>
+
+                            </div>
+
+                            <div className="profile-form-group">
+
+                                <label>Email Address</label>
+                                <input type="email" name="email" value={editData.email} onChange={handleInputChange}/>
+
+                            </div>
+
+                            <div className="profile-modal-buttons">
+
+                                <button className="cancel-btn" onClick={() => setShowEditModal(false)}>
+                                    Cancel
+                                </button>
+
+                                <button className="save-btn" onClick={updateProfile}>
+                                    Save Changes
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                )
+            }
 
         </>
 
