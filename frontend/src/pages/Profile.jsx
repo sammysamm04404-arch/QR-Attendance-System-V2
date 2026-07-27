@@ -41,6 +41,30 @@ function Profile() {
         fetchProfile();
     }, []);
 
+    if (loading) {
+
+        return (
+
+            <>
+                <Navbar />
+                <Loader />
+            </>
+
+        );
+
+    }
+
+    if (!profile) {
+        return (
+            <>
+                <Navbar />
+                <div className="profile-loading">
+                    Unable to load profile.
+                </div>
+            </>
+        );
+    }
+
     const handleInputChange = (e) => {
 
         const { name, value } = e.target;
@@ -73,30 +97,6 @@ function Profile() {
         }
 
     };
-
-    if (loading) {
-
-        return (
-
-            <>
-                <Navbar />
-                <Loader />
-            </>
-
-        );
-
-    }
-
-    if (!profile) {
-        return (
-            <>
-                <Navbar />
-                <div className="profile-loading">
-                    Unable to load profile.
-                </div>
-            </>
-        );
-    }
 
     const avatarLetter = profile.name.charAt(0).toUpperCase();
 
