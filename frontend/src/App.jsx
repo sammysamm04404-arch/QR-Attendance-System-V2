@@ -56,7 +56,7 @@ function App() {
                 <Route
                     path="/dashboard"
                     element={
-                        <ProtectedRoute allowedRoles={["Employee"]}>
+                        <ProtectedRoute allowedRoles={["Employee","Admin"]}>
                             <Dashboard />
                         </ProtectedRoute>
                     }
@@ -74,7 +74,7 @@ function App() {
                 <Route
                     path="/history"
                     element={
-                        <ProtectedRoute allowedRoles={["Employee"]}>
+                        <ProtectedRoute allowedRoles={["Employee","Admin"]}>
                             <History />
                         </ProtectedRoute>
                     }
@@ -83,7 +83,7 @@ function App() {
                 <Route
                     path="/profile"
                     element={
-                        <ProtectedRoute allowedRoles={["Employee"]}>
+                        <ProtectedRoute allowedRoles={["Employee","Admin"]}>
                             <Profile />
                         </ProtectedRoute>
                     }
@@ -92,7 +92,7 @@ function App() {
                 <Route
                     path="/settings"
                     element={
-                        <ProtectedRoute allowedRoles={["Employee"]}>
+                        <ProtectedRoute allowedRoles={["Employee","Admin"]}>
                             <Settings />
                         </ProtectedRoute>
                     }

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import ConfirmationModal from "./ConfirmationModal";
 import "../styles/components/Navbar.css";
 import toast from "react-hot-toast";
-import { FaBell, FaBars, FaTimes } from "react-icons/fa";
+import { FaBell, FaBars, FaTimes, FaCog } from "react-icons/fa";
 
 function Navbar() {
     const navigate = useNavigate();
@@ -85,14 +85,23 @@ function Navbar() {
                                 <Link className="nav-link" to="/AdminDashboard" onClick={() => setMenuOpen(false)}>
                                     Dashboard
                                 </Link>
+                                <Link className="nav-link" to="/dashboard" onClick={() => setMenuOpen(false)}>
+                                    My Dashboard
+                                </Link>
                                 <Link className="nav-link" to="/attendance" onClick={() => setMenuOpen(false)}>
                                     Attendance
+                                </Link>
+                                <Link className="nav-link" to="/history" onClick={() => setMenuOpen(false)}>
+                                    History
                                 </Link>
                                 <Link className="nav-link" to="/Employees" onClick={() => setMenuOpen(false)}>
                                     Employees
                                 </Link>
                                 <Link className="nav-link" to="/attendance-management" onClick={() => setMenuOpen(false)}>
                                     Attendance Management
+                                </Link>
+                                <Link className="nav-link" to="/profile" onClick={() => setMenuOpen(false)}>
+                                    Profile
                                 </Link>
                             </>
                         ) : (
@@ -140,6 +149,9 @@ function Navbar() {
                             </div>
                         </Link>
                     )}
+                    <Link to="/settings" onClick={() => setMenuOpen(false)}>
+                        <FaCog />
+                    </Link>
                 </div>
             </nav>
 
