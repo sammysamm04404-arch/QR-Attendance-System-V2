@@ -445,3 +445,40 @@
     }
 
 }
+
+/* Prevent hero background from blocking clicks */
+.profile-hero > *{
+    position:relative;
+    z-index:2;
+}
+
+/* Keep glow circles behind everything */
+.profile-hero::before,
+.profile-hero::after{
+    z-index:1;
+    pointer-events:none;
+}
+
+/* Make button always clickable */
+.edit-profile-btn{
+    position:relative;
+    z-index:10;
+}
+
+/* Modal should always be on top */
+.profile-modal-overlay{
+    position:fixed;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:rgba(0,0,0,.45);
+    backdrop-filter:blur(6px);
+    z-index:99999;
+}
+
+/* Prevent input overflow */
+.profile-form-group input{
+    width:100%;
+    box-sizing:border-box;
+}
