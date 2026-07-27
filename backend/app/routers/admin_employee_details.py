@@ -135,9 +135,9 @@ def employee_details(
 
         if cin:
 
-            if cin.scan_time.hour > 9 or (
-                cin.scan_time.hour == 9
-                and cin.scan_time.minute > 30
+            if cin.scan_time.hour > 10 or (
+                cin.scan_time.hour == 10
+                and cin.scan_time.minute > 10
             ):
                 late_days += 1
 
