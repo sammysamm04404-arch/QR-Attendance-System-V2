@@ -85,11 +85,14 @@ function Navbar() {
                                 <Link className="nav-link" to="/AdminDashboard" onClick={() => setMenuOpen(false)}>
                                     Dashboard
                                 </Link>
+                                <Link className="nav-link" to="/attendance" onClick={() => setMenuOpen(false)}>
+                                    Attendance
+                                </Link>
                                 <Link className="nav-link" to="/Employees" onClick={() => setMenuOpen(false)}>
                                     Employees
                                 </Link>
                                 <Link className="nav-link" to="/attendance-management" onClick={() => setMenuOpen(false)}>
-                                    Attendance
+                                    Attendance Management
                                 </Link>
                             </>
                         ) : (
