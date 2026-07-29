@@ -254,12 +254,9 @@ function Profile() {
               >
                 <div className="summary-box-top">
                   <FaIdBadge />
-                  <button className="copy-btn">
-                    {copied ? <FaCheck className="copied-icon"/> : <FaCopy />}
-                  </button>
                 </div>
                 <h3>#{profile.id}</h3>
-                <p>User ID (Click to copy)</p>
+                <p>User ID</p>
               </motion.div>
 
               <motion.div className="summary-box" whileHover={{ y: -4, transition: { duration: 0.2 } }}>
