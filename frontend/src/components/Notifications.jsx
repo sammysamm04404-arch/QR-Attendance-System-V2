@@ -5,7 +5,7 @@ import "../styles/components/Notifications.css";
 import { FaEnvelopeOpen, FaExclamationTriangle, FaClipboardList, FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader/Loader";
-import CorrectionTable from "../components/CorrectionTable";
+import CorrectionTable from "../components/Admin/CorrectionTable";
 
 function Notifications() {
   // Personal Notifications State
