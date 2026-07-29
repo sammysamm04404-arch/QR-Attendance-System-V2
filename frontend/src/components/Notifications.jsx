@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import api from "../services/api";
 import "../styles/components/Notifications.css";
-import { FaEnvelopeOpen, FaExclamationTriangle, FaClipboardList } from "react-icons/fa";
+import { FaEnvelopeOpen, FaExclamationTriangle, FaClipboardList, FaTimes } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader/Loader";
-import CorrectionTable from "../components/CorrectionTable"; // Import CorrectionTable
+import CorrectionTable from "../components/CorrectionTable";
 
 function Notifications() {
   // Personal Notifications State
@@ -45,9 +45,9 @@ function Notifications() {
       const notifRes = await api.get("/notifications");
       setNotifications(notifRes.data);
 
-      // 2. Check user role from localStorage or API response
-      const currentUser = JSON.parse(localStorage.getItem("user_role"));
-      const userIsAdmin = currentUser === "Admin"
+      // 2. Read role directly as string (NO JSON.parse)
+      const userRole = localStorage.getItem("user_role");
+      const userIsAdmin = userRole === "Admin";
       setIsAdmin(userIsAdmin);
 
       // 3. If user is Admin, fetch pending employee correction requests
@@ -139,7 +139,7 @@ function Notifications() {
     );
   }
 
-  // Filter personal "Attendance Incomplete" / "Forgot Check Out" notifications
+  // Filter personal "Attendance Incomplete" notifications
   const personalIncompleteNotifs = notifications.filter(
     (n) => n.title === "Attendance Incomplete" && !n.is_closed
   );
@@ -243,7 +243,7 @@ function Notifications() {
             )}
           </div>
 
-          {/* SECTION 3: ADMIN CORRECTION REQUESTS TABLE (ONLY VISIBLE TO ADMINS) */}
+          {/* SECTION 3: ADMIN CORRECTION REQUESTS TABLE */}
           {isAdmin && (
             <div className="admin-corrections-section">
               <div
@@ -260,7 +260,6 @@ function Notifications() {
                 </h2>
               </div>
 
-              {/* Renders CorrectionTable component */}
               <CorrectionTable
                 loading={tableLoading}
                 requests={correctionRequests}
@@ -338,7 +337,14 @@ function Notifications() {
               </p>
             </div>
 
-            <div className="resolve-buttons" style={{ marginTop: "24px" }}>
+            <div className="resolve-buttons" style={{ marginTop: "24px", display: "flex", gap: "10px" }}>
+              <button
+                className="cancel-btn"
+                style={{ background: "#64748b", color: "#fff", border: "none" }}
+                onClick={() => setShowAdminActionModal(false)}
+              >
+                Close
+              </button>
               <button
                 className="cancel-btn"
                 style={{ background: "#ef4444", color: "#fff", border: "none" }}
