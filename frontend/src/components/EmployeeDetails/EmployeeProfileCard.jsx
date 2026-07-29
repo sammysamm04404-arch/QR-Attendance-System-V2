@@ -17,7 +17,7 @@ function EmployeeProfileCard({ employee }) {
 
             <div className="employee-profile-status">
 
-                <span className="role-badge">
+                <span className="employee-role-badge">
                     {employee.role}
                 </span>
 

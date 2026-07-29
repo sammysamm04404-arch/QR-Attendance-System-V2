@@ -2,11 +2,11 @@ function EmployeeSummaryCard({ summary }) {
 
     return (
 
-        <div className="summary-card">
+        <div className="employee-summary-card">
 
             <h3>Attendance Summary</h3>
 
-            <div className="summary-grid">
+            <div className="employee-summary-grid">
 
                 <div>
 
