@@ -126,6 +126,15 @@ function App() {
                 />
 
                 <Route
+                    path="/attendance-corrections"
+                    element={
+                        <ProtectedRoute allowedRoles={["Admin"]}>
+                            <CorrectionRequests />
+                        </ProtectedRoute>
+                    }
+                />
+
+                <Route
                     path="/employees/:id"
                     element={
                         <ProtectedRoute allowedRoles={["Admin"]}>
