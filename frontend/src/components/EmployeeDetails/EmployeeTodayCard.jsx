@@ -2,11 +2,11 @@ function EmployeeTodayCard({ today }) {
 
     return (
 
-        <div className="today-card">
+        <div className="employee-today-card">
 
             <h3>Today's Attendance</h3>
 
-            <div className="today-grid">
+            <div className="employee-today-grid">
 
                 <div>
 

@@ -83,7 +83,7 @@
 }
 
 /* Today Metrics Card */
-.today-card {
+.employee-today-card {
     background: white;
     border-radius: 20px;
     padding: 25px;
@@ -91,21 +91,21 @@
     box-sizing: border-box;
 }
 
-.today-grid {
+.employee-today-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
     margin-top: 20px;
 }
 
-.today-grid h4 {
+.employee-today-grid h4 {
     color: #64748B;
     margin: 0 0 8px 0;
     font-size: 14px;
     font-weight: 500;
 }
 
-.today-grid p {
+.employee-today-grid p {
     margin: 0;
     font-size: 20px;
     font-weight: 600;
@@ -202,7 +202,7 @@
         padding: 0 20px 40px;
     }
     
-    .today-grid, 
+    .employee-today-grid, 
     .employee-summary-grid {
         gap: 14px;
     }
@@ -217,7 +217,7 @@
     }
 
     .employee-profile-card,
-    .today-card,
+    .employee-today-card,
     .employee-summary-card,
     .history-card {
         padding: 22px;
@@ -297,26 +297,26 @@
     }
 
     /* Downscale row metrics grids to balanced 2-column configurations */
-    .today-grid,
+    .employee-today-grid,
     .employee-summary-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 14px;
         margin-top: 16px;
     }
 
-    .today-card,
+    .employee-today-card,
     .employee-summary-card,
     .history-card {
         padding: 16px;
         border-radius: 14px;
     }
 
-    .today-grid h4 {
+    .employee-today-grid h4 {
         font-size: 12px;
         margin-bottom: 4px;
     }
 
-    .today-grid p {
+    .employee-today-grid p {
         font-size: 16px;
     }
 
@@ -349,7 +349,7 @@
         align-items: flex-end;
     }
 
-    .today-grid,
+    .employee-today-grid,
     .employee-summary-grid {
         grid-template-columns: 1fr;
         gap: 12px;
