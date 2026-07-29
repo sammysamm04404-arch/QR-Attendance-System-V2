@@ -11,6 +11,7 @@ function Navbar() {
     const role = localStorage.getItem("user_role");
     const [menuOpen, setMenuOpen] = useState(false);
     const [showLogoutModal, setShowLogoutModal] = useState(false);
+    
     const [notificationCount, setNotificationCount] = useState(0);
     const [correctionCount, setCorrectionCount] = useState(0);
 
@@ -25,9 +26,7 @@ function Navbar() {
 
     const fetchPendingCorrections = async () => {
         try {
-            const response = await api.get(
-                "/admin/corrections/pending-count"
-            );
+            const response = await api.get("/admin/corrections/pending-count");
             setCorrectionCount(response.data.count);
         } catch (error) {
             console.log(error);
@@ -36,26 +35,28 @@ function Navbar() {
 
     useEffect(() => {
         fetchNotificationCount();
-        fetchPendingCorrections();
+        if (role === "Admin") {
+            fetchPendingCorrections();
+        }
 
         // Listen for immediate updates triggered from Notifications page
         const handleCountUpdate = () => {
             fetchNotificationCount();
-            fetchPendingCorrections();
+            if (role === "Admin") fetchPendingCorrections();
         };
 
         window.addEventListener("unreadCountUpdated", handleCountUpdate);
 
         const timer = setInterval(() => {
             fetchNotificationCount();
-            fetchPendingCorrections();
+            if (role === "Admin") fetchPendingCorrections();
         }, 20000);
 
         return () => {
             clearInterval(timer);
             window.removeEventListener("unreadCountUpdated", handleCountUpdate);
         };
-    }, []);
+    }, [role]);
 
     const handleLogout = () => {
         setShowLogoutModal(false);
@@ -64,6 +65,11 @@ function Navbar() {
         toast.success("Logged out successfully");
         window.location.href = "/login";
     };
+
+    // Calculate total badge count dynamically based on role
+    const totalBadgeCount = role === "Admin" 
+        ? notificationCount + correctionCount 
+        : notificationCount;
 
     return (
         <>
@@ -126,29 +132,18 @@ function Navbar() {
                         </button>
                     </div>
 
-                    {role === "Admin" ? (
-                        <Link className="notification-link" to="/attendance-corrections" onClick={() => setMenuOpen(false)}>
-                            <div className="notification-wrapper">
-                                <FaBell className="notification-icon" />
-                                {correctionCount > 0 && (
-                                    <span className="notification-count">
-                                        {correctionCount > 99 ? "99+" : correctionCount}
-                                    </span>
-                                )}
-                            </div>
-                        </Link>
-                    ) : (
-                        <Link className="notification-link" to="/notifications" onClick={() => setMenuOpen(false)}>
-                            <div className="notification-wrapper">
-                                <FaBell className="notification-icon" />
-                                {notificationCount > 0 && (
-                                    <span className="notification-count">
-                                        {notificationCount > 99 ? "99+" : notificationCount}
-                                    </span>
-                                )}
-                            </div>
-                        </Link>
-                    )}
+                    {/* Both Admin and Normal Users go to /notifications now */}
+                    <Link className="notification-link" to="/notifications" onClick={() => setMenuOpen(false)}>
+                        <div className="notification-wrapper">
+                            <FaBell className="notification-icon" />
+                            {totalBadgeCount > 0 && (
+                                <span className="notification-count">
+                                    {totalBadgeCount > 99 ? "99+" : totalBadgeCount}
+                                </span>
+                            )}
+                        </div>
+                    </Link>
+
                     <Link className="notification-link" to="/settings" onClick={() => setMenuOpen(false)}>
                         <FaCog className="setting-icon" />
                     </Link>
