@@ -52,7 +52,7 @@ function AuthRedirect() {
 
     }
 
-    return role === "admin"
+    return role === "Admin"
 
         ? <Navigate to="/AdminDashboard" replace />
 
