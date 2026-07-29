@@ -47,7 +47,7 @@ function Notifications() {
 
       // 2. Check user role from localStorage or API response
       const currentUser = JSON.parse(localStorage.getItem("user") || "{}");
-      const userIsAdmin = currentUser?.role === "ADMIN" || currentUser?.is_admin;
+      const userIsAdmin = currentUser?.role === "Admin" || currentUser?.is_admin;
       setIsAdmin(userIsAdmin);
 
       // 3. If user is Admin, fetch pending employee correction requests
