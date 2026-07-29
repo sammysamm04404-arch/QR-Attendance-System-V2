@@ -31,8 +31,8 @@
 /* Safeguard for SVG / Image icons rendered inside the logo */
 .branding-logo svg,
 .branding-logo img {
-    width: 1em;
-    height: 1em;
+    width: 70%;
+    height: 70%;
     object-fit: contain;
 }
 
