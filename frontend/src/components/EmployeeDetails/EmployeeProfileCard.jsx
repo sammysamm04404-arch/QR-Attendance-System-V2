@@ -4,18 +4,18 @@ function EmployeeProfileCard({ employee }) {
 
         <div className="employee-profile-card">
 
-            <div className="profile-avatar">
+            <div className="employee-profile-avatar">
                 {employee.name.charAt(0).toUpperCase()}
             </div>
 
-            <div className="profile-info">
+            <div className="employee-profile-info">
 
                 <h2>{employee.name}</h2>
                 <p>{employee.email}</p>
 
             </div>
 
-            <div className="profile-status">
+            <div className="employee-profile-status">
 
                 <span className="role-badge">
                     {employee.role}

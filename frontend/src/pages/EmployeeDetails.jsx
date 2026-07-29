@@ -52,7 +52,7 @@ function EmployeeDetails() {
 
             <div className="employee-details-page">
 
-                <button className="back-btn" onClick={()=>navigate("/employees")}>
+                <button className="employeepage-back-btn" onClick={()=>navigate("/employees")}>
                     Back
                 </button>
 

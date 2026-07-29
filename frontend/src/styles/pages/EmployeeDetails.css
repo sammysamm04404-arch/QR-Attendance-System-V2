@@ -8,7 +8,7 @@
     box-sizing: border-box;
 }
 
-.back-btn {
+.employeepage-back-btn {
     padding: 12px 20px;
     background: #4F46E5;
     color: white;
@@ -21,7 +21,7 @@
     transition: background-color 0.2s ease;
 }
 
-.back-btn:hover {
+.employeepage-back-btn:hover {
     background: #4338CA;
 }
 
@@ -45,7 +45,7 @@
     box-sizing: border-box;
 }
 
-.profile-avatar {
+.employee-profile-avatar {
     width: 90px;
     height: 90px;
     border-radius: 50%;
@@ -58,25 +58,25 @@
     flex-shrink: 0;
 }
 
-.profile-info {
+.employee-profile-info {
     flex: 1;
     margin-left: 25px;
 }
 
-.profile-info h2 {
+.employee-profile-info h2 {
     font-size: 28px;
     color: #111827;
     margin: 0 0 6px 0;
     font-weight: 700;
 }
 
-.profile-info p {
+.employee-profile-info p {
     margin: 0;
     color: #64748B;
     font-size: 15px;
 }
 
-.profile-status {
+.employee-profile-status {
     display: flex;
     gap: 15px;
     align-items: center;
