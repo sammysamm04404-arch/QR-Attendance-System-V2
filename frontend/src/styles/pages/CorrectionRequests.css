@@ -235,6 +235,15 @@
   gap: 15px;
 }
 
+/* Ensures status badge inside modal rows aligns right and fits text */
+.detail-row .status-badge {
+  width: auto;
+  display: inline-block;
+  padding: 4px 12px;
+  font-size: 12px;
+  border-radius: 20px;
+}
+
 .detail-row strong {
   color: #64748b;
   font-size: 14px;
@@ -358,7 +367,7 @@
   }
 
   .correction-filters select {
-    width: 105px; /* Compact width prevents right-side overflow */
+    width: 105px;
     min-width: 0;
     flex-shrink: 0;
     padding: 7px 6px;
@@ -381,19 +390,19 @@
 
   /* Strict Column Width Allocations */
   .correction-table th:nth-child(1),
-  .correction-table td:nth-child(1) { width: 25%; } /* Employee */
+  .correction-table td:nth-child(1) { width: 25%; }
 
   .correction-table th:nth-child(2),
-  .correction-table td:nth-child(2) { width: 20%; } /* Date */
+  .correction-table td:nth-child(2) { width: 20%; }
 
   .correction-table th:nth-child(3),
-  .correction-table td:nth-child(3) { width: 22%; } /* Req. Check Out */
+  .correction-table td:nth-child(3) { width: 22%; }
 
   .correction-table th:nth-child(4),
-  .correction-table td:nth-child(4) { width: 18%; } /* Status */
+  .correction-table td:nth-child(4) { width: 18%; }
 
   .correction-table th:nth-child(5),
-  .correction-table td:nth-child(5) { width: 15%; } /* Action */
+  .correction-table td:nth-child(5) { width: 15%; }
 
   .correction-table th,
   .correction-table td {
@@ -416,7 +425,6 @@
     padding-right: 6px;
   }
 
-  /* Hide email address to save critical room */
   .employee-info small.employee-email {
     display: none;
   }
@@ -428,7 +436,8 @@
     white-space: nowrap;
   }
 
-  .status-badge {
+  /* Only target table badges here */
+  .correction-table .status-badge {
     padding: 3px 5px;
     font-size: 9.5px;
     border-radius: 4px;
@@ -491,25 +500,22 @@
     text-align: center;
   }
 
-  .status-badge {
-    padding: 2px 4px;
-    font-size: 9px;
-    display: inline-block;
-  }
-
   .view-btn {
     padding: 3px 4px;
     font-size: 9.5px;
   }
 
+  /* Modal sized to 80% width on small screens & centered */
   .modal-overlay {
-    padding: 0;
-    align-items: flex-end;
+    padding: 12px;
+    align-items: center;
+    justify-content: center;
   }
 
   .correction-modal {
+    width: 80%;
     padding: 16px;
-    border-radius: 18px 18px 0 0;
+    border-radius: 18px;
     max-height: 85vh;
   }
 }
