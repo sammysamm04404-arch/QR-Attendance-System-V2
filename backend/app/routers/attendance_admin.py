@@ -34,14 +34,14 @@ def get_attendance(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ):
-    # 1. Determine target dates
+    
     if single_date:
         target_dates = [single_date]
     elif from_date and to_date:
         delta = (to_date - from_date).days
         target_dates = [from_date + timedelta(days=i) for i in range(delta + 1)]
     else:
-        # Collect unique dates from attendance logs
+        
         all_scans = db.query(Attendance.scan_time).all()
         if all_scans:
             target_dates = sorted(
@@ -50,14 +50,11 @@ def get_attendance(
         else:
             target_dates = [date.today()]
 
-    # 2. STRICTLY EXCLUDE ALL ADMIN USERS (Case-insensitive)
-    # Handles "Admin", "admin", "ADMIN", etc.
-    users = db.query(User).filter(func.lower(User.role) != "admin").all()
+    users = db.query(User).all()
 
     rows = []
 
     for user in users:
-        # Apply search filter
         if search:
             if (
                 search.lower() not in user.name.lower()
@@ -65,7 +62,6 @@ def get_attendance(
             ):
                 continue
 
-        # Fetch attendance records for non-admin user
         records = (
             db.query(Attendance)
             .filter(Attendance.user_id == user.id)
@@ -73,12 +69,10 @@ def get_attendance(
             .all()
         )
 
-        # Group records by date
         grouped = {}
         for r in records:
             grouped.setdefault(r.scan_time.date(), []).append(r)
 
-        # Evaluate attendance for target dates
         for day in target_dates:
             day_records = grouped.get(day, [])
 
@@ -112,7 +106,7 @@ def get_attendance(
                 "user_id": user.id,
                 "employee": user.name,
                 "email": user.email,
-                "role": user.role,  # Included in API payload
+                "role": user.role,
                 "date": str(day),
                 "check_in": (
                     cin.scan_time.strftime("%I:%M %p") if cin else "--"
@@ -129,18 +123,15 @@ def get_attendance(
 
             rows.append(attendance_row)
 
-    # Filter by status if selected
     if status != "All":
         rows = [row for row in rows if row["status"] == status]
 
-    # Sort rows by date descending
     rows.sort(key=lambda x: x["date"], reverse=True)
 
     total = len(rows)
     start = (page - 1) * limit
     end = start + limit
 
-    # Summary calculations ONLY count non-admin employees!
     summary = {
         "total_records": total,
         "present": len([r for r in rows if r["status"] == "Present"]),
