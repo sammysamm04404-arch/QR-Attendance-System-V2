@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import api from "../services/api";
 import { COLORS } from "../theme/theme"; 
 import "../styles/pages/Settings.css";
 
