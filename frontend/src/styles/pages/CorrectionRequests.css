@@ -463,6 +463,10 @@
     font-size: 11.5px;
   }
 
+  .correction-filters {
+    padding: 5px;
+  }
+
   .correction-filters input {
     font-size: 9.5px;
     padding: 4px 6px;
@@ -482,6 +486,11 @@
     font-size: 10px;
   }
 
+  .correction-table-card h3 {
+    font-size: 10px;
+    text-align: center;
+  }
+  
   .status-badge {
     padding: 2px 4px;
     font-size: 9px;
