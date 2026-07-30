@@ -10,7 +10,7 @@ function ProfileCard({ user }) {
                 <FaUserCircle className="profile-avatar" />
                 <div>
                     <h2>{user.name}</h2>
-                    <p>Employee</p>
+                    <p>{user.role}</p>
                 </div>
             </div>
 

@@ -251,7 +251,9 @@ def get_dashboard(
 
             "name": current_user.name,
 
-            "email": current_user.email
+            "email": current_user.email,
+
+            "role": current_user.role
 
         },
 
