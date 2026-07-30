@@ -213,7 +213,9 @@ function Notifications() {
 
                                     {!notification.is_closed && (
                                         <div className="notification-actions">
-                                            {notification.title === "Attendance Incomplete" && (
+                                            {notification.title === "Attendance Incomplete" || (
+                                                notification.title === "Attendance Correction Rejected" )
+                                                && (
                                                 <button
                                                     className="resolve-btn"
                                                     onClick={() => handleResolve(notification)}
