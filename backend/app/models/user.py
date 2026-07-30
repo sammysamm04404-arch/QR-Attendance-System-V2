@@ -20,3 +20,5 @@ class User(Base):
     role = Column(String(50), nullable=False, default="Employee")
 
     status = Column(String(20), nullable=False, default="Active")
+
+    is_verified = Column(Boolean, default=False)
