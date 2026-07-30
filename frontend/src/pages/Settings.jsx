@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { COLORS } from "./Theme"; 
-import "./Settings.css";
+import { COLORS } from "../theme/theme"; 
+import "../styles/pages/Settings.css";
 
 function Settings({ onLogout, qrImagePath = "/attendance-qr.png" }) {
   const [userEmail, setUserEmail] = useState("");
