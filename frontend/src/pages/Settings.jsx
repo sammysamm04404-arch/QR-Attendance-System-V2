@@ -31,12 +31,12 @@ function Settings({ onLogout, qrImagePath = "/attendance-qr.png" }) {
 
     try {
       const response = await api.get("/profile");
-
+        
       if (!response.ok) {
         throw new Error("Failed to load user profile.");
       }
 
-      const data = await response.json();
+      const data = await response.data;
       setUserEmail(data.email || "");
     } catch (err) {
       setAlert({ type: "error", text: err.message });
