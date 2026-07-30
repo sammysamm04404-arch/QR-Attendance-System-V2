@@ -1,33 +1,70 @@
 import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import api from "../services/api";
-import "../styles/components/Notifications.css";
 import { FaEnvelopeOpen } from "react-icons/fa";
 import toast from "react-hot-toast";
 import Loader from "../components/Loader/Loader";
 
+// Admin components
+import CorrectionTable from "../components/Admin/CorrectionTable";
+import CorrectionDetailsModal from "../components/Admin/CorrectionDetailsModal";
+
+// Styles
+import "../styles/components/Notifications.css";
+import "../styles/pages/CorrectionRequests.css";
+
 function Notifications() {
-    const [notifications, setNotifications] = useState([]);
+    // Check local storage for user role
+    const userRole = localStorage.getItem("user_role");
+    const isAdmin = userRole === "Admin";
+
+    // Common Loading State
     const [loading, setLoading] = useState(true);
+
+    // Notification States
+    const [notifications, setNotifications] = useState([]);
     const [showResolveModal, setShowResolveModal] = useState(false);
     const [selectedNotification, setSelectedNotification] = useState(null);
     const [reason, setReason] = useState("Forgot Check Out");
     const [checkoutTime, setCheckoutTime] = useState("");
     const [notes, setNotes] = useState("");
 
-    useEffect(() => {
-        fetchNotifications();
+    // Admin Correction Request States
+    const [requests, setRequests] = useState([]);
+    const [selectedRequest, setSelectedRequest] = useState(null);
+    const [detailsOpen, setDetailsOpen] = useState(false);
+    const [search, setSearch] = useState("");
+    const [status, setStatus] = useState("All");
 
+    useEffect(() => {
+        const loadInitialData = async () => {
+            setLoading(true);
+            if (isAdmin) {
+                await Promise.all([fetchNotifications(false), fetchRequests(false)]);
+            } else {
+                await fetchNotifications(false);
+            }
+            setLoading(false);
+        };
+
+        loadInitialData();
+
+        // Interval to auto-refresh notifications (and requests for admin)
         const notificationTimer = setInterval(() => {
             fetchNotifications(false);
+            if (isAdmin) {
+                fetchRequests(false);
+            }
         }, 30000);
 
         return () => {
             clearInterval(notificationTimer);
         };
-    }, []);
+    }, [isAdmin]);
 
+    // Notification Fetch
     const fetchNotifications = async (showLoader = true) => {
+        if (showLoader) setLoading(true);
         try {
             const response = await api.get("/notifications");
             setNotifications(response.data);
@@ -36,9 +73,20 @@ function Notifications() {
             console.log(error.response?.data);
             toast.error(error.response?.data?.detail);
         } finally {
-            if (showLoader) {
-                setLoading(false);
-            }
+            if (showLoader) setLoading(false);
+        }
+    };
+
+    // Admin Requests Fetch
+    const fetchRequests = async (showLoader = true) => {
+        if (showLoader) setLoading(true);
+        try {
+            const response = await api.get("/admin/corrections");
+            setRequests(response.data);
+        } catch (error) {
+            console.log(error);
+        } finally {
+            if (showLoader) setLoading(false);
         }
     };
 
@@ -71,19 +119,33 @@ function Notifications() {
             });
 
             fetchNotifications(false);
+            if (isAdmin) fetchRequests(false);
             setShowResolveModal(false);
-            // Notify Navbar to update counter in case status changed
             window.dispatchEvent(new Event("unreadCountUpdated"));
 
-            toast.success(
-                "Attendance correction request sent successfully."
-            );
+            toast.success("Attendance correction request sent successfully.");
         } catch (error) {
             console.log(error.response);
             console.log(error.response?.data);
             toast.error(error.response?.data?.detail);
         }
     };
+
+    // Filter Admin Requests
+    const filteredRequests = requests.filter((request) => {
+        const matchSearch =
+            request.employee_name
+                ?.toLowerCase()
+                .includes(search.toLowerCase()) ||
+            request.employee_email
+                ?.toLowerCase()
+                .includes(search.toLowerCase());
+
+        const matchStatus =
+            status === "All" ? true : request.status === status;
+
+        return matchSearch && matchStatus;
+    });
 
     if (loading) {
         return (
@@ -97,6 +159,8 @@ function Notifications() {
     return (
         <div>
             <Navbar />
+
+            {/* Notifications Section */}
             <div className="notifications-page">
                 <div className="notifications-card">
                     <div className="notifications-header">
@@ -121,28 +185,21 @@ function Notifications() {
                                     <p>{notification.message}</p>
                                 </div>
 
-                                {/* Only render action buttons if notification is NOT closed */}
                                 {!notification.is_closed && (
                                     <div className="notification-actions">
-                                        {/* Resolve button displays only if attendance is incomplete & not closed */}
                                         {notification.title === "Attendance Incomplete" && (
                                             <button
                                                 className="resolve-btn"
-                                                onClick={() =>
-                                                    handleResolve(notification)
-                                                }
+                                                onClick={() => handleResolve(notification)}
                                             >
                                                 Resolve Now
                                             </button>
                                         )}
 
-                                        {/* Mark Read button displays only if unread & not closed */}
                                         {!notification.is_read && (
                                             <button
                                                 className="mark-read-btn"
-                                                onClick={() =>
-                                                    markAsRead(notification.id)
-                                                }
+                                                onClick={() => markAsRead(notification.id)}
                                             >
                                                 Mark Read
                                             </button>
@@ -155,13 +212,52 @@ function Notifications() {
                 </div>
             </div>
 
+            {/* Admin Attendance Corrections Section */}
+            {isAdmin && (
+                <div className="correction-page">
+                    <div className="correction-header">
+                        <h1>Attendance Corrections</h1>
+                        <p>Review employee attendance correction requests.</p>
+                    </div>
+
+                    <div className="correction-filters">
+                        <input
+                            type="text"
+                            placeholder="Search Employee..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                        />
+
+                        <select
+                            value={status}
+                            onChange={(e) => setStatus(e.target.value)}
+                        >
+                            <option>All</option>
+                            <option>Pending</option>
+                            <option>Approved</option>
+                            <option>Rejected</option>
+                        </select>
+                    </div>
+
+                    <CorrectionTable
+                        loading={false}
+                        requests={filteredRequests}
+                        onView={(request) => {
+                            setSelectedRequest(request);
+                            setDetailsOpen(true);
+                        }}
+                    />
+                </div>
+            )}
+
+            {/* User Resolve Attendance Modal */}
             {showResolveModal && (
                 <div className="resolve-modal-overlay">
                     <div className="resolve-modal">
                         <h2>Resolve Attendance</h2>
                         <p>
-                            Yesterday's attendance is incomplete. Please
-                            provide the correct details below.
+                            Yesterday's attendance is incomplete. Please provide
+                            the correct details below.
                         </p>
 
                         <div className="form-group">
@@ -182,9 +278,7 @@ function Notifications() {
                             <input
                                 type="time"
                                 value={checkoutTime}
-                                onChange={(e) =>
-                                    setCheckoutTime(e.target.value)
-                                }
+                                onChange={(e) => setCheckoutTime(e.target.value)}
                             />
                         </div>
 
@@ -214,6 +308,18 @@ function Notifications() {
                         </div>
                     </div>
                 </div>
+            )}
+
+            {/* Admin Details Modal */}
+            {isAdmin && (
+                <CorrectionDetailsModal
+                    open={detailsOpen}
+                    request={selectedRequest}
+                    onClose={() => {
+                        setDetailsOpen(false);
+                        fetchRequests(false);
+                    }}
+                />
             )}
         </div>
     );
