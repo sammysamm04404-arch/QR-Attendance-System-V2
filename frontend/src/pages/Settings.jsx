@@ -30,13 +30,7 @@ function Settings({ onLogout, qrImagePath = "/attendance-qr.png" }) {
     }
 
     try {
-      const response = await fetch("/profile", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await api.get("/profile");
 
       if (!response.ok) {
         throw new Error("Failed to load user profile.");
