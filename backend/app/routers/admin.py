@@ -30,7 +30,6 @@ def admin_dashboard(
 
     employees = (
         db.query(User)
-        .filter(User.role != "Admin")
         .all()
     )
 
