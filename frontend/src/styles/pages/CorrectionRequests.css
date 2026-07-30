@@ -333,7 +333,6 @@
     padding: 16px 12px;
   }
 
-  /* Compact Sleek Headers */
   .correction-header {
     padding: 12px;
   }
@@ -348,7 +347,6 @@
     line-height: 1.4;
   }
 
-  /* Compact Non-Clipping Filters Bar */
   .correction-filters {
     display: flex;
     flex-direction: row;
@@ -376,7 +374,6 @@
     box-sizing: border-box;
   }
 
-  /* Table Sizing Engine */
   .correction-table-card {
     padding: 2px;
     border-radius: 12px;
@@ -388,7 +385,6 @@
     width: 100%;
   }
 
-  /* Strict Column Width Allocations */
   .correction-table th:nth-child(1),
   .correction-table td:nth-child(1) { width: 25%; }
 
@@ -505,7 +501,7 @@
     font-size: 9.5px;
   }
 
-  /* Modal sized to 80% width on small screens & centered */
+  /* COMPACT MOBILE MODAL STYLING */
   .modal-overlay {
     padding: 12px;
     align-items: center;
@@ -513,9 +509,70 @@
   }
 
   .correction-modal {
-    width: 80%;
-    padding: 16px;
-    border-radius: 18px;
+    width: 90%;
+    max-width: 380px;
+    padding: 16px 14px;
+    border-radius: 14px;
     max-height: 85vh;
+  }
+
+  .modal-header {
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+  }
+
+  .modal-header h2 {
+    font-size: 16px;
+  }
+
+  .modal-body {
+    gap: 8px;
+  }
+
+  .detail-row {
+    gap: 8px;
+  }
+
+  .detail-row strong {
+    font-size: 12.5px;
+  }
+
+  .detail-row span {
+    font-size: 12.5px;
+  }
+
+  .detail-row .status-badge {
+    font-size: 10.5px;
+    padding: 3px 10px;
+  }
+
+  .detail-column strong {
+    font-size: 12px;
+    margin-bottom: 3px;
+  }
+
+  .detail-column p {
+    padding: 6px 10px;
+    font-size: 12px;
+    line-height: 1.35;
+  }
+
+  .modal-body textarea {
+    min-height: 52px;
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .modal-buttons {
+    gap: 6px;
+    margin-top: 4px;
+  }
+
+  .approve-btn,
+  .reject-btn,
+  .close-btn {
+    padding: 8px 4px;
+    font-size: 12px;
+    border-radius: 6px;
   }
 }
