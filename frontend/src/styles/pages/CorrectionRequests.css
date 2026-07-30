@@ -326,7 +326,7 @@
 
   /* Compact Sleek Headers */
   .correction-header {
-    padding: 16px;
+    padding: 12px;
   }
 
   .correction-header h1 {
@@ -343,8 +343,7 @@
   .correction-filters {
     display: flex;
     flex-direction: row;
-    gap: 8px;
-    padding: 16px;
+    padding: 12px;
     width: 100%;
     box-sizing: border-box;
   }
@@ -354,7 +353,7 @@
     min-width: 0;
     padding: 7px 10px;
     font-size: 12px;
-    height: 36px;
+    height: 30px;
     box-sizing: border-box;
   }
 
@@ -364,7 +363,7 @@
     flex-shrink: 0;
     padding: 7px 6px;
     font-size: 12px;
-    height: 36px;
+    height: 30px;
     box-sizing: border-box;
   }
 
@@ -452,6 +451,10 @@
     padding: 12px 8px;
   }
 
+  .correction-header {
+    padding: 5px;
+  }
+  
   .correction-header h1 {
     font-size: 17.5px;
   }
@@ -463,12 +466,14 @@
   .correction-filters input {
     font-size: 11.5px;
     padding: 6px 8px;
+    height: 23px;
   }
 
   .correction-filters select {
     width: 95px;
     font-size: 11.5px;
     padding: 6px 4px;
+    height: 23px;
   }
 
   .correction-table th,
