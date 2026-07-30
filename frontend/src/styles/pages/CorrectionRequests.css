@@ -9,6 +9,7 @@
 
 .correction-header {
   margin-bottom: 25px;
+  padding: 28px;
 }
 
 .correction-header h1 {
@@ -30,6 +31,7 @@
   display: flex;
   align-items: center;
   gap: 15px;
+  padding: 28px;
   margin-bottom: 25px;
   flex-wrap: wrap;
   width: 100%;
@@ -74,6 +76,7 @@
 .correction-table-card {
   background: #fff;
   border-radius: 18px;
+  padding: 28px;
   overflow: hidden;
   box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
   box-sizing: border-box;
