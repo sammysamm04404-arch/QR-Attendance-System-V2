@@ -3,7 +3,7 @@ import api from "../services/api";
 import { COLORS } from "../theme/theme"; 
 import "../styles/pages/Settings.css";
 
-function Settings({ onLogout, qrImagePath = "/attendance-qr.png" }) {
+function Settings({ onLogout }) {
   const [userEmail, setUserEmail] = useState("");
   const [loadingUser, setLoadingUser] = useState(true);
 

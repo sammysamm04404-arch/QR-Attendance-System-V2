@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from app.models.user import User
+from app.models.email_verification_token import EmailVerificationToken
+from app.models.password_reset_token import PasswordResetToken
 from app.models.attendance import Attendance
 from app.models.notification import Notification
 from app.models.attendance_correction import AttendanceCorrection
