@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+
+        <meta charset="UTF-8">
+
+        <style>
+
+            body{
+                font-family:Arial;
+                background:#f4f7fb;
+                padding:40px;
+            }
+
+            .container{
+                max-width:650px;
+                margin:auto;
+                background:white;
+                padding:40px;
+                border-radius:14px;
+            }
+
+            .header{
+                background:#2563eb;
+                padding:18px;
+                color:white;
+                text-align:center;
+                font-size:24px;
+                font-weight:bold;
+                border-radius:10px;
+            }
+
+            .button{
+                display:inline-block;
+                margin-top:30px;
+                padding:14px 26px;
+                background:#2563eb;
+                color:white !important;
+                text-decoration:none;
+                border-radius:8px;
+                font-weight:bold;
+            }
+
+        </style>
+
+    </head>
+
+    <body>
+
+        <div class="container">
+
+            <div class="header">
+
+                QR Attendance System
+
+            </div>
+
+            <h2>Hello {{name}},</h2>
+
+            <p>
+
+                Welcome to QR Attendance System.
+
+            </p>
+
+            <p>
+
+                Please verify your email.
+
+            </p>
+
+            <a href="{{verification_link}}" class="button">
+
+                Verify Email
+
+            </a>
+
+            <p>
+
+                This verification link expires in
+                <strong>24 hours</strong>.
+
+            </p>
+
+        </div>
+
+        </body>
+
+</html>
