@@ -12,6 +12,10 @@ from sqlalchemy.orm import Session
 #from passlib.context import CryptContext
 
 from app.database.session import get_db
+from app.dependencies.auth import get_current_user
+from app.schemas.auth_schema import ChangePasswordRequest
+from app.services.auth_service import AuthService
+from app.schemas.auth_schema import ForgotPasswordRequest
 from app.models.user import User
 from app.schemas.user_schema import UserRegister    
 from app.core.security import get_password_hash
@@ -101,3 +105,28 @@ def login_user(
         "token_type": "bearer",
         "user_role": user.role
     }
+
+@router.post("/change-password")
+def change_password(
+    request: ChangePasswordRequest,
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    return AuthService.change_password(
+        db=db,
+        current_user=current_user,
+        current_password=request.current_password,
+        new_password=request.new_password
+    )
+
+@router.post("/forgot-password")
+def forgot_password(
+    request: ForgotPasswordRequest,
+    db: Session = Depends(get_db)
+):
+
+    return AuthService.forgot_password(
+        db=db,
+        email=request.email
+    )
