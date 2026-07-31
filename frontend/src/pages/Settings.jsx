@@ -815,7 +815,7 @@ function Settings({ onLogout }) {
 
         </div>
 
-        <button className="logout-btn" onClick={() => setShowLogoutModal(true) }>
+        <button className="setting-logout-btn" onClick={() => setShowLogoutModal(true) }>
           Logout Account
         </button>
 
