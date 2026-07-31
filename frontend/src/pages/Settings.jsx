@@ -823,7 +823,7 @@ function Settings({ onLogout }) {
     </div>
 
   </div>
-  {
+  (
     <ConfirmationModal
       isOpen={showLogoutModal}
       title="Logout"
@@ -833,7 +833,7 @@ function Settings({ onLogout }) {
       onConfirm={confirmLogout}
       onCancel={() => setShowLogoutModal(false)}
     />
-  }
+  )
 }
 
 export default Settings;
