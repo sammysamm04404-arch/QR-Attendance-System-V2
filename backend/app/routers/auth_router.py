@@ -16,6 +16,8 @@ from app.dependencies.auth import get_current_user
 from app.schemas.auth_schema import ChangePasswordRequest
 from app.services.auth_service import AuthService
 from app.schemas.auth_schema import ForgotPasswordRequest
+from app.schemas.auth_schema import ResetPasswordRequest
+from app.schemas.auth_schema import VerifyEmailRequest
 from app.models.user import User
 from app.schemas.user_schema import UserRegister    
 from app.core.security import get_password_hash
@@ -129,4 +131,38 @@ def forgot_password(
     return AuthService.forgot_password(
         db=db,
         email=request.email
+    )
+
+@router.post("/reset-password")
+def reset_password(
+    request: ResetPasswordRequest,
+    db: Session = Depends(get_db)
+):
+
+    return AuthService.reset_password(
+        db=db,
+        token=request.token,
+        new_password=request.new_password
+    )
+
+@router.post("/send-verification-email")
+def send_verification_email(
+    current_user: User = Depends(get_current_user),
+    db: Session = Depends(get_db)
+):
+
+    return AuthService.send_verification_email(
+        db=db,
+        current_user=current_user
+    )
+
+@router.post("/verify-email")
+def verify_email(
+    request: VerifyEmailRequest,
+    db: Session = Depends(get_db)
+):
+
+    return AuthService.verify_email(
+        db=db,
+        token=request.token
     )

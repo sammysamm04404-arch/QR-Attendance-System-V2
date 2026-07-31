@@ -245,3 +245,169 @@ class AuthService:
         return {
             "message": "Password reset email sent successfully."
         }
+
+    # Reset Password
+
+    @staticmethod
+    def reset_password(
+        db: Session,
+        token: str,
+        new_password: str
+    ):
+
+        token_hash = hash_token(token)
+
+        reset_token = PasswordResetRepository.get_by_hash(
+            db,
+            token_hash
+        )
+
+        if not reset_token:
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid reset token."
+            )
+
+        if reset_token.used:
+            raise HTTPException(
+                status_code=400,
+                detail="This reset link has already been used."
+            )
+
+        if reset_token.expires_at < datetime.now(timezone.utc):
+            raise HTTPException(
+                status_code=400,
+                detail="Reset link has expired."
+            )
+
+        user = UserRepository.get_by_id(
+            db,
+            reset_token.user_id
+        )
+
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="User not found."
+            )
+
+        if verify_password(
+            new_password,
+            user.password_hash
+        ):
+            raise HTTPException(
+                status_code=400,
+                detail="New password cannot be the same as the current password."
+            )
+
+        user.password_hash = get_password_hash(
+            new_password
+        )
+
+        UserRepository.save(
+            db,
+            user
+        )
+
+        PasswordResetRepository.mark_used(
+            db,
+            reset_token
+        )
+
+        return {
+            "message": "Password has been reset successfully."
+        }
+
+    # Send Verification Email
+
+    @staticmethod
+    def send_verification_email(
+        db: Session,
+        current_user: User
+    ):
+
+        if current_user.email_verified:
+            return {
+                "message": "Your email is already verified."
+            }
+
+        token = AuthService.generate_email_verification_token(
+            db,
+            current_user
+        )
+
+        if token is None:
+            return {
+                "message": "A verification email has already been sent. Please check your inbox."
+            }
+
+        EmailService.send_verification_email(
+            user=current_user,
+            token=token
+        )
+
+        return {
+            "message": "Verification email sent successfully."
+        }
+
+    # Verify Email
+
+    @staticmethod
+    def verify_email(
+        db: Session,
+        token: str
+    ):
+
+        token_hash = hash_token(token)
+
+        verification_token = (
+            EmailVerificationRepository.get_by_hash(
+                db,
+                token_hash
+            )
+        )
+
+        if not verification_token:
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid verification link."
+            )
+
+        if verification_token.used:
+            raise HTTPException(
+                status_code=400,
+                detail="This verification link has already been used."
+            )
+
+        if verification_token.expires_at < datetime.now(timezone.utc):
+            raise HTTPException(
+                status_code=400,
+                detail="Verification link has expired."
+            )
+
+        user = UserRepository.get_by_id(
+            db,
+            verification_token.user_id
+        )
+
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="User not found."
+            )
+
+        user.email_verified = True
+
+        UserRepository.save(
+            db,
+            user
+        )
+
+        EmailVerificationRepository.mark_used(
+            db,
+            verification_token
+        )
+
+        return {
+            "message": "Email verified successfully."
+        }
