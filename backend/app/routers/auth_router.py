@@ -133,6 +133,17 @@ def forgot_password(
         email=request.email
     )
 
+@router.get("/validate-reset-token/{token}")
+def validate_reset_token(
+    token: str,
+    db: Session = Depends(get_db)
+):
+
+    return AuthService.validate_reset_token(
+        db=db,
+        token=token
+    )
+
 @router.post("/reset-password")
 def reset_password(
     request: ResetPasswordRequest,

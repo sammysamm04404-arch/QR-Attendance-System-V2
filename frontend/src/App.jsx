@@ -17,6 +17,7 @@ import EmployeeDetails from "./pages/EmployeeDetails";
 import AttendanceManagement from "./pages/AttendanceManagement";
 import History from "./pages/History";
 import Profile from "./pages/Profile";
+import ResetPassword from "./pages/ResetPassword";
 import Settings from "./pages/Settings";
 import Notifications from "./components/Notifications";
 import CorrectionRequests from "./pages/CorrectionRequests";
@@ -42,6 +43,11 @@ function App() {
                 <Route
                     path="/attendance/scan"
                     element={<QRLanding />}
+                />
+
+                <Route 
+                    path="/reset-password"
+                    element={<ResetPassword />}
                 />
 
                 <Route

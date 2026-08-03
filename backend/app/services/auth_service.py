@@ -246,6 +246,55 @@ class AuthService:
             "message": "Password reset email sent successfully."
         }
 
+        # Validate Reset Token
+
+    @staticmethod
+    def validate_reset_token(
+        db: Session,
+        token: str
+    ):
+
+        token_hash = hash_token(token)
+
+        reset_token = PasswordResetRepository.get_by_hash(
+            db,
+            token_hash
+        )
+
+        if not reset_token:
+            raise HTTPException(
+                status_code=400,
+                detail="Invalid reset link."
+            )
+
+        if reset_token.used:
+            raise HTTPException(
+                status_code=400,
+                detail="This reset link has already been used."
+            )
+
+        if reset_token.expires_at < datetime.now(timezone.utc):
+            raise HTTPException(
+                status_code=400,
+                detail="Reset link has expired."
+            )
+
+        user = UserRepository.get_by_id(
+            db,
+            reset_token.user_id
+        )
+
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="User not found."
+            )
+
+        return {
+            "valid": True,
+            "email": user.email
+        }
+
     # Reset Password
 
     @staticmethod
