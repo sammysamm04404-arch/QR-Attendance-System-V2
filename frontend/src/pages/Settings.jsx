@@ -29,10 +29,6 @@ function Settings({ onLogout }) {
 
   const [loading, setLoading] = useState(false);
 
-  const [darkMode, setDarkMode] = useState(
-      localStorage.getItem("theme") === "dark"
-  );
-
   const [passwordData, setPasswordData] = useState({
 
       currentPassword: "",
