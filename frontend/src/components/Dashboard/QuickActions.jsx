@@ -41,11 +41,11 @@ function QuickActions() {
 
     return (
 
-        <div className="quick-actions-card">
+        <div className="dash-quick-actions-card">
 
             <h2>Quick Actions</h2>
 
-            <div className="quick-actions-grid">
+            <div className="dash-quick-actions-grid">
 
                 {
 
@@ -55,13 +55,13 @@ function QuickActions() {
 
                             key={index}
 
-                            className="quick-action-btn"
+                            className="dash-quick-action-btn"
 
                             onClick={item.action}
 
                         >
 
-                            <div className="quick-action-icon">
+                            <div className="dash-quick-action-icon">
 
                                 {item.icon}
 

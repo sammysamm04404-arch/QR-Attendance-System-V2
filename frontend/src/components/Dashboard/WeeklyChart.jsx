@@ -11,7 +11,7 @@ function WeeklyChart({ data }) {
 
     return (
 
-        <div className="weekly-chart-card">
+        <div className="dash-weekly-chart-card">
 
             <h2>Weekly Attendance</h2>
 

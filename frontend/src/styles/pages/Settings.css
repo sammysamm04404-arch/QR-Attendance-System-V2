@@ -190,27 +190,27 @@
     box-shadow:0 18px 45px rgba(37,99,235,.10);
 }
 
-.card-header{
+.settings-card-header{
     display:flex;
     align-items:flex-start;
     gap:16px;
     margin-bottom:25px;
 }
 
-.card-header h2{
+.settings-card-header h2{
     margin:0;
     color:#0F172A;
     font-size:22px;
 }
 
-.card-header p{
+.settings-card-header p{
     margin-top:6px;
     color:#64748B;
     line-height:1.6;
     font-size:14px;
 }
 
-.card-icon{
+.settings-card-icon{
     width:55px;
     height:55px;
     border-radius:15px;
@@ -311,7 +311,7 @@
         font-size:1.6rem;
     }
 
-    .card-header{
+    .settings-card-header{
         flex-direction:column;
         align-items:flex-start;
     }
@@ -494,7 +494,7 @@
     overflow:hidden;
 }
 
-.password-card .card-header{
+.password-card .settings-card-header{
     padding-bottom:18px;
     border-bottom:1px solid #E2E8F0;
     margin-bottom:24px;
@@ -659,7 +659,7 @@
     border-color:#FCA5A5;
 }
 
-.card-icon.logout{
+.settings-card-icon.logout{
     background:#FEF2F2;
     color:#DC2626;
 }
@@ -810,7 +810,7 @@ body.dark-mode .setting-summary-card{
 
 }
 
-body.dark-mode .card-header h2,
+body.dark-mode .settings-card-header h2,
 body.dark-mode .setting-summary-card h3,
 body.dark-mode .form-group label,
 body.dark-mode .toggle-container h4{
@@ -820,7 +820,7 @@ body.dark-mode .toggle-container h4{
 }
 
 body.dark-mode .setting-summary-card p,
-body.dark-mode .card-header p,
+body.dark-mode .settings-card-header p,
 body.dark-mode .verification-status small,
 body.dark-mode .toggle-container small{
 
@@ -978,7 +978,7 @@ body.dark-mode .strength-bar{
 
     }
 
-    .card-header{
+    .settings-card-header{
 
         gap:12px;
 

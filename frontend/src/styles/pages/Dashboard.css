@@ -181,7 +181,7 @@
     margin-top:35px;
 }
 
-.profile-card{
+.dash-profile-card{
     background: var(--card);
     border:1px solid var(--border);
     border-radius:20px;
@@ -189,34 +189,34 @@
     box-shadow: var(--shadow);
 }
 
-.profile-header{
+.dash-profile-header{
     display:flex;
     align-items:center;
     gap:18px;
     margin-bottom:25px;
 }
 
-.profile-avatar{
+.dash-profile-avatar{
     font-size:65px;
     color:#2563eb;
 }
 
-.profile-header h2{
+.dash-profile-header h2{
     margin:0;
 }
 
-.profile-header p{
+.dash-profile-header p{
     color: var(--secondary);
     margin-top:5px;
 }
 
-.profile-info{
+.dash-profile-info{
     display:flex;
     flex-direction:column;
     gap:18px;
 }
 
-.profile-row{
+.dash-profile-row{
     display:flex;
     align-items:center;
     gap:12px;
@@ -293,7 +293,7 @@
     color: var(--text);
 }
 
-.weekly-chart-card{
+.dash-weekly-chart-card{
     background: var(--card);
     border: 1px solid var(--border);
     border-radius:22px;
@@ -301,7 +301,7 @@
     box-shadow: var(--shadow);
 }
 
-.weekly-chart-card h2{
+.dash-weekly-chart-card h2{
     margin-bottom:25px;
 }
 
@@ -312,24 +312,24 @@
     margin-top:35px;
 }
 
-.quick-actions-card{
+.dash-quick-actions-card{
     background: var(--card);
     border-radius:22px;
     padding:30px;
     box-shadow:0 10px 30px rgba(0,0,0,.08);
 }
 
-.quick-actions-card h2{
+.dash-quick-actions-card h2{
     margin-bottom:25px;
 }
 
-.quick-actions-grid{
+.dash-quick-actions-grid{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:18px;
 }
 
-.quick-action-btn{
+.dash-quick-action-btn{
     border:none;
     background: var(--background);
     border: 1px solid var(--border);
@@ -344,13 +344,13 @@
     gap:12px;
 }
 
-.quick-action-btn:hover{
+.dash-quick-action-btn:hover{
     background:#2563eb;
     color:white;
     transform:translateY(-6px);
 }
 
-.quick-action-icon{
+.dash-quick-action-icon{
     font-size:30px;
 }
 
@@ -418,11 +418,11 @@
 /* ===== Dashboard Animation ===== */
 
 .dashboard-card,
-.profile-card,
+.dash-profile-card,
 .progress-card,
-.weekly-chart-card,
+.dash-weekly-chart-card,
 .summary-card,
-.quick-actions-card{
+.dash-quick-actions-card{
 
     animation:fadeUp .6s ease forwards;
     opacity:0;
@@ -448,11 +448,11 @@
 }
 
 .dashboard-card:hover,
-.profile-card:hover,
+.dash-profile-card:hover,
 .progress-card:hover,
-.weekly-chart-card:hover,
+.dash-weekly-chart-card:hover,
 .summary-card:hover,
-.quick-actions-card:hover{
+.dash-quick-actions-card:hover{
 
     transform:translateY(-6px);
 
@@ -572,31 +572,31 @@
     }
 
     /* Card Layout Paddings & Headings */
-    .profile-card,
+    .dash-profile-card,
     .progress-card,
-    .weekly-chart-card,
-    .quick-actions-card,
+    .dash-weekly-chart-card,
+    .dash-quick-actions-card,
     .attendance-summary-card {
         padding: 18px;
         border-radius: 14px;
     }
-    .profile-header h2,
+    .dash-profile-header h2,
     .progress-header h2,
-    .weekly-chart-card h2,
-    .quick-actions-card h2,
+    .dash-weekly-chart-card h2,
+    .dash-quick-actions-card h2,
     .attendance-summary-card h2 {
         font-size: 16px; /* Uniform section heading sizes */
         margin-bottom: 16px;
     }
 
     /* Profile Section Adjustments */
-    .profile-avatar {
+    .dash-profile-avatar {
         font-size: 44px;
     }
-    .profile-header p {
+    .dash-profile-header p {
         font-size: 13px;
     }
-    .profile-row {
+    .dash-profile-row {
         font-size: 13px;
         gap: 10px;
     }
@@ -621,23 +621,23 @@
     }
 
     /* Quick Actions (Hover highlight colors preserved) */
-    .quick-actions-grid {
+    .dash-quick-actions-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 12px;
     }
-    .quick-action-btn {
+    .dash-quick-action-btn {
         padding: 14px;
         border-radius: 12px;
         gap: 8px;
     }
-    .quick-action-icon {
+    .dash-quick-action-icon {
         font-size: 20px;
     }
-    .quick-action-btn span {
+    .dash-quick-action-btn span {
         font-size: 12px; /* Made smaller */
     }
     /* Restored highlight backgrounds while removing layout jumps */
-    .quick-action-btn:hover {
+    .dash-quick-action-btn:hover {
         background: #2563eb;
         color: white;
         transform: none !important; 
@@ -673,12 +673,12 @@
     .stat-card:hover,
     .attendance-summary-item:hover,
     .dashboard-card:hover,
-    .profile-card:hover,
+    .dash-profile-card:hover,
     .progress-card:hover,
-    .weekly-chart-card:hover,
-    .quick-actions-card:hover {
+    .dash-weekly-chart-card:hover,
+    .dash-quick-actions-card:hover {
         transform: none !important;
-        box-shadow: var(--shadow) !important;
+        box-shadow: var(--shadow);
     }
 }
 
@@ -708,13 +708,13 @@
 
     /* Safely stack to 1 column only on very narrow screens */
     .stats-grid,
-    .quick-actions-grid,
+    .dash-quick-actions-grid,
     .attendance-summary-grid {
         grid-template-columns: 1fr;
         gap: 10px;
     }
     
-    .quick-action-btn {
+    .dash-quick-action-btn {
         flex-direction: row;
         justify-content: center;
         gap: 10px;
