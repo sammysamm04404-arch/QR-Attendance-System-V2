@@ -544,55 +544,93 @@ function Settings({ onLogout }) {
 
       </div>
 
-      <div className="settings-grid"></div>
+      <div className="settings-grid">
 
-      <div className="settings-card password-card">
+        <div className="settings-card password-card">
 
-        <div className="card-header">
+          <div className="card-header">
 
-          <div className="card-icon">
-            <FiLock />
-          </div>
+            <div className="card-icon">
+              <FiLock />
+            </div>
 
-          <div>
+            <div>
 
-            <h2>
-              Change Password
-            </h2>
+              <h2>
+                Change Password
+              </h2>
 
-            <p>
-              Update your account password to keep your account secure.
-            </p>
-
-          </div>
-
-        </div>
-
-        <form className="settings-form" onSubmit={handleChangePassword}>
-
-          <div className="form-group">
-
-            <div className="label-row">
-
-              <label>
-                Current Password
-              </label>
-
-              <button type="button" className="forgot-link" onClick={handleForgotPassword}>
-                Forgot Password?
-              </button>
+              <p>
+                Update your account password to keep your account secure.
+              </p>
 
             </div>
 
-            <div className="password-field">
+          </div>
 
-              <input type={showPassword.current ? "text" : "password"} name="currentPassword" placeholder="Enter current password" value={passwordData.currentPassword} onChange={handleInputChange} required />
+          <form className="settings-form" onSubmit={handleChangePassword}>
 
-              <button type="button" className="eye-btn" onClick={() => togglePassword("current")}>
+            <div className="form-group">
+
+              <div className="label-row">
+
+                <label>
+                  Current Password
+                </label>
+
+                <button type="button" className="forgot-link" onClick={handleForgotPassword}>
+                  Forgot Password?
+                </button>
+
+              </div>
+
+              <div className="password-field">
+
+                <input type={showPassword.current ? "text" : "password"} name="currentPassword" placeholder="Enter current password" value={passwordData.currentPassword} onChange={handleInputChange} required />
+
+                <button type="button" className="eye-btn" onClick={() => togglePassword("current")}>
+                  {
+                    showPassword.current ? <FiEyeOff /> : <FiEye />
+                  }
+                </button>
+
+              </div>
+
+            </div>
+
+            <div className="form-group">
+
+              <label>
+                New Password
+              </label>
+
+              <div className="password-field">
+
+                <input type={ showPassword.new ? "text" : "password" } name="newPassword" placeholder="Enter new password" value={passwordData.newPassword} onChange={handleInputChange} required />
+
+                <button type="button" className="eye-btn" onClick={() => togglePassword("new") }>
+                  {
+                    showPassword.new ? <FiEyeOff /> : <FiEye />
+                  }
+                </button>
+
+            </div>
+
+            <div className="password-strength">
+
+              <div className="strength-bar">
+
+                <div className="strength-fill" style={{ width: `${passwordStrength.percentage}%`, background: passwordStrength.color }}/>
+
+              </div>
+
+              <span style={{ color: passwordStrength.color }}>
                 {
-                  showPassword.current ? <FiEyeOff /> : <FiEye />
+                  passwordStrength.label
+
                 }
-              </button>
+
+              </span>
 
             </div>
 
@@ -601,226 +639,190 @@ function Settings({ onLogout }) {
           <div className="form-group">
 
             <label>
-              New Password
+              Confirm Password
             </label>
 
             <div className="password-field">
 
-              <input type={ showPassword.new ? "text" : "password" } name="newPassword" placeholder="Enter new password" value={passwordData.newPassword} onChange={handleInputChange} required />
+              <input type={ showPassword.confirm ? "text" : "password" } name="confirmPassword" placeholder="Confirm password" value={passwordData.confirmPassword} onChange={handleInputChange} required />
 
-              <button type="button" className="eye-btn" onClick={() => togglePassword("new") }>
+              <button type="button" className="eye-btn" onClick={() => togglePassword("confirm") }>
                 {
-                  showPassword.new ? <FiEyeOff /> : <FiEye />
+                  showPassword.confirm ? <FiEyeOff /> : <FiEye />
                 }
               </button>
 
-          </div>
-
-          <div className="password-strength">
-
-            <div className="strength-bar">
-
-              <div className="strength-fill" style={{ width: `${passwordStrength.percentage}%`, background: passwordStrength.color }}/>
-
             </div>
 
-            <span style={{ color: passwordStrength.color }}>
-              {
-                passwordStrength.label
-
-              }
-
-            </span>
-
           </div>
 
-        </div>
+          <div className="password-actions">
 
-        <div className="form-group">
-
-          <label>
-            Confirm Password
-          </label>
-
-          <div className="password-field">
-
-            <input type={ showPassword.confirm ? "text" : "password" } name="confirmPassword" placeholder="Confirm password" value={passwordData.confirmPassword} onChange={handleInputChange} required />
-
-            <button type="button" className="eye-btn" onClick={() => togglePassword("confirm") }>
+            <button className="primary-btn" disabled={changingPassword}>
               {
-                showPassword.confirm ? <FiEyeOff /> : <FiEye />
+                changingPassword ? "Updating..." : "Update Password"
               }
             </button>
 
           </div>
 
+        </form>
+
+      </div>
+
+      <div className="settings-right">
+
+        <div className="settings-card">
+
+          <div className="card-header">
+
+            <div className="card-icon">
+              <FiMail />
+            </div>
+
+            <div>
+
+              <h2>
+                Email Verification
+              </h2>
+
+              <p>
+                Verify your email to secure your account and enable password recovery.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div className="verification-box">
+
+            <div className="verification-status">
+
+              {
+                user?.email_verified ? 
+                  <> 
+                    <span className="status-badge verified">
+                      <FiCheckCircle />
+                      Verified
+                    </span>
+
+                    <small>
+                      Your email address has already been verified.
+                    </small>
+
+                  </> : <>
+                    <span className="status-badge pending">
+                      <FiAlertCircle />
+                      Verification Pending
+                    </span>
+
+                    <small>
+                      Please verify your email to improve account security.
+                    </small>
+
+                  </>
+
+              }
+
+            </div>
+
+            {
+
+              !user?.email_verified && (
+                <button className="primary-btn" onClick={ sendVerificationEmail } disabled={ sendingVerification }>
+                  {
+                    sendingVerification ? "Sending..." : "Send Verification Email"
+                  }
+                </button>
+              )
+
+            }
+
+          </div>
+
         </div>
 
-        <div className="password-actions">
+        <div className="settings-card">
 
-          <button className="primary-btn" disabled={changingPassword}>
-            {
-              changingPassword ? "Updating..." : "Update Password"
-            }
+          <div className="card-header">
+
+            <div className="card-icon">
+
+              {
+                darkMode ? <FiMoon /> : <FiSun />
+              }
+
+            </div>
+
+            <div>
+
+              <h2>
+                Appearance
+              </h2>
+
+              <p>
+                Customize your application theme.
+              </p>
+
+            </div>
+
+          </div>
+
+          <div className="toggle-container">
+
+            <div>
+
+              <h4>
+                Dark Mode
+              </h4>
+
+              <small>
+                Reduce eye strain during night usage.
+              </small>
+
+            </div>
+
+            <label className="switch">
+              <input type="checkbox" checked={darkMode} onChange={toggleDarkMode}/>
+              <span className="slider"></span>
+            </label>
+
+          </div>
+
+        </div>
+
+        <div className="settings-card logout-card">
+
+          <div className="card-header">
+
+            <div className="card-icon logout">
+
+              <FiLogOut />
+
+            </div>
+
+            <div>
+
+              <h2>
+                Logout
+              </h2>
+
+              <p>
+                Sign out securely from this device.
+              </p>
+
+            </div>
+
+          </div>
+
+          <button className="setting-logout-btn" onClick={() => setShowLogoutModal(true) }>
+            Logout Account
           </button>
 
         </div>
 
-      </form>
-
-    </div>
-
-    <div className="settings-right">
-
-      <div className="settings-card">
-
-        <div className="card-header">
-
-          <div className="card-icon">
-            <FiMail />
-          </div>
-
-          <div>
-
-            <h2>
-              Email Verification
-            </h2>
-
-            <p>
-              Verify your email to secure your account and enable password recovery.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div className="verification-box">
-
-          <div className="verification-status">
-
-            {
-              user?.email_verified ? 
-                <> 
-                  <span className="status-badge verified">
-                    <FiCheckCircle />
-                    Verified
-                  </span>
-
-                  <small>
-                    Your email address has already been verified.
-                  </small>
-
-                </> : <>
-                  <span className="status-badge pending">
-                    <FiAlertCircle />
-                    Verification Pending
-                  </span>
-
-                  <small>
-                    Please verify your email to improve account security.
-                  </small>
-
-                </>
-
-            }
-
-          </div>
-
-          {
-
-            !user?.email_verified && (
-              <button className="primary-btn" onClick={ sendVerificationEmail } disabled={ sendingVerification }>
-                {
-                  sendingVerification ? "Sending..." : "Send Verification Email"
-                }
-              </button>
-            )
-
-          }
-
-        </div>
-
       </div>
-
-      <div className="settings-card">
-
-        <div className="card-header">
-
-          <div className="card-icon">
-
-            {
-              darkMode ? <FiMoon /> : <FiSun />
-            }
-
-          </div>
-
-          <div>
-
-            <h2>
-              Appearance
-            </h2>
-
-            <p>
-              Customize your application theme.
-            </p>
-
-          </div>
-
-        </div>
-
-        <div className="toggle-container">
-
-          <div>
-
-            <h4>
-              Dark Mode
-            </h4>
-
-            <small>
-              Reduce eye strain during night usage.
-            </small>
-
-          </div>
-
-          <label className="switch">
-            <input type="checkbox" checked={darkMode} onChange={toggleDarkMode}/>
-            <span className="slider"></span>
-          </label>
-
-        </div>
-
-      </div>
-
-      <div className="settings-card logout-card">
-
-        <div className="card-header">
-
-          <div className="card-icon logout">
-
-            <FiLogOut />
-
-          </div>
-
-          <div>
-
-            <h2>
-              Logout
-            </h2>
-
-            <p>
-              Sign out securely from this device.
-            </p>
-
-          </div>
-
-        </div>
-
-        <button className="setting-logout-btn" onClick={() => setShowLogoutModal(true) }>
-          Logout Account
-        </button>
-
-      </div>
-
+    
     </div>
 
   </div>
