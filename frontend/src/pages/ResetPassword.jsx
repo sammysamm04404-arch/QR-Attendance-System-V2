@@ -41,7 +41,7 @@ function ResetPassword() {
         confirm: false
     });
 
-    const [passwordStrength, setPasswordStrength] = useState({
+    const [resetpasswordStrength, setresetPasswordStrength] = useState({
         label: "Weak",
         percentage: 0,
         color: "#ef4444"
@@ -127,7 +127,7 @@ function ResetPassword() {
 
         if (score <= 2) {
 
-            setPasswordStrength({
+            setresetPasswordStrength({
                 label: "Weak",
                 percentage: 35,
                 color: "#ef4444"
@@ -137,7 +137,7 @@ function ResetPassword() {
 
         else if (score <= 4) {
 
-            setPasswordStrength({
+            setresetPasswordStrength({
                 label: "Medium",
                 percentage: 70,
                 color: "#f59e0b"
@@ -147,7 +147,7 @@ function ResetPassword() {
 
         else {
 
-            setPasswordStrength({
+            setresetPasswordStrength({
                 label: "Strong",
                 percentage: 100,
                 color: "#22c55e"
@@ -345,12 +345,12 @@ function ResetPassword() {
 
                             <div className="reset-strength-bar">
 
-                                <div className="reset-strength-fill" style={{ width: `${passwordStrength.percentage}%`, background: passwordStrength.color}}/>
+                                <div className="reset-strength-fill" style={{ width: `${resetpasswordStrength.percentage}%`, background: resetpasswordStrength.color}}/>
 
                             </div>
 
-                            <span style={{ color: passwordStrength.color }}>
-                                {passwordStrength.label}
+                            <span style={{ color: resetpasswordStrength.color }}>
+                                {resetpasswordStrength.label}
                             </span>
 
                         </div>
