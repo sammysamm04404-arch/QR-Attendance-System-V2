@@ -1,6 +1,6 @@
 .dashboard-container{
     padding:30px;
-    background:#f8fafc;
+    background: var(--background);
     min-height:100vh;
 }
 
@@ -113,10 +113,11 @@
 }
 
 .stat-card{
-    background:#ffffff;
+    background: var(--card);
+    border:1px solid var(--border);
     border-radius:20px;
     padding:28px;
-    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    box-shadow: var(--shadow);
     transition:all .30s ease;
     position:relative;
     overflow:hidden;
@@ -160,7 +161,7 @@
 }
 
 .stat-title{
-    color:#64748b;
+    color: var(--secondary);
     font-size:15px;
     font-weight:500;
     margin-bottom:10px;
@@ -169,7 +170,7 @@
 .stat-value{
     font-size:30px;
     font-weight:700;
-    color:#0f172a;
+    color: var(--text);
     letter-spacing:.5px;
 }
 
@@ -181,10 +182,11 @@
 }
 
 .profile-card{
-    background:white;
+    background: var(--card);
+    border:1px solid var(--border);
     border-radius:20px;
     padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
 }
 
 .profile-header{
@@ -204,7 +206,7 @@
 }
 
 .profile-header p{
-    color:#64748b;
+    color: var(--secondary);
     margin-top:5px;
 }
 
@@ -218,7 +220,7 @@
     display:flex;
     align-items:center;
     gap:12px;
-    color:#334155;
+    color: var(--text);
 }
 
 .status-green{
@@ -226,10 +228,11 @@
 }
 
 .progress-card{
-    background:white;
+    background: var(--card);
+    border: 1px, solid var(--border);
     border-radius:20px;
     padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
 }
 
 .progress-header{
@@ -254,7 +257,7 @@
     height:12px;
     margin-top: 5px;
     margin-bottom: 5px;
-    background:#e2e8f0;
+    background: var(--border);
     border-radius:20px;
     overflow:hidden;
 }
@@ -279,7 +282,7 @@
 
 .progress-details h4{
     margin-bottom:10px;
-    color:#64748b;
+    color: var(--secondary);
 }
 
 .progress-details p{
@@ -287,14 +290,15 @@
     gap: 15px;
     font-size:24px;
     font-weight:700;
-    color:#0f172a;
+    color: var(--text);
 }
 
 .weekly-chart-card{
-    background:white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius:22px;
     padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
 }
 
 .weekly-chart-card h2{
@@ -309,7 +313,7 @@
 }
 
 .quick-actions-card{
-    background:white;
+    background: var(--card);
     border-radius:22px;
     padding:30px;
     box-shadow:0 10px 30px rgba(0,0,0,.08);
@@ -327,7 +331,8 @@
 
 .quick-action-btn{
     border:none;
-    background:#f8fafc;
+    background: var(--background);
+    border: 1px solid var(--border);
     border-radius:18px;
     padding:22px;
     cursor:pointer;
@@ -351,10 +356,11 @@
 
 .attendance-summary-card{
     margin-top:30px;
-    background:white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius:22px;
     padding:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
 }
 
 .attendance-summary-card h2{
@@ -373,7 +379,8 @@
     gap:18px;
     padding:22px;
     border-radius:18px;
-    background:#f8fafc;
+    background: var(--background);
+    border: 1px solid var(--border);
     transition:.3s;
 }
 
@@ -401,11 +408,11 @@
 .attendance-summary-item h3{
     font-size:28px;
     margin-bottom:5px;
-    color:#0f172a;
+    color: var(--text);
 }
 
 .attendance-summary-item p{
-    color:#64748b;
+    color: var(--secondary);
 }
 
 /* ===== Dashboard Animation ===== */
@@ -671,7 +678,7 @@
     .weekly-chart-card:hover,
     .quick-actions-card:hover {
         transform: none !important;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, .08) !important;
+        box-shadow: var(--shadow) !important;
     }
 }
 

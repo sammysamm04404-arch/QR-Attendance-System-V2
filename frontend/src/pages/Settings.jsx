@@ -19,6 +19,7 @@ import "../styles/pages/Settings.css";
 import Loader from "../components/Loader/Loader";
 import ConfirmationModal from "../components/ConfirmationModal";
 import Navbar from "../components/Navbar";
+import { useTheme } from "../theme/ThemeContext";
 
 function Settings({ onLogout }) {
 
@@ -153,33 +154,10 @@ function Settings({ onLogout }) {
 
   }, []);
 
-  useEffect(() => {
-
-    if (darkMode) {
-
-      document.body.classList.add("dark-mode");
-
-      localStorage.setItem(
-        "theme",
-        "dark"
-      );
-
-    }
-
-    else {
-
-      document.body.classList.remove(
-        "dark-mode"
-      );
-
-      localStorage.setItem(
-        "theme",
-        "light"
-      );
-
-    }
-
-  }, [darkMode]);
+  const {
+    darkMode,
+    toggleTheme
+  } = useTheme();
 
   const fetchProfile = async () => {
 
@@ -344,13 +322,6 @@ function Settings({ onLogout }) {
 
   };
 
-  
-  const toggleDarkMode = () => {
-
-    setDarkMode(!darkMode);
-
-  };
-
   const confirmLogout = () => {
 
     localStorage.removeItem("access_token");
@@ -418,7 +389,7 @@ function Settings({ onLogout }) {
 
           <div className="hero-chip">
             <FiShield />
-            Enterprise Security
+            Account Protection
           </div>
 
         </div>
@@ -444,9 +415,9 @@ function Settings({ onLogout }) {
 
       <div className="settings-summary">
 
-        <div className="summary-card">
+        <div className="setting-summary-card">
 
-          <div className="summary-icon security">
+          <div className="setting-summary-icon security">
 
             <FiLock />
 
@@ -466,9 +437,9 @@ function Settings({ onLogout }) {
 
         </div>
 
-        <div className="summary-card">
+        <div className="setting-summary-card">
 
-          <div className="summary-icon email">
+          <div className="setting-summary-icon email">
 
             <FiMail />
 
@@ -492,9 +463,9 @@ function Settings({ onLogout }) {
 
         </div>
 
-        <div className="summary-card">
+        <div className="setting-summary-card">
 
-          <div className="summary-icon appearance">
+          <div className="setting-summary-icon appearance">
 
             {
               darkMode ? <FiMoon /> : <FiSun />
@@ -518,9 +489,9 @@ function Settings({ onLogout }) {
 
         </div>
 
-        <div className="summary-card">
+        <div className="setting-summary-card">
 
-          <div className="summary-icon account">
+          <div className="setting-summary-icon account">
             <FiShield />
           </div>
 
@@ -783,7 +754,7 @@ function Settings({ onLogout }) {
             </div>
 
             <label className="switch">
-              <input type="checkbox" checked={darkMode} onChange={toggleDarkMode}/>
+              <input type="checkbox" checked={darkMode} onChange={toggleTheme}/>
               <span className="slider"></span>
             </label>
 

@@ -1,26 +1,55 @@
 :root{
 
+    /* Brand */
+
     --primary:#2563EB;
     --primary-hover:#1D4ED8;
 
-    --background:#F8FAFC;
+    /* Background */
 
+    --background:#F8FAFC;
     --card:#FFFFFF;
 
-    --text:#0F172A;
+    /* Text */
 
+    --text:#0F172A;
     --secondary:#64748B;
+
+    /* Border */
 
     --border:#E2E8F0;
 
+    /* Status */
+
     --success:#16A34A;
-
     --warning:#F59E0B;
-
     --danger:#DC2626;
 
-    --radius:16px;
+    /* UI */
 
+    --radius:16px;
     --shadow:0 10px 30px rgba(0,0,0,.08);
+
+}
+
+/* DARK THEME */
+
+.dark{
+
+    --background:#0F172A;
+
+    --card:#1E293B;
+
+    --text:#F8FAFC;
+
+    --secondary:#CBD5E1;
+
+    --border:#334155;
+
+    --primary:#3B82F6;
+
+    --primary-hover:#2563EB;
+
+    --shadow:0 10px 30px rgba(0,0,0,.45);
 
 }

@@ -108,7 +108,7 @@
     margin-bottom:28px;
 }
 
-.summary-card{
+.setting-summary-card{
     background:#fff;
     border-radius:18px;
     padding:22px;
@@ -120,18 +120,18 @@
     box-shadow:0 8px 24px rgba(15,23,42,.05);
 }
 
-.summary-card:hover{
+.setting-summary-card:hover{
     transform:translateY(-5px);
     box-shadow:0 20px 40px rgba(37,99,235,.12);
 }
 
-.summary-card h3{
+.setting-summary-card h3{
     margin:0;
     color:#0F172A;
     font-size:17px;
 }
 
-.summary-card p{
+.setting-summary-card p{
     margin-top:6px;
     color:#64748B;
     font-size:14px;
@@ -149,19 +149,19 @@
     flex-shrink:0;
 }
 
-.summary-icon.security{
+.setting-summary-icon.security{
     background:linear-gradient(135deg,#2563EB,#1D4ED8);
 }
 
-.summary-icon.email{
+.setting-summary-icon.email{
     background:linear-gradient(135deg,#10B981,#059669);
 }
 
-.summary-icon.appearance{
+.setting-summary-icon.appearance{
     background:linear-gradient(135deg,#F59E0B,#D97706);
 }
 
-.summary-icon.account{
+.setting-summary-icon.account{
     background:linear-gradient(135deg,#8B5CF6,#7C3AED);
 }
 
@@ -753,7 +753,7 @@
 /* CARD ANIMATIONS */
 
 .settings-card,
-.summary-card{
+.setting-summary-card{
     transition:
         transform .25s ease,
         box-shadow .25s ease,
@@ -761,7 +761,7 @@
 }
 
 .settings-card:hover,
-.summary-card:hover{
+.setting-summary-card:hover{
     border-color:#BFDBFE;
 }
 
@@ -803,7 +803,7 @@ body.dark-mode .settings-page{
 }
 
 body.dark-mode .settings-card,
-body.dark-mode .summary-card{
+body.dark-mode .setting-summary-card{
 
     background:#1E293B;
     border-color:#334155;
@@ -811,7 +811,7 @@ body.dark-mode .summary-card{
 }
 
 body.dark-mode .card-header h2,
-body.dark-mode .summary-card h3,
+body.dark-mode .setting-summary-card h3,
 body.dark-mode .form-group label,
 body.dark-mode .toggle-container h4{
 
@@ -819,7 +819,7 @@ body.dark-mode .toggle-container h4{
 
 }
 
-body.dark-mode .summary-card p,
+body.dark-mode .setting-summary-card p,
 body.dark-mode .card-header p,
 body.dark-mode .verification-status small,
 body.dark-mode .toggle-container small{
@@ -927,7 +927,7 @@ body.dark-mode .strength-bar{
 
     }
 
-    .summary-card{
+    .setting-summary-card{
 
         padding:18px;
 
@@ -965,7 +965,7 @@ body.dark-mode .strength-bar{
 
     }
 
-    .summary-card{
+    .setting-summary-card{
 
         flex-direction:column;
         text-align:center;
