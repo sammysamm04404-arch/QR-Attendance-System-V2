@@ -16,9 +16,9 @@ import {
 import api from "../services/api";
 import { COLORS } from "../theme/theme";
 import "../styles/pages/Settings.css";
-import "../components/Loader/Loader";
 import Loader from "../components/Loader/Loader";
 import ConfirmationModal from "../components/ConfirmationModal";
+import Navbar from "../components/Navbar";
 
 function Settings({ onLogout }) {
 
@@ -383,8 +383,6 @@ function Settings({ onLogout }) {
 
       <div className="settings-loading">
 
-        <div className="settings-spinner"></div>
-
           <Loader />
 
         </div>
@@ -397,6 +395,8 @@ function Settings({ onLogout }) {
     <>
 
     <div className="settings-page">
+
+      <Navbar />
 
       <div className="settings-hero">
 
@@ -713,7 +713,7 @@ function Settings({ onLogout }) {
                   </> : <>
                     <span className="status-badge pending">
                       <FiAlertCircle />
-                      Verification Pending
+                       Verification Pending
                     </span>
 
                     <small>
