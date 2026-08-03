@@ -341,11 +341,11 @@ function ResetPassword() {
 
                         </div>
 
-                        <div className="password-strength">
+                        <div className="password-reset-strength">
 
-                            <div className="strength-bar">
+                            <div className="reset-strength-bar">
 
-                                <div className="strength-fill" style={{ width: `${passwordStrength.percentage}%`, background: passwordStrength.color}}/>
+                                <div className="reset-strength-fill" style={{ width: `${passwordStrength.percentage}%`, background: passwordStrength.color}}/>
 
                             </div>
 
@@ -384,7 +384,7 @@ function ResetPassword() {
 
                         <div className="reset-actions">
 
-                            <button type="submit" className="primary-btn" disabled={submitting}>
+                            <button type="submit" className="reset-primary-btn" disabled={submitting}>
                                 {
                                     submitting ? "Updating Password..." : "Reset Password"
                                 }
@@ -394,7 +394,7 @@ function ResetPassword() {
 
                         <div className="login-link">
 
-                            <button type="button" className="secondary-btn" onClick={() => navigate("/login")}>
+                            <button type="button" className="reset-secondary-btn" onClick={() => navigate("/login")}>
                                 Back to Login
                             </button>
 
