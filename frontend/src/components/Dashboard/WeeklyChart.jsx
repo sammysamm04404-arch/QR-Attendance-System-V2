@@ -47,20 +47,52 @@ function WeeklyChart({ data }) {
 
                     </defs>
 
-                    <CartesianGrid strokeDasharray="3 3" />
+                    <CartesianGrid stroke="var(--border)" strokeDasharray="3 3"/>
 
                     <XAxis
                         dataKey="day"
+                        stroke="var(--secondary)"
+                        tick={{
+                            fill: "var(--secondary)",
+                            fontSize: 13,
+                            fontWeight: 500
+                        }}
                     />
 
-                    <Tooltip />
+                    <YAxis
+                        stroke="var(--secondary)"
+                        tick={{
+                            fill: "var(--secondary)",
+                            fontSize: 13
+                        }}
+                    />
+
+                    <Tooltip
+                        contentStyle={{
+                            background: "var(--card)",
+                            border: "1px solid var(--border)",
+                            borderRadius: "12px",
+                            color: "var(--text)"
+                        }}
+                        labelStyle={{
+                            color: "var(--text)"
+                        }}
+                        itemStyle={{
+                            color: "var(--text)"
+                        }}
+                    />
 
                     <Area
                         type="monotone"
                         dataKey="hours"
-                        stroke="#2563eb"
+                        stroke="#3b82f6"
+                        strokeWidth={3}
                         fillOpacity={1}
                         fill="url(#colorHours)"
+                        activeDot={{
+                            r: 6,
+                            fill: "#2563eb"
+                        }}
                     />
 
                 </AreaChart>

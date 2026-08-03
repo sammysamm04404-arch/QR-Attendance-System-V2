@@ -342,16 +342,30 @@
     align-items:center;
     justify-content:center;
     gap:12px;
+    color: var(--text);
 }
 
 .dash-quick-action-btn:hover{
     background:#2563eb;
-    color:white;
+    color:#fff;
+    border-color:#2563eb;
     transform:translateY(-6px);
+}
+
+.dash-quick-action-btn:hover .dash-quick-action-icon,
+.dash-quick-action-btn:hover span{
+    color:#fff;
 }
 
 .dash-quick-action-icon{
     font-size:30px;
+    color: inherit;
+}
+
+.dash-quick-action-btn span{
+    color:inherit;
+    font-size:15px;
+    font-weight:600;
 }
 
 .attendance-summary-card{
