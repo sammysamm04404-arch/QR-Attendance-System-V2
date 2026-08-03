@@ -394,9 +394,9 @@ function Settings({ onLogout }) {
   return (
     <>
 
-    <div className="settings-page">
+    <Navbar />
 
-      <Navbar />
+    <div className="settings-page">
 
       <div className="settings-hero">
 
