@@ -1,6 +1,10 @@
-/* ATTENDANCE MANAGEMENT PAGE STYLES (Theme-Enabled) */
+/* =====================================================
+   ATTENDANCE MANAGEMENT PAGE STYLES (Theme-Enabled)
+===================================================== */
 
-/* Base Global Layout */
+/* -----------------------------------------------------
+   1. Base Global Layout
+----------------------------------------------------- */
 .attendance-page {
     max-width: 1450px;
     margin: auto;
@@ -26,7 +30,9 @@
     font-size: 15px;
 }
 
-/* Attendance Metrics Summary Cards */
+/* -----------------------------------------------------
+   2. Attendance Metrics Summary Cards
+----------------------------------------------------- */
 .attendance-atmsummary {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -78,7 +84,9 @@
     font-size: 14px;
 }
 
-/* Filters Control Bar */
+/* -----------------------------------------------------
+   3. Filters Control Bar
+----------------------------------------------------- */
 .attendance-filters {
     display: flex;
     align-items: center;
@@ -152,6 +160,25 @@
     cursor: pointer;
 }
 
+/* Enhanced Date Picker Controls & Theme Inversion */
+.filter-group input[type="date"] {
+    color-scheme: light dark;
+    font-family: inherit;
+}
+
+.filter-group input[type="date"]::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 0.8;
+    padding: 4px;
+    border-radius: 6px;
+    transition: opacity 0.2s ease, background-color 0.2s ease;
+}
+
+.filter-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
+    opacity: 1;
+    background-color: rgba(37, 99, 235, 0.15);
+}
+
 .filter-group select option {
     background-color: var(--card);
     color: var(--text);
@@ -179,7 +206,9 @@
     transform: translateY(-1px);
 }
 
-/* Data Logs Table Architecture */
+/* -----------------------------------------------------
+   4. Data Logs Table Architecture
+----------------------------------------------------- */
 .attendance-table {
     background: var(--card);
     border: 1px solid var(--border);
@@ -247,13 +276,15 @@
 }
 
 .status.present {
-    background: rgba(22, 163, 74, 0.15);
+    background: color-mix(in srgb, var(--success) 18%, transparent);
     color: var(--success);
+    border: 1px solid color-mix(in srgb, var(--success) 35%, transparent);
 }
 
 .status.late {
-    background: rgba(217, 119, 6, 0.15);
+    background: color-mix(in srgb, var(--warning) 18%, transparent);
     color: var(--warning);
+    border: 1px solid color-mix(in srgb, var(--warning) 35%, transparent);
 }
 
 .status.absent {
@@ -279,7 +310,9 @@
     color: #ffffff;
 }
 
-/* Pagination Component System */
+/* -----------------------------------------------------
+   5. Pagination Component System
+----------------------------------------------------- */
 .attendance-pagination {
     display: flex;
     justify-content: center;
@@ -318,7 +351,9 @@
     color: var(--text);
 }
 
-/* Attendance Details Modal Component */
+/* -----------------------------------------------------
+   6. Attendance Details Modal Component
+----------------------------------------------------- */
 .attendance-modal-overlay {
     position: fixed;
     inset: 0;
@@ -434,7 +469,9 @@
     word-break: break-word; 
 }
 
-/* High Fidelity Responsive Media Queries */
+/* -----------------------------------------------------
+   7. High Fidelity Responsive Media Queries
+----------------------------------------------------- */
 
 /* Tablet & Smaller Desktop Screens */
 @media (max-width: 1024px) {
@@ -606,6 +643,12 @@
         outline: none;
         background: transparent;
         color: var(--text);
+    }
+
+    .filter-group input[type="date"]::-webkit-calendar-picker-indicator {
+        padding: 0;
+        width: 14px;
+        height: 14px;
     }
 
     .filter-label {
