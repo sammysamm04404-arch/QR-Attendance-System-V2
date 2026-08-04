@@ -191,6 +191,28 @@
     overflow-y: auto;
     flex: 1;
     padding-right: 8px;
+    
+    /* Firefox custom scrollbar variables */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+}
+
+/* Webkit (Chrome / Edge / Safari) Custom Theme Scrollbar */
+.recent-card .activity-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.recent-card .activity-list::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.recent-card .activity-list::-webkit-scrollbar-thumb {
+    background: var(--border);
+    border-radius: 20px;
+}
+
+.recent-card .activity-list::-webkit-scrollbar-thumb:hover {
+    background: var(--secondary);
 }
 
 .activity-item {
@@ -232,20 +254,6 @@
     text-align: center;
     color: var(--secondary);
     padding: 30px;
-}
-
-.recent-card::-webkit-scrollbar {
-    background: var(--card);
-    width: 7px;
-}
-
-.recent-card::-webkit-scrollbar-thumb {
-    background: var(--background);
-    border-radius: 20px;
-}
-
-.recent-card::-webkit-scrollbar-thumb:hover {
-    background: var(--secondary);
 }
 
 /* Admin Quick Actions */
