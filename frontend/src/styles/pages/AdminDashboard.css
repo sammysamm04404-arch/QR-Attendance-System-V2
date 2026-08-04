@@ -239,12 +239,12 @@
 }
 
 .recent-card::-webkit-scrollbar-thumb {
-    background: #bfc7d5;
+    background: var(--background);
     border-radius: 20px;
 }
 
 .recent-card::-webkit-scrollbar-thumb:hover {
-    background: #94a3b8;
+    background: var(--secondary);
 }
 
 /* Admin Quick Actions */
