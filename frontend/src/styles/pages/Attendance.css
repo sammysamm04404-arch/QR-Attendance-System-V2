@@ -1,18 +1,19 @@
 .attendance-container{
     padding:30px;
-    background:#f8fafc;
+    background: var(--background);
     min-height:100vh;
+    transition: .3s;
 }
 
 .page-title{
     font-size:32px;
     font-weight:600;
-    color:#1e293b;
+    color: var(--text);
     margin-bottom:5px;
 }
 
 .page-subtitle{
-    color:#64748b;
+    color: var(--secondary);
     margin-bottom:30px;
 }
 
@@ -26,14 +27,15 @@
 .summary-card{
     flex:1;
     min-width:220px;
-    background:white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius:15px;
     padding:25px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
 }
 
 .summary-title{
-    color:#64748b;
+    color: var(--secondary);
     font-size:15px;
 }
 
@@ -41,20 +43,21 @@
     margin-top:15px;
     font-size:28px;
     font-weight:600;
-    color:#2563eb;
+    color: var(--primary);
 }
 
 .action-section{
-    background:white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius:15px;
     padding:25px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
 }
 
 .action-title{
     font-size:22px;
     margin-bottom:20px;
-    color:#1e293b;
+    color: var(--text);
 }
 
 .action-buttons{
@@ -82,16 +85,17 @@
 
 .timeline-section{
     margin-top:35px;
-    background:white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius:15px;
     padding:25px;
-    box-shadow:0 5px 15px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
 }
 
 .timeline-title{
     font-size:22px;
     margin-bottom:25px;
-    color:#1e293b;
+    color: var(--text);
 }
 
 .timeline-card{
@@ -99,7 +103,7 @@
     justify-content:space-between;
     align-items:center;
     padding:18px;
-    border-bottom:1px solid #e2e8f0;
+    border-bottom:1px solid var(--border);
 }
 
 .timeline-card:last-child{
@@ -163,12 +167,13 @@
 .timeline-connector{
     width:3px;
     height:80px;
-    background:#cbd5e1;
+    background: var(--border);
     margin-top:6px;
 }
 
 .timeline-content{
-    background:#f8fafc;
+    background: var(--background);
+    border: 1px solid var(--border);
     width:100%;
     border-radius:12px;
     padding:18px;
@@ -182,18 +187,18 @@
 
 .timeline-content h3{
     margin:0;
-    color:#1e293b;
+    color: var(--text);
 }
 
 .timeline-content p{
     margin:6px 0;
-    color:#64748b;
+    color: var(--secondary);
 }
 
 .location-warning{
-    background:#fef2f2;
+    background: rgba(239, 68, 68, .08);
     border:1px solid #ef4444;
-    color:#991b1b;
+    color: var(--text);
     padding:18px;
     border-radius:12px;
     margin-bottom:25px;
@@ -208,7 +213,8 @@
 }
 
 .action-button:disabled{
-    background:#94a3b8;
+    background: var(--border);
+    color: var(--secondary);
     cursor:not-allowed;
     opacity:.7;
 }
