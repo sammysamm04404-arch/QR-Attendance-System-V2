@@ -1,6 +1,6 @@
-/* =====================================================
-   BASE & DESKTOP STYLES (Fluid Default Structure)
-===================================================== */
+/* EMPLOYEE DETAILS PAGE STYLES (Theme-Enabled) */
+
+/* Base Layout & Back Button */
 .employee-details-page {
     max-width: 1400px;
     margin: 40px auto;
@@ -10,19 +10,21 @@
 
 .employeepage-back-btn {
     padding: 12px 20px;
-    background: #4F46E5;
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
     border: none;
     border-radius: 10px;
     cursor: pointer;
     margin-bottom: 25px;
     font-weight: 600;
     font-size: 14px;
-    transition: background-color 0.2s ease;
+    transition: all 0.2s ease;
+    box-shadow: var(--shadow);
 }
 
 .employeepage-back-btn:hover {
-    background: #4338CA;
+    background: var(--primary-hover);
+    transform: translateY(-1px);
 }
 
 /* Master Grid Structure */
@@ -33,29 +35,32 @@
     margin: 30px 0;
 }
 
-/* Employee Profile Banner Card */
+/* Profile Banner Card */
 .employee-profile-card {
-    background: white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 20px;
     padding: 30px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
     box-sizing: border-box;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .employee-profile-avatar {
     width: 90px;
     height: 90px;
     border-radius: 50%;
-    background: #4F46E5;
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
     font-size: 42px;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-shrink: 0;
+    box-shadow: var(--shadow);
 }
 
 .employee-profile-info {
@@ -65,14 +70,14 @@
 
 .employee-profile-info h2 {
     font-size: 28px;
-    color: #111827;
+    color: var(--text);
     margin: 0 0 6px 0;
     font-weight: 700;
 }
 
 .employee-profile-info p {
     margin: 0;
-    color: #64748B;
+    color: var(--secondary);
     font-size: 15px;
 }
 
@@ -82,15 +87,56 @@
     align-items: center;
 }
 
-/* Today Metrics Card */
-.employee-today-card {
-    background: white;
+/* Profile Status & Role Badges */
+.employee-role-badge,
+.status-active,
+.status-inactive {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
     border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
-    box-sizing: border-box;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
 }
 
+.employee-role-badge {
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--primary);
+}
+
+.status-active {
+    background: rgba(22, 163, 74, 0.15);
+    color: var(--success);
+}
+
+.status-inactive {
+    background: rgba(220, 38, 38, 0.15);
+    color: var(--danger);
+}
+
+/* Today Metrics & Summary Cards */
+.employee-today-card,
+.employee-summary-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
+    transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.employee-today-card h3,
+.employee-summary-card h3 {
+    margin: 0 0 10px 0;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Today Metrics Grid */
 .employee-today-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -99,7 +145,7 @@
 }
 
 .employee-today-grid h4 {
-    color: #64748B;
+    color: var(--secondary);
     margin: 0 0 8px 0;
     font-size: 14px;
     font-weight: 500;
@@ -109,18 +155,10 @@
     margin: 0;
     font-size: 20px;
     font-weight: 600;
-    color: #111827;
+    color: var(--text);
 }
 
-/* Summary Accumulator Card */
-.employee-summary-card {
-    background: white;
-    border-radius: 20px;
-    padding: 25px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
-    box-sizing: border-box;
-}
-
+/* Summary Grid */
 .employee-summary-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -130,7 +168,7 @@
 }
 
 .employee-summary-grid h2 {
-    color: #4F46E5;
+    color: var(--primary);
     font-size: 30px;
     margin: 0 0 6px 0;
     font-weight: 700;
@@ -138,50 +176,59 @@
 
 .employee-summary-grid p {
     margin: 0;
-    color: #64748B;
+    color: var(--secondary);
     font-size: 14px;
 }
 
-/* History Data Logs Table Component */
+/* History Data Logs Table */
 .history-card {
-    background: white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 20px;
     padding: 30px;
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
     box-sizing: border-box;
-    overflow: hidden; /* Encapsulates responsive sliding block inside border parameters */
+    overflow: hidden;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
-/* Native Overflow Track Wrapper */
+.history-card h3 {
+    margin: 0 0 10px 0;
+    color: var(--text);
+    font-size: 18px;
+    font-weight: 700;
+}
+
 .history-table-responsive {
     width: 100%;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch; /* Smooth kinetic scroll architecture on mobile iOS */
+    -webkit-overflow-scrolling: touch;
     margin-top: 20px;
 }
 
 .history-card table {
     width: 100%;
     border-collapse: collapse;
-    margin-top: 0; /* Handled directly by the wrapper parent element */
+    margin-top: 0;
 }
 
 .history-card th {
-    background: #EEF2FF;
-    color: #4F46E5;
+    background: var(--background);
+    color: var(--primary);
     padding: 15px;
     text-align: left;
     font-weight: 600;
     font-size: 14.5px;
     white-space: nowrap;
+    border-bottom: 2px solid var(--border);
 }
 
 .history-card td {
     padding: 15px;
-    border-bottom: 1px solid #E2E8F0;
-    color: #334155;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
     font-size: 14.5px;
-    white-space: nowrap; /* Prevents text from breaking ugly mid-sentence on table scales */
+    white-space: nowrap;
 }
 
 .history-card tr:last-child td {
@@ -189,14 +236,10 @@
 }
 
 .history-card tr:hover {
-    background: #F8FAFC;
+    background: rgba(255, 255, 255, 0.03);
 }
 
-
-/* =====================================================
-   CROSS-DEVICE RESPONSIVE REDESIGN
-===================================================== */
-
+/* Responsive Design Across Devices */
 @media (max-width: 1100px) {
     .employee-details-page {
         padding: 0 20px 40px;
@@ -208,9 +251,7 @@
     }
 }
 
-/* Tablet & Large Mobile Screen Scaling */
 @media (max-width: 992px) {
-    /* Collapse side-by-side splits into a fluid single stack */
     .details-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -224,7 +265,6 @@
     }
 }
 
-/* Mobile Screens (768px and down) */
 @media (max-width: 768px) {
     .employee-details-page {
         padding: 14px;
@@ -238,12 +278,11 @@
         margin-bottom: 18px;
     }
 
-    /* FIX: Keeps everything on a single, clean row track */
     .employee-profile-card {
         display: flex;
         flex-direction: row;
         justify-content: space-between; 
-        align-items: center; /* Vertically centers text and capsules side-by-side */
+        align-items: center;
         gap: 16px;
         padding: 16px;
         border-radius: 14px;
@@ -258,7 +297,7 @@
     .employee-profile-info {
         margin-left: 12px;
         flex: 1;
-        min-width: 0; /* Critical fix: allows text truncation if email is long */
+        min-width: 0;
     }
 
     .employee-profile-info h2 {
@@ -276,7 +315,6 @@
         text-overflow: ellipsis;
     }
 
-    /* FIX: Pushes the capsules tightly to the right side on the same line */
     .employee-profile-status {
         display: flex;
         flex-direction: row; 
@@ -284,7 +322,7 @@
         margin-top: 0;
         padding-top: 0;
         border-top: none;
-        flex-shrink: 0; /* Prevents capsules from squishing */
+        flex-shrink: 0;
     }
 
     .employee-role-badge,
@@ -296,7 +334,6 @@
         gap: 4px;
     }
 
-    /* Downscale row metrics grids to balanced 2-column configurations */
     .employee-today-grid,
     .employee-summary-grid {
         grid-template-columns: repeat(2, 1fr);
@@ -336,13 +373,11 @@
     }
 }
 
-/* Extra Small Screens (480px and down) */
 @media (max-width: 480px) {
     .employee-details-page {
         padding: 10px;
     }
 
-    /* On ultra-narrow screens, stack capsules vertically but KEEP them on the right side */
     .employee-profile-status {
         flex-direction: column;
         gap: 4px;
@@ -363,7 +398,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        border-bottom: 1px dashed #f1f5f9;
+        border-bottom: 1px dashed var(--border);
         padding-bottom: 8px;
     }
 
@@ -381,6 +416,6 @@
     .employee-summary-grid p {
         order: 1;
         font-weight: 500;
-        color: #64748B;
+        color: var(--secondary);
     }
 }
