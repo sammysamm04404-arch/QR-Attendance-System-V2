@@ -1,10 +1,6 @@
-/* =====================================================
-   NOTIFICATIONS PAGE STYLES (Theme-Enabled & Responsive)
-===================================================== */
+/* NOTIFICATIONS PAGE STYLES (Theme-Enabled & Responsive) */
 
-/* -----------------------------------------------------
-   1. Base & Desktop Surface Structure
------------------------------------------------------ */
+/* Base & Desktop Surface Structure */
 .notifications-page {
     padding: 40px;
     background-color: var(--background);
@@ -43,9 +39,7 @@
     color: var(--secondary);
 }
 
-/* -----------------------------------------------------
-   2. Notification Items & Interaction States
------------------------------------------------------ */
+/* Notification Items & Interaction States */
 .notification-item {
     display: flex;
     justify-content: space-between;
@@ -123,9 +117,7 @@
     background: color-mix(in srgb, var(--text) 8%, var(--card));
 }
 
-/* -----------------------------------------------------
-   3. Resolve Modal System
------------------------------------------------------ */
+/* Resolve Modal System */
 .resolve-modal-overlay {
     position: fixed;
     inset: 0;
@@ -239,9 +231,7 @@
     background: var(--primary-hover, #1d4ed8);
 }
 
-/* =====================================================
-   4. CROSS-DEVICE RESPONSIVE REDESIGN
-===================================================== */
+/* CROSS-DEVICE RESPONSIVE REDESIGN */
 
 @media (max-width: 992px) {
     .notifications-page {
