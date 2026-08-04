@@ -458,9 +458,9 @@ function Settings({ onLogout }) {
 
         <div className="settings-card password-card">
 
-          <div className="card-header">
+          <div className="settings-card-header">
 
-            <div className="card-icon">
+            <div className="settings-card-icon">
               <FiLock />
             </div>
 
@@ -584,9 +584,9 @@ function Settings({ onLogout }) {
 
         <div className="settings-card">
 
-          <div className="card-header">
+          <div className="settings-card-header">
 
-            <div className="card-icon">
+            <div className="settings-card-icon">
               <FiMail />
             </div>
 
@@ -654,9 +654,9 @@ function Settings({ onLogout }) {
 
         <div className="settings-card">
 
-          <div className="card-header">
+          <div className="settings-card-header">
 
-            <div className="card-icon">
+            <div className="settings-card-icon">
 
               {
                 darkMode ? <FiMoon /> : <FiSun />
@@ -703,9 +703,9 @@ function Settings({ onLogout }) {
 
         <div className="settings-card logout-card">
 
-          <div className="card-header">
+          <div className="settings-card-header">
 
-            <div className="card-icon logout">
+            <div className="settings-card-icon logout">
 
               <FiLogOut />
 
