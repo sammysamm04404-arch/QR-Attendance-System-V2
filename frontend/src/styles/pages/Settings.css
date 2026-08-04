@@ -3,7 +3,7 @@
 .settings-page{
     min-height:100vh;
     padding:30px;
-    background:#f8fafc;
+    background: var(--background);
     animation:fadeIn .35s ease;
 }
 
@@ -556,8 +556,7 @@
 /* APPEARANCE */
 
 .toggle-container{
-    background: var(--background);
-    border: 1px solid var(--border);
+    background: #f8fafc;
     display:flex;
     justify-content:space-between;
     align-items:center;
