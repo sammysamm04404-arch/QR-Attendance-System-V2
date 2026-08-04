@@ -1,10 +1,6 @@
-/* =====================================================
-   ATTENDANCE MANAGEMENT PAGE STYLES (Theme-Enabled)
-===================================================== */
+/* ATTENDANCE MANAGEMENT PAGE STYLES (Theme-Enabled) */
 
-/* -----------------------------------------------------
-   1. Base Global Layout
------------------------------------------------------ */
+/* Base Global Layout */
 .attendance-page {
     max-width: 1450px;
     margin: auto;
@@ -30,9 +26,7 @@
     font-size: 15px;
 }
 
-/* -----------------------------------------------------
-   2. Attendance Metrics Summary Cards
------------------------------------------------------ */
+/* Attendance Metrics Summary Cards */
 .attendance-atmsummary {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -84,9 +78,7 @@
     font-size: 14px;
 }
 
-/* -----------------------------------------------------
-   3. Filters Control Bar
------------------------------------------------------ */
+/* Filters Control Bar */
 .attendance-filters {
     display: flex;
     align-items: center;
@@ -160,23 +152,37 @@
     cursor: pointer;
 }
 
-/* Enhanced Date Picker Controls & Theme Inversion */
+/* Enhanced Date Picker Controls & Cross-Theme Calendar Visibility */
 .filter-group input[type="date"] {
-    color-scheme: light dark;
+    color-scheme: light; /* Forces dark calendar icon on light background */
     font-family: inherit;
 }
 
 .filter-group input[type="date"]::-webkit-calendar-picker-indicator {
     cursor: pointer;
-    opacity: 0.8;
+    opacity: 0.85;
     padding: 4px;
     border-radius: 6px;
-    transition: opacity 0.2s ease, background-color 0.2s ease;
+    transition: opacity 0.2s ease, background-color 0.2s ease, filter 0.2s ease;
+    filter: var(--calendar-icon-filter, none);
 }
 
 .filter-group input[type="date"]::-webkit-calendar-picker-indicator:hover {
     opacity: 1;
     background-color: rgba(37, 99, 235, 0.15);
+}
+
+/* Universal Dark Mode Overrides for Calendar Icon */
+[data-theme="dark"] .filter-group input[type="date"],
+.dark .filter-group input[type="date"],
+.dark-mode .filter-group input[type="date"] {
+    color-scheme: dark;
+}
+
+[data-theme="dark"] .filter-group input[type="date"]::-webkit-calendar-picker-indicator,
+.dark .filter-group input[type="date"]::-webkit-calendar-picker-indicator,
+.dark-mode .filter-group input[type="date"]::-webkit-calendar-picker-indicator {
+    filter: invert(1); /* Ensures white calendar icon on dark background */
 }
 
 .filter-group select option {
@@ -206,9 +212,7 @@
     transform: translateY(-1px);
 }
 
-/* -----------------------------------------------------
-   4. Data Logs Table Architecture
------------------------------------------------------ */
+/* Data Logs Table Architecture */
 .attendance-table {
     background: var(--card);
     border: 1px solid var(--border);
@@ -310,9 +314,7 @@
     color: #ffffff;
 }
 
-/* -----------------------------------------------------
-   5. Pagination Component System
------------------------------------------------------ */
+/* Pagination Component System */
 .attendance-pagination {
     display: flex;
     justify-content: center;
@@ -351,9 +353,7 @@
     color: var(--text);
 }
 
-/* -----------------------------------------------------
-   6. Attendance Details Modal Component
------------------------------------------------------ */
+/* Attendance Details Modal Component */
 .attendance-modal-overlay {
     position: fixed;
     inset: 0;
@@ -469,9 +469,7 @@
     word-break: break-word; 
 }
 
-/* -----------------------------------------------------
-   7. High Fidelity Responsive Media Queries
------------------------------------------------------ */
+/* High Fidelity Responsive Media Queries */
 
 /* Tablet & Smaller Desktop Screens */
 @media (max-width: 1024px) {
