@@ -70,35 +70,6 @@
     font-size:20px;
 }
 
-/* ALERT */
-
-.settings-alert{
-    display:flex;
-    align-items:center;
-    gap:12px;
-    padding:15px 18px;
-    border-radius:14px;
-    margin-bottom:24px;
-    font-weight:500;
-    animation:fadeIn .25s ease;
-}
-
-.settings-alert.success{
-    background:#DCFCE7;
-    color:#15803D;
-    border:1px solid #BBF7D0;
-}
-
-.settings-alert.error{
-    background:#FEE2E2;
-    color:#B91C1C;
-    border:1px solid #FECACA;
-}
-
-.settings-alert svg{
-    font-size:22px;
-}
-
 /* SUMMARY CARDS */
 
 .settings-summary{
@@ -109,15 +80,15 @@
 }
 
 .setting-summary-card{
-    background:#fff;
+    background: var(--card);
     border-radius:18px;
     padding:22px;
     display:flex;
     align-items:center;
     gap:18px;
-    border:1px solid #E2E8F0;
+    border:1px solid var(--border);
     transition:.3s;
-    box-shadow:0 8px 24px rgba(15,23,42,.05);
+    box-shadow:0 8px 24px var(shadow);
 }
 
 .setting-summary-card:hover{
@@ -127,13 +98,13 @@
 
 .setting-summary-card h3{
     margin:0;
-    color:#0F172A;
+    color: var(--text);
     font-size:17px;
 }
 
 .setting-summary-card p{
     margin-top:6px;
-    color:#64748B;
+    color: var(--secondary);
     font-size:14px;
 }
 
@@ -177,17 +148,17 @@
 /* COMMON CARD */
 
 .settings-card{
-    background:#fff;
-    border:1px solid #E2E8F0;
+    background: var(--card);
+    border:1px solid var(--border);
     border-radius:20px;
     padding:26px;
-    box-shadow:0 10px 30px rgba(15,23,42,.05);
+    box-shadow: var(--shadow);
     transition:.3s;
 }
 
 .settings-card:hover{
     transform:translateY(-4px);
-    box-shadow:0 18px 45px rgba(37,99,235,.10);
+    box-shadow: var(--shadow);
 }
 
 .settings-card-header{
@@ -199,13 +170,13 @@
 
 .settings-card-header h2{
     margin:0;
-    color:#0F172A;
+    color: var(--text);
     font-size:22px;
 }
 
 .settings-card-header p{
     margin-top:6px;
-    color:#64748B;
+    color: var(--secondary);
     line-height:1.6;
     font-size:14px;
 }
@@ -342,13 +313,13 @@
 .form-group label{
     font-size:14px;
     font-weight:600;
-    color:#0F172A;
+    color: var(--text);
 }
 
 .forgot-link{
     background:none;
     border:none;
-    color:#2563EB;
+    color: var(--primary);
     cursor:pointer;
     font-size:13px;
     font-weight:600;
@@ -356,7 +327,7 @@
 }
 
 .forgot-link:hover{
-    color:#1D4ED8;
+    color: var(--primary-hover);
     text-decoration:underline;
 }
 
@@ -370,22 +341,22 @@
     width:100%;
     height:52px;
     padding:0 50px 0 16px;
-    border:1px solid #CBD5E1;
+    border:1px solid var(--border);
     border-radius:12px;
     outline:none;
     font-size:15px;
-    color:#0F172A;
-    background:#fff;
+    color: var(--text);
+    background: var(--background);
     transition:.25s;
     box-sizing:border-box;
 }
 
 .password-field input::placeholder{
-    color:#94A3B8;
+    color: var(--secondary);
 }
 
 .password-field input:focus{
-    border-color:#2563EB;
+    border-color: var(--primary);
     box-shadow:0 0 0 4px rgba(37,99,235,.12);
 }
 
@@ -476,7 +447,8 @@
 /* INPUT VALIDATION */
 
 .password-field input:disabled{
-    background:#F8FAFC;
+    background: var(--background);
+    border: 1px solid var(--border);
     cursor:not-allowed;
 }
 
@@ -584,6 +556,8 @@
 /* APPEARANCE */
 
 .toggle-container{
+    background: var(--background);
+    border: 1px solid var(--border);
     display:flex;
     justify-content:space-between;
     align-items:center;
@@ -592,14 +566,14 @@
 
 .toggle-container h4{
     margin:0;
-    color:#0F172A;
+    color: var(--text);
     font-size:16px;
 }
 
 .toggle-container small{
     display:block;
     margin-top:6px;
-    color:#64748B;
+    color: var(--secondary);
     line-height:1.5;
 }
 
@@ -652,7 +626,8 @@
 /* LOGOUT */
 
 .logout-card{
-    border:1px solid #FECACA;
+    background: var(--card);
+    border:1px solid var(--border);
 }
 
 .logout-card:hover{
@@ -669,7 +644,7 @@
     height:50px;
     border:none;
     border-radius:12px;
-    background:#DC2626;
+    background: var(--danger);
     color:#fff;
     font-size:15px;
     font-weight:600;
@@ -785,93 +760,6 @@
 .password-field input:-webkit-autofill:focus{
     -webkit-box-shadow:0 0 0 1000px #fff inset;
     -webkit-text-fill-color:#0F172A;
-}
-
-/* DARK MODE */
-
-body.dark-mode{
-
-    background:#0F172A;
-    color:#F8FAFC;
-
-}
-
-body.dark-mode .settings-page{
-
-    background:#0F172A;
-
-}
-
-body.dark-mode .settings-card,
-body.dark-mode .setting-summary-card{
-
-    background:#1E293B;
-    border-color:#334155;
-
-}
-
-body.dark-mode .settings-card-header h2,
-body.dark-mode .setting-summary-card h3,
-body.dark-mode .form-group label,
-body.dark-mode .toggle-container h4{
-
-    color:#F8FAFC;
-
-}
-
-body.dark-mode .setting-summary-card p,
-body.dark-mode .settings-card-header p,
-body.dark-mode .verification-status small,
-body.dark-mode .toggle-container small{
-
-    color:#CBD5E1;
-
-}
-
-body.dark-mode .password-field input{
-
-    background:#334155;
-    color:#fff;
-    border-color:#475569;
-
-}
-
-body.dark-mode .password-field input::placeholder{
-
-    color:#94A3B8;
-
-}
-
-body.dark-mode .password-field input:focus{
-
-    border-color:#60A5FA;
-
-}
-
-body.dark-mode .secondary-btn{
-
-    background:#334155;
-    color:#F8FAFC;
-    border-color:#475569;
-
-}
-
-body.dark-mode .secondary-btn:hover{
-
-    background:#475569;
-
-}
-
-body.dark-mode .slider{
-
-    background:#475569;
-
-}
-
-body.dark-mode .strength-bar{
-
-    background:#475569;
-
 }
 
 /* TABLET */

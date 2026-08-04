@@ -20,6 +20,7 @@ import Loader from "../components/Loader/Loader";
 import ConfirmationModal from "../components/ConfirmationModal";
 import Navbar from "../components/Navbar";
 import { useTheme } from "../theme/ThemeContext";
+import toast from "react-hot-toast";
 
 function Settings({ onLogout }) {
 
@@ -32,9 +33,7 @@ function Settings({ onLogout }) {
   const [passwordData, setPasswordData] = useState({
 
       currentPassword: "",
-
       newPassword: "",
-
       confirmPassword: ""
 
   });
@@ -42,9 +41,7 @@ function Settings({ onLogout }) {
   const [showPassword, setShowPassword] = useState({
 
     current: false,
-
     new: false,
-
     confirm: false
 
   });
@@ -53,9 +50,7 @@ function Settings({ onLogout }) {
       useState({
 
         label: "Weak",
-
         percentage: 0,
-
         color: "#ef4444"
 
       });
@@ -66,19 +61,8 @@ function Settings({ onLogout }) {
   const [changingPassword,
       setChangingPassword] = useState(false);
 
-
   const [showLogoutModal,
       setShowLogoutModal] = useState(false);
-
-
-  const [alert,setAlert] = 
-    useState({
-
-      type: "",
-
-      message: ""
-
-    });
 
   const calculatePasswordStrength = (password) => {
 
@@ -104,9 +88,7 @@ function Settings({ onLogout }) {
       setPasswordStrength({
 
         label: "Weak",
-
         percentage: 35,
-
         color: "#ef4444"
 
       });
@@ -118,9 +100,7 @@ function Settings({ onLogout }) {
       setPasswordStrength({
 
         label: "Medium",
-
         percentage: 70,
-
         color: "#f59e0b"
 
       });
@@ -132,9 +112,7 @@ function Settings({ onLogout }) {
       setPasswordStrength({
 
         label: "Strong",
-
         percentage: 100,
-
         color: "#22c55e"
 
       });
@@ -160,14 +138,13 @@ function Settings({ onLogout }) {
     try {
 
       const response =await api.get("/profile");
-
       setUser(response.data);
 
     }
 
     catch (error) {
-
-      setAlert({ type: "error", message:error?.response?.data?.detail || "Unable to load profile."});
+      
+      toast.error(error?.response?.data?.detail || "Unable to load profile");
 
     }
 
@@ -215,15 +192,13 @@ function Settings({ onLogout }) {
 
     e.preventDefault();
 
-    setAlert({type: "", message: ""});
-
     if (
       passwordData.newPassword !==
       passwordData.confirmPassword
     ) {
 
-      setAlert({type: "error", message:"Passwords do not match."});
-
+      toast.error("Passwords do not match");
+    
       return;
 
     }
@@ -241,8 +216,8 @@ function Settings({ onLogout }) {
       }
       );
 
-      setAlert({ type: "success", message:response.data.message || "Password updated successfully."});
-
+      toast.success(response.data.message || "Password updated successfully.");
+      
       setPasswordData({ currentPassword: "", newPassword: "", confirmPassword: ""});
 
       setPasswordStrength({ label: "Weak", percentage: 0, color: "#ef4444"});
@@ -251,8 +226,8 @@ function Settings({ onLogout }) {
 
     catch (error) {
 
-      setAlert({type: "error", message: error.response?.data?.detail || "Unable to change password."});
-
+      toast.error(error.response?.data?.detail || "Unable to change password.");
+      
     }
 
     finally {
@@ -267,7 +242,7 @@ function Settings({ onLogout }) {
 
     if (!user?.email) {
 
-      setAlert({ type: "error", message: "User email not found."});
+      toast.error("User email not found.");
       return;
 
     }
@@ -282,14 +257,14 @@ function Settings({ onLogout }) {
         }
       );
 
-      setAlert({ type: "success", message: response.data.message || "Reset link sent successfully."});
-
+      toast.success(response.data.message || "Reset link sent successfully.");
+      
     }
 
     catch (error) {
 
-      setAlert({ type: "error", message: error.response?.data?.detail || "Unable to send reset email."});
-
+      toast.error(error.response?.data?.detail || "Unable to send reset email.");
+      
     }
 
     finally {
@@ -303,11 +278,11 @@ function Settings({ onLogout }) {
     try {
       setSendingVerification(true);
       const response =await api.post("/auth/send-verification-email");
-      setAlert({ type: "success", message: response.data.message});
+      toast.success(response.data.message);
     }
 
     catch (error) {
-      setAlert({ type: "error", message: error.response?.data?.detail || "Unable to send verification email."});
+      toast.error(error.response?.data?.detail || "Unable to send verification email.");
     }
 
     finally {
@@ -328,21 +303,6 @@ function Settings({ onLogout }) {
       }
 
   };
-
-  useEffect(() => {
-
-    if (!alert.message)
-      return;
-
-    const timer = setTimeout(() => {
-
-      setAlert({type: "", message: ""});
-
-    }, 5000);
-
-    return () => clearTimeout(timer);
-
-  }, [alert]);
 
   if (loadingUser) {
 
@@ -391,23 +351,6 @@ function Settings({ onLogout }) {
         </div>
 
       </div>
-
-      {
-        alert.message && ( <div className={`settings-alert ${alert.type}`}>
-          {
-            alert.type === "success" ? <FiCheckCircle /> : <FiAlertCircle />
-          }
-
-          <span>
-
-            {alert.message}
-
-          </span>
-
-          </div>
-
-        )
-      }
 
       <div className="settings-summary">
 

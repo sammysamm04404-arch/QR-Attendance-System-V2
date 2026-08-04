@@ -52,10 +52,12 @@ function Profile() {
     try {
       const response = await api.get("/profile");
       setProfile(response.data);
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(error);
       toast.error("Unable to load profile.");
-    } finally {
+    } 
+    finally {
       setLoading(false);
     }
   };
@@ -85,7 +87,8 @@ function Profile() {
       toast.success("Profile updated successfully.");
       setShowEditModal(false);
       fetchProfile();
-    } catch (error) {
+    } 
+    catch (error) {
       console.log(error);
       toast.error(error.response?.data?.detail || "Unable to update profile.");
     }
