@@ -1,18 +1,25 @@
 /* =====================================================
-   BASE & DESKTOP STYLES (Fluid Default Structure)
+   NOTIFICATIONS PAGE STYLES (Theme-Enabled & Responsive)
 ===================================================== */
+
+/* -----------------------------------------------------
+   1. Base & Desktop Surface Structure
+----------------------------------------------------- */
 .notifications-page {
     padding: 40px;
-    background: #f4f7fb;
+    background-color: var(--background);
     min-height: 100vh;
     box-sizing: border-box;
+    transition: background-color 0.3s ease;
 }
 
 .notifications-card {
-    background: #ffffff;
+    background: var(--card);
     border-radius: 20px;
     padding: 28px;
-    box-shadow: 0 12px 30px rgba(0,0,0,.08);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
 }
 
 .notifications-header {
@@ -21,9 +28,9 @@
 
 .notifications-header h1 {
     margin: 0;
-    font-size: 36px; /* Scaled down slightly from 42px for cleaner baseline */
+    font-size: 36px;
     font-weight: 700;
-    color: #0f172a;
+    color: var(--text);
 }
 
 .empty-notification {
@@ -33,9 +40,12 @@
     gap: 12px;
     height: 220px;
     font-size: 20px;
-    color: #6b7280;
+    color: var(--secondary);
 }
 
+/* -----------------------------------------------------
+   2. Notification Items & Interaction States
+----------------------------------------------------- */
 .notification-item {
     display: flex;
     justify-content: space-between;
@@ -44,17 +54,18 @@
     padding: 22px;
     border-radius: 14px;
     margin-bottom: 18px;
-    transition: .25s;
+    border: 1px solid var(--border);
+    transition: background-color 0.25s ease, border-color 0.25s ease, transform 0.2s ease;
 }
 
 .notification-item.unread {
-    background: #eef5ff;
-    border-left: 6px solid #2563eb;
+    background: color-mix(in srgb, var(--primary) 8%, var(--card));
+    border-left: 6px solid var(--primary);
 }
 
 .notification-item.read {
-    background: #f8fafc;
-    opacity: .75;
+    background: var(--background);
+    opacity: 0.8;
 }
 
 .notification-content {
@@ -62,19 +73,19 @@
 }
 
 .notification-content h3 {
-    margin: 0;
-    font-size: 20px; /* Optimized down from 24px */
-    color: #111827;
-    margin-bottom: 8px;
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    color: var(--text);
 }
 
 .notification-content p {
     margin: 0;
-    color: #6b7280;
+    color: var(--secondary);
     line-height: 1.6;
-    font-size: 15px; /* Optimized down from 17px */
+    font-size: 15px;
 }
 
+/* Actions Row & Buttons */
 .notification-actions {
     display: flex;
     gap: 12px;
@@ -89,33 +100,37 @@
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    transition: .25s;
+    transition: background-color 0.25s ease, color 0.25s ease, transform 0.15s ease;
     white-space: nowrap;
 }
 
 .resolve-btn {
-    background: #2563eb;
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
 }
 
 .resolve-btn:hover {
-    background: #1d4ed8;
+    background: var(--primary-hover, #1d4ed8);
 }
 
 .mark-read-btn {
-    background: #e5e7eb;
-    color: #111827;
+    background: var(--background);
+    color: var(--text);
+    border: 1px solid var(--border);
 }
 
 .mark-read-btn:hover {
-    background: #d1d5db;
+    background: color-mix(in srgb, var(--text) 8%, var(--card));
 }
 
-/* Modal Fluid Configurations */
+/* -----------------------------------------------------
+   3. Resolve Modal System
+----------------------------------------------------- */
 .resolve-modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,.45);
+    background: rgba(15, 23, 42, 0.6);
+    backdrop-filter: blur(6px);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -126,25 +141,30 @@
 
 .resolve-modal {
     width: 100%;
-    max-width: 560px; /* Turned from absolute width into a responsive max boundary */
-    background: #fff;
+    max-width: 560px;
+    background: var(--card);
     border-radius: 18px;
     padding: 30px;
-    box-shadow: 0 18px 45px rgba(0,0,0,.18);
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
     box-sizing: border-box;
+    animation: modalPop 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes modalPop {
+    from { transform: scale(0.95); opacity: 0; }
+    to { transform: scale(1); opacity: 1; }
 }
 
 .resolve-modal h2 {
-    margin: 0;
+    margin: 0 0 10px 0;
     font-size: 24px;
-    margin-bottom: 10px;
-    color: #111827;
+    color: var(--text);
 }
 
 .resolve-modal p {
-    margin-top: 0;
-    margin-bottom: 25px;
-    color: #6b7280;
+    margin: 0 0 25px 0;
+    color: var(--secondary);
     font-size: 15px;
 }
 
@@ -157,26 +177,29 @@
 .form-group label {
     margin-bottom: 8px;
     font-weight: 600;
-    color: #111827;
+    color: var(--text);
     font-size: 14px;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-    border: 1px solid #d1d5db;
+    border: 1.5px solid var(--border);
     border-radius: 10px;
     padding: 12px;
     font-size: 15px;
     outline: none;
-    transition: .2s;
+    color: var(--text);
+    background-color: var(--background);
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: #2563eb;
-    box-shadow: 0 0 0 3px rgba(37,99,235,.15);
+    background-color: var(--card);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 18%, transparent);
 }
 
 .resolve-buttons {
@@ -194,29 +217,30 @@
     font-weight: 600;
     cursor: pointer;
     font-size: 14px;
+    transition: background-color 0.2s ease, transform 0.15s ease;
 }
 
 .cancel-btn {
-    background: #e5e7eb;
-    color: #111827;
+    background: var(--background);
+    color: var(--text);
+    border: 1px solid var(--border);
 }
 
 .cancel-btn:hover {
-    background: #d1d5db;
+    background: color-mix(in srgb, var(--text) 8%, var(--card));
 }
 
 .submit-btn {
-    background: #2563eb;
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
 }
 
 .submit-btn:hover {
-    background: #1d4ed8;
+    background: var(--primary-hover, #1d4ed8);
 }
 
-
 /* =====================================================
-   CROSS-DEVICE RESPONSIVE REDESIGN
+   4. CROSS-DEVICE RESPONSIVE REDESIGN
 ===================================================== */
 
 @media (max-width: 992px) {
@@ -249,7 +273,6 @@
         border-radius: 14px;
     }
 
-    /* Small Clean Header Typography */
     .notifications-header {
         margin-bottom: 18px;
     }
@@ -263,7 +286,6 @@
         font-size: 16px;
     }
 
-    /* Reflow items vertically so text & buttons have room */
     .notification-item {
         flex-direction: column;
         align-items: flex-start;
@@ -274,10 +296,9 @@
     }
 
     .notification-item.unread {
-        border-left-width: 4px; /* Scaled down border block marker */
+        border-left-width: 4px;
     }
 
-    /* Micro-Sized Notification Typography */
     .notification-content h3 {
         font-size: 14.5px;
         margin-bottom: 5px;
@@ -288,7 +309,6 @@
         line-height: 1.5;
     }
 
-    /* Compact Mobile Utility Actions Row */
     .notification-actions {
         width: 100%;
         justify-content: flex-start;
@@ -297,12 +317,11 @@
 
     .resolve-btn, 
     .mark-read-btn {
-        padding: 7px 14px; /* Sleek micro button framing */
+        padding: 7px 14px;
         font-size: 12px;
         border-radius: 6px;
     }
 
-    /* Micro-Scaled Resolve Form Modal */
     .resolve-modal {
         padding: 18px;
         border-radius: 14px;
@@ -358,7 +377,6 @@
         font-size: 19px;
     }
 
-    /* Distribute actions evenly across layout row on tiny widths */
     .notification-actions {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -372,7 +390,6 @@
         padding: 8px 10px;
     }
 
-    /* Modal Form Action buttons split screen width flawlessly */
     .resolve-buttons {
         justify-content: space-between;
     }
