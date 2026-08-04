@@ -4,8 +4,9 @@
 
 .history-container{
     padding:30px;
-    background:#f8fafc;
+    background: var(--background);
     min-height:100vh;
+    transition: .3s ease;
 }
 
 .history-header{
@@ -40,10 +41,11 @@
 }
 
 .history-stat-card{
-    background:#fff;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius:20px;
     padding:24px;
-    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    box-shadow: var(--shadow);
     position:relative;
     overflow:hidden;
     transition:.3s;
@@ -66,14 +68,14 @@
 
 .history-stat-card h3{
     font-size:15px;
-    color:#64748b;
+    color: var(--secondary);
     margin-bottom:10px;
 }
 
 .history-stat-card span{
     font-size:32px;
     font-weight:700;
-    color:#0f172a;
+    color: var(--text);
 }
 
 /* ==========================
@@ -81,14 +83,15 @@
 ========================== */
 
 .history-filters{
-    background:#fff;
+    background: var(--card);
+    border: 1px solid var(--border);
     padding:22px;
     border-radius:18px;
     display:grid;
     grid-template-columns:2fr 1fr 1fr 1fr; /* Defines 4 clean structural columns */
     gap:14px;
     margin-bottom:28px;
-    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    box-shadow: var(--shadow);
     align-items: center; /* Vertically aligns elements perfectly with each other */
 }
 
@@ -96,13 +99,23 @@
 .history-filters select{
     width:100%; /* FIX: Changed from 80% to 100% to fill grid lanes flush */
     padding:12px 14px;
-    border:1px solid #dbe4ef;
+    border:1px solid var(--border);
     border-radius:10px;
     outline:none;
     font-size:14px;
-    background:white;
+    background: var(--background);
     transition:.25s;
     box-sizing: border-box;
+    color: var(--text);
+}
+
+.history-filters input::placeholder{
+    color:var(--secondary);
+}
+
+.history-filters select option{
+    background:var(--card);
+    color:var(--text);
 }
 
 .history-filters input:focus,
@@ -141,11 +154,12 @@
 ========================== */
 
 .history-table-container{
-    background:white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius:18px;
     overflow-x:auto;
     -webkit-overflow-scrolling:touch;
-    box-shadow:0 10px 30px rgba(15,23,42,.08);
+    box-shadow: var(--shadow);
 }
 
 .history-table{
@@ -154,7 +168,7 @@
 }
 
 .history-table thead{
-    background:#2563eb;
+    background: var(--primary);
     color:white;
 }
 
@@ -167,8 +181,8 @@
 
 .history-table td{
     padding:18px;
-    border-bottom:1px solid #eef2f7;
-    color:#334155;
+    border-bottom:1px solid var(--border);
+    color: var(--text);
 }
 
 .history-table tbody tr{
@@ -176,21 +190,14 @@
 }
 
 .history-table tbody tr:hover{
-    background:#f8fafc;
+    background: var(--background);
 }
 
 .history-empty{
     text-align:center;
     padding:40px;
     font-size:18px;
-    color:#64748b;
-}
-
-.history-loading{
-    padding:60px;
-    text-align:center;
-    font-size:20px;
-    color:#64748b;
+    color: var(--secondary);
 }
 
 /* ==========================
@@ -251,13 +258,15 @@
 }
 
 .pagination button:disabled {
-    background: #94a3b8;
+    background: var(--border);
+    color: var(--secondary);
     cursor: not-allowed;
 }
 
 .pagination span {
     font-size: 14px;
     font-weight: 600;
+    color: var(--text);
 }
 
 /* =========================================================
@@ -307,9 +316,9 @@
         padding: 10px 8px;
         width: 100%;
         font-size: 13px;
-        color: #334155;
-        background-color: #f8fafc;
-        border: 1px solid #e2e8f0;
+        color: var(--text);
+        background: var(--background);
+        border: 1px solid var(--border);
     }
 
     /* ROW 2: Date Picker and Clear Button side-by-side */
@@ -319,9 +328,9 @@
         width: 100%;
         padding: 10px 12px;
         font-size: 13px;
-        color: #334155;
-        background-color: #f8fafc;
-        border: 1px solid #e2e8f0;
+        color: var(--text);
+        background: var(--background);
+        border: 1px solid var(--border);
     }
 
     .history-filters button {
@@ -338,7 +347,7 @@
     }
 
     .history-filters input::placeholder {
-        color: #94a3b8;
+        color: var(--secondary);
     }
 
     /* --- TABLE STYLES --- */
@@ -482,4 +491,32 @@
         font-size: 12px;
         white-space: nowrap;
     }
+}
+
+/* DARK MODE ENHANCEMENTS */
+
+.dark .history-header{
+    box-shadow:0 20px 45px rgba(0,0,0,.35);
+}
+
+.dark .history-stat-card{
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+}
+
+.dark .history-filters,
+.dark .history-table-container{
+    box-shadow:0 10px 30px rgba(0,0,0,.35);
+}
+
+.dark .history-table tbody tr:hover{
+    background:rgba(255,255,255,.04);
+}
+
+.dark .history-filters input,
+.dark .history-filters select{
+    background:var(--background);
+}
+
+.dark .history-filters input::-webkit-calendar-picker-indicator{
+    filter:invert(1);
 }
