@@ -1,5 +1,8 @@
-/* Base & Desktop Styles */
+/* =====================================================
+   EMPLOYEES PAGE STYLES (Theme-Enabled & Responsive)
+===================================================== */
 
+/* Base & Desktop Styles */
 .employees-page {
     max-width: 1200px;
     margin: 24px auto;
@@ -21,25 +24,25 @@
     gap: 10px;
     font-size: 26px;
     font-weight: 700;
-    color: #1E293B;
+    color: var(--text);
     margin: 0;
 }
 
 .header-icon {
-    color: #4F46E5;
+    color: var(--primary);
 }
 
 .employee-header p {
     margin-top: 4px;
     margin-bottom: 0;
-    color: #64748B;
+    color: var(--secondary);
     font-size: 14px;
 }
 
 /* Compact Add Employee Button */
 .add-employee-btn {
-    background: #4F46E5;
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
     border: none;
     border-radius: 10px;
     padding: 9px 16px;
@@ -47,14 +50,13 @@
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
-    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+    box-shadow: var(--shadow);
     white-space: nowrap;
 }
 
 .add-employee-btn:hover {
     transform: translateY(-1px);
-    background: #4338CA;
-    box-shadow: 0 6px 16px rgba(79, 70, 229, 0.3);
+    background: var(--primary-hover);
 }
 
 /* Search Container */
@@ -71,22 +73,22 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: white;
+    background: var(--card);
     padding: 9px 14px;
-    border: 1px solid #E2E8F0;
+    border: 1px solid var(--border);
     border-radius: 10px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    box-shadow: var(--shadow);
     transition: all 0.2s ease;
     box-sizing: border-box;
 }
 
 .search-box:focus-within {
-    border-color: #4F46E5;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .search-icon {
-    color: #64748B;
+    color: var(--secondary);
     font-size: 16px;
 }
 
@@ -96,29 +98,30 @@
     outline: none;
     font-size: 14px;
     background: transparent;
-    color: #1E293B;
+    color: var(--text);
 }
 
 .search-box input::placeholder {
-    color: #94A3B8;
+    color: var(--secondary);
+    opacity: 0.7;
 }
 
 /* Table Lists / Rows */
 .employee-table {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Reduced gap to eliminate white space */
+    gap: 10px;
 }
 
 .employee-card {
-    background: white;
-    border: 1px solid #F1F5F9;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 12px 18px; /* Tighter padding */
+    padding: 12px 18px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+    box-shadow: var(--shadow);
     transition: all 0.2s ease;
     box-sizing: border-box;
     cursor: pointer;
@@ -126,8 +129,7 @@
 
 .employee-card:hover {
     transform: translateY(-2px);
-    border-color: #CBD5E1;
-    box-shadow: 0 6px 18px rgba(79, 70, 229, 0.08);
+    border-color: var(--primary);
 }
 
 .employee-left {
@@ -142,8 +144,8 @@
     width: 42px;
     height: 42px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #6366F1, #8B5CF6);
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -155,13 +157,13 @@
 .employee-left h3 {
     font-size: 15px;
     font-weight: 600;
-    color: #1E293B;
+    color: var(--text);
     margin: 0 0 2px 0;
 }
 
 .employee-left p {
     margin: 0;
-    color: #64748B;
+    color: var(--secondary);
     font-size: 13px;
 }
 
@@ -188,18 +190,18 @@
 }
 
 .role-badge {
-    background: #EEF2FF;
-    color: #4F46E5;
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--primary);
 }
 
 .status-active {
-    background: #DCFCE7;
-    color: #15803D;
+    background: rgba(22, 163, 74, 0.15);
+    color: var(--success);
 }
 
 .status-inactive {
-    background: #FEE2E2;
-    color: #DC2626;
+    background: rgba(220, 38, 38, 0.15);
+    color: var(--danger);
 }
 
 .employee-actions {
@@ -223,30 +225,30 @@
 }
 
 .edit-btn {
-    background: #EEF2FF;
-    color: #4F46E5;
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--primary);
 }
 
 .edit-btn:hover {
-    background: #4F46E5;
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
 }
 
 .table-delete-btn {
-    background: #FEE2E2;
-    color: #DC2626;
+    background: rgba(220, 38, 38, 0.15);
+    color: var(--danger);
 }
 
 .table-delete-btn:hover {
-    background: #DC2626;
-    color: white;
+    background: var(--danger);
+    color: #ffffff;
 }
 
 /* Modals Core Overhauls */
 .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(15, 23, 42, 0.45);
+    background: rgba(15, 23, 42, 0.6);
     backdrop-filter: blur(4px);
     display: flex;
     justify-content: center;
@@ -258,21 +260,22 @@
 
 .modal-card {
     width: 100%;
-    max-width: 440px;
-    background: #ffffff;
-    border-radius: 16px;
-    padding: 28px;
-    box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15);
+    max-width: 460px;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: var(--shadow);
     box-sizing: border-box;
     animation: modalPopIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .modal-card h2 {
     margin-top: 0;
-    margin-bottom: 20px;
-    font-size: 20px;
+    margin-bottom: 24px;
+    font-size: 24px;
     font-weight: 700;
-    color: #1E293B;
+    color: var(--text);
 }
 
 .modal-card form {
@@ -282,22 +285,22 @@
 
 .modal-card label {
     display: block;
-    margin-top: 14px;
+    margin-top: 16px;
     margin-bottom: 6px;
     font-weight: 600;
-    color: #334155;
-    font-size: 13px;
+    color: var(--text);
+    font-size: 14px;
 }
 
 .modal-card input,
 .modal-card select {
     width: 100%;
-    padding: 10px 12px;
-    border: 1px solid #CBD5E1;
-    border-radius: 10px;
-    font-size: 14px;
-    color: #1E293B;
-    background-color: #ffffff;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    font-size: 15px;
+    color: var(--text);
+    background-color: var(--background);
     outline: none;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     box-sizing: border-box;
@@ -305,23 +308,23 @@
 
 .modal-card input:focus,
 .modal-card select:focus {
-    border-color: #4F46E5;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.12);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
 }
 
 .modal-buttons {
-    margin-top: 24px;
+    margin-top: 28px;
     display: flex;
     justify-content: flex-end;
-    gap: 10px;
+    gap: 12px;
 }
 
 .cancel-btn,
 .save-btn {
     border: none;
-    padding: 10px 18px;
-    border-radius: 10px;
-    font-size: 13.5px;
+    padding: 12px 22px;
+    border-radius: 12px;
+    font-size: 14px;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s ease;
@@ -329,52 +332,53 @@
 }
 
 .cancel-btn {
-    background: #E2E8F0;
-    color: #334155;
+    background: var(--border);
+    color: var(--text);
 }
 
 .cancel-btn:hover {
-    background: #CBD5E1;
+    opacity: 0.8;
 }
 
 .save-btn {
-    background: #4F46E5;
+    background: var(--primary);
     color: #ffffff;
 }
 
 .save-btn:hover {
-    background: #4338CA;
+    background: var(--primary-hover);
 }
 
 /* Delete Modal */
 .delete-modal {
     width: 100%;
     max-width: 400px;
-    background: white;
+    background: var(--card);
+    border: 1px solid var(--border);
     padding: 28px;
     border-radius: 16px;
     text-align: center;
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+    box-shadow: var(--shadow);
     box-sizing: border-box;
     animation: modalPopIn 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 .delete-modal h2 {
-    color: #DC2626;
+    color: var(--danger);
     margin-top: 0;
     margin-bottom: 14px;
     font-size: 20px;
 }
 
 .delete-modal p {
-    color: #334155;
+    color: var(--text);
     font-size: 14px;
     margin-top: 0;
     margin-bottom: 8px;
 }
 
 .delete-modal span {
-    color: #94A3B8;
+    color: var(--secondary);
     font-size: 13px;
     display: block;
 }
@@ -396,12 +400,12 @@
 }
 
 .delete-btn {
-    background: #DC2626;
-    color: white;
+    background: var(--danger);
+    color: #ffffff;
 }
 
 .delete-btn:hover {
-    background: #B91C1C;
+    opacity: 0.9;
 }
 
 @keyframes modalPopIn {
@@ -427,8 +431,8 @@
 .pagination button {
     padding: 8px 16px;
     border: none;
-    background: #4F46E5;
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
     border-radius: 8px;
     cursor: pointer;
     font-weight: 600;
@@ -437,18 +441,21 @@
 }
 
 .pagination button:disabled {
-    background: #CBD5E1;
+    background: var(--border);
+    color: var(--secondary);
     cursor: not-allowed;
+    opacity: 0.7;
 }
 
 .pagination span {
     font-size: 14px;
     font-weight: 600;
-    color: #334155;
+    color: var(--text);
 }
 
-
-/* CROSS-DEVICE RESPONSIVE REDESIGN */
+/* =====================================================
+   CROSS-DEVICE RESPONSIVE REDESIGN
+===================================================== */
 
 @media (max-width: 1200px) {
     .employee-card {
@@ -493,7 +500,6 @@
         border-radius: 8px;
     }
 
-    /* Fixed grid layout for mobile cards */
     .employee-card {
         display: grid;
         grid-template-columns: 1fr auto;
@@ -552,33 +558,32 @@
         border-radius: 6px;
     }
 
-    .employee-card:hover,
-    .add-employee-btn:hover {
-        transform: none !important;
+    .modal-overlay {
+        padding: 12px;
     }
 
-    /* Form Modals */
     .modal-card, 
     .delete-modal {
         padding: 20px;
         border-radius: 14px;
+        max-width: 400px;
     }
 
     .modal-card h2,
     .delete-modal h2 {
-        font-size: 16px;
+        font-size: 18px;
         margin-bottom: 16px;
     }
 
     .modal-card label {
         font-size: 12px;
         margin-top: 12px;
-        margin-bottom: 6px;
+        margin-bottom: 4px;
     }
 
     .modal-card input,
     .modal-card select {
-        padding: 10px;
+        padding: 10px 12px;
         font-size: 13.5px;
         border-radius: 8px;
     }
@@ -593,7 +598,7 @@
     .save-btn,
     .delete-buttons button {
         padding: 10px 16px;
-        font-size: 12.5px;
+        font-size: 13px;
         border-radius: 8px;
     }
 
@@ -605,7 +610,6 @@
         font-size: 11.5px;
     }
 
-    /* Pagination */
     .pagination {
         gap: 14px;
         margin-top: 24px;
@@ -621,18 +625,24 @@
         font-size: 13px;
     }
 
-    /* Disable hover animation shifts on touch screens */
     .employee-card:hover,
     .add-employee-btn:hover {
         transform: none !important;
-        box-shadow: 0 10px 30px rgba(15, 23, 42, .08) !important;
     }
 }
 
 /* Extra Small Screens (480px and down) */
 @media (max-width: 480px) {
+    .modal-card {
+        padding: 16px;
+        border-radius: 12px;
+    }
+
     .modal-buttons,
     .delete-buttons {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
         width: 100%;
         gap: 8px;
     }
@@ -642,206 +652,8 @@
     .delete-buttons button {
         flex: 1;
         text-align: center;
-        padding: 9px 8px;
-        font-size: 12px;
-    }
-}
-
-/* =====================================================
-   CORE BASE STYLES (Desktop Baseline Configuration)
-===================================================== */
-.modal-overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(15, 23, 42, 0.45); /* Modern slate tinted overlay backing */
-    backdrop-filter: blur(4px); /* Premium application-grade glass softening */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-    padding: 16px;
-    box-sizing: border-box;
-}
-
-.modal-card {
-    width: 100%;
-    max-width: 460px; /* Fluid wrapper boundary limits */
-    background: #ffffff;
-    border-radius: 20px;
-    padding: 35px;
-    box-shadow: 0 25px 60px rgba(15, 23, 42, 0.15);
-    box-sizing: border-box;
-    animation: modalPopIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.modal-card h2 {
-    margin-top: 0;
-    margin-bottom: 24px;
-    font-size: 24px;
-    font-weight: 700;
-    color: #1e293b;
-}
-
-/* Form Input Layout Stack */
-.modal-card form {
-    display: flex;
-    flex-direction: column;
-}
-
-.modal-card label {
-    display: block;
-    margin-top: 16px;
-    margin-bottom: 6px;
-    font-weight: 600;
-    color: #334155;
-    font-size: 14px;
-}
-
-/* Normalize input fields to eliminate browser variance */
-.modal-card input,
-.modal-card select {
-    width: 100%;
-    padding: 12px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 12px;
-    font-size: 15px;
-    color: #1e293b;
-    background-color: #ffffff;
-    outline: none;
-    transition: border-color 0.2s ease, box-shadow 0.2s ease;
-    box-sizing: border-box;
-}
-
-.modal-card input:focus,
-.modal-card select:focus {
-    border-color: #4f46e5;
-    box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
-}
-
-/* Modal Actions Strip */
-.modal-buttons {
-    margin-top: 28px;
-    display: flex;
-    justify-content: flex-end;
-    gap: 12px;
-}
-
-.cancel-btn,
-.save-btn {
-    border: none;
-    padding: 12px 22px;
-    border-radius: 12px;
-    font-size: 14px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
-    white-space: nowrap;
-}
-
-.cancel-btn {
-    background: #e2e8f0;
-    color: #334155;
-}
-
-.cancel-btn:hover {
-    background: #cbd5e1;
-}
-
-.save-btn {
-    background: #4f46e5;
-    color: #ffffff;
-}
-
-.save-btn:hover {
-    background: #4338ca;
-}
-
-/* Micro Pop Keyframe Animation */
-@keyframes modalPopIn {
-    from {
-        opacity: 0;
-        transform: scale(0.95) translateY(10px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
-}
-
-
-/* =====================================================
-   CROSS-DEVICE RESPONSIVE REDESIGN
-===================================================== */
-
-/* Mobile Viewports (768px and down) */
-@media (max-width: 768px) {
-    .modal-overlay {
-        padding: 12px; /* Generates breathing room for the virtual keyboard bounding boxes */
-    }
-
-    /* Micro-scaled container footprint */
-    .modal-card {
-        padding: 20px;
-        border-radius: 14px;
-        max-width: 400px;
-    }
-
-    .modal-card h2 {
-        font-size: 18px;
-        margin-bottom: 16px;
-    }
-
-    /* Crisp Micro Typography Scaling */
-    .modal-card label {
-        font-size: 12px;
-        margin-top: 12px;
-        margin-bottom: 4px;
-    }
-
-    .modal-card input,
-    .modal-card select {
-        padding: 10px 12px;
-        font-size: 13.5px;
-        border-radius: 8px;
-    }
-
-    /* Action Container Optimization */
-    .modal-buttons {
-        margin-top: 20px;
-        gap: 10px;
-    }
-
-    .cancel-btn,
-    .save-btn {
-        padding: 10px 16px;
-        font-size: 13px;
-        border-radius: 8px;
-    }
-}
-
-/* Extra Small Devices (480px and down) */
-@media (max-width: 480px) {
-    .modal-card {
-        padding: 16px;
-        border-radius: 12px;
-    }
-
-    /* FIX: Converts action strip into a fluid full-width split track 
-       so "Update Employee" text has plenty of side room without line breaks */
-    .modal-buttons {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        width: 100%;
-        gap: 8px;
-    }
-
-    .cancel-btn,
-    .save-btn {
-        flex: 1; /* Distributes explicit matching 50% sizing tracks */
-        text-align: center;
         padding: 10px 8px;
         font-size: 12px;
-        letter-spacing: -0.1px; /* Extra protection metric against text overflows */
+        letter-spacing: -0.1px;
     }
 }
