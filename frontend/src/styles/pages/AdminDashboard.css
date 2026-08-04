@@ -235,6 +235,7 @@
 }
 
 .recent-card::-webkit-scrollbar {
+    background: var(--card);
     width: 7px;
 }
 
