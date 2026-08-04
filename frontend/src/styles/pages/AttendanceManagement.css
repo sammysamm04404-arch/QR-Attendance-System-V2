@@ -1,6 +1,6 @@
-/* =====================================================
-   1. BASE GLOBAL LAYOUT
-===================================================== */
+/* ATTENDANCE MANAGEMENT PAGE STYLES (Theme-Enabled) */
+
+/* Base Global Layout */
 .attendance-page {
     max-width: 1450px;
     margin: auto;
@@ -14,21 +14,19 @@
 
 .attendance-header h1 {
     font-size: 34px;
-    color: #1E293B;
+    color: var(--text);
     margin: 0;
     font-weight: 700;
 }
 
 .attendance-header p {
-    color: #64748B;
+    color: var(--secondary);
     margin-top: 8px;
     margin-bottom: 0;
     font-size: 15px;
 }
 
-/* =====================================================
-   2. ATTENDANCE METRICS SUMMARY CARDS
-===================================================== */
+/* Attendance Metrics Summary Cards */
 .attendance-atmsummary {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -37,27 +35,29 @@
 }
 
 .attendance-atmsummary-card {
-    background: white;
+    background: var(--card);
+    border: 1px solid var(--border);
     padding: 25px;
     border-radius: 18px;
     display: flex;
     align-items: center;
     gap: 20px;
-    box-shadow: 0 8px 20px rgba(0,0,0,.08);
-    transition: transform 0.3s ease;
+    box-shadow: var(--shadow);
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
     box-sizing: border-box;
 }
 
 .attendance-atmsummary-card:hover {
     transform: translateY(-5px);
+    border-color: var(--primary);
 }
 
 .atmsummary-icon {
     width: 60px;
     height: 60px;
     border-radius: 15px;
-    background: #EEF2FF;
-    color: #4F46E5;
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--primary);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -68,19 +68,17 @@
 .attendance-atmsummary-card h3 {
     font-size: 20px;
     margin: 0;
-    color: #1E293B;
+    color: var(--text);
     font-weight: 700;
 }
 
 .attendance-atmsummary-card p {
     margin: 5px 0 0 0;
-    color: #64748B;
+    color: var(--secondary);
     font-size: 14px;
 }
 
-/* =====================================================
-   3. FILTERS SYSTEM CONTROL BAR (Desktop Base)
-===================================================== */
+/* Filters Control Bar */
 .attendance-filters {
     display: flex;
     align-items: center;
@@ -93,11 +91,17 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    background: white;
+    background: var(--card);
+    border: 1px solid var(--border);
     padding: 12px 18px;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
     box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.attendance-search:focus-within {
+    border-color: var(--primary);
 }
 
 .attendance-search input {
@@ -105,24 +109,36 @@
     outline: none;
     width: 220px;
     font-size: 14px;
-    color: #1E293B;
+    background: transparent;
+    color: var(--text);
+}
+
+.attendance-search input::placeholder {
+    color: var(--secondary);
+    opacity: 0.7;
 }
 
 .filter-group {
     display: flex;
     align-items: center;
     gap: 10px;
-    background: white;
+    background: var(--card);
+    border: 1px solid var(--border);
     padding: 12px 16px;
     border-radius: 12px;
-    box-shadow: 0 6px 18px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
     box-sizing: border-box;
+    transition: border-color 0.2s ease;
+}
+
+.filter-group:focus-within {
+    border-color: var(--primary);
 }
 
 .filter-label {
     font-size: 13px;
     font-weight: 700;
-    color: #4F46E5;
+    color: var(--primary);
     white-space: nowrap;
 }
 
@@ -132,8 +148,13 @@
     outline: none;
     background: transparent;
     font-size: 14px;
-    color: #1E293B;
+    color: var(--text);
     cursor: pointer;
+}
+
+.filter-group select option {
+    background-color: var(--card);
+    color: var(--text);
 }
 
 .clear-filter-btn {
@@ -142,30 +163,31 @@
     justify-content: center;
     gap: 8px;
     padding: 12px 18px;
-    background: #EF4444;
-    color: white;
+    background: var(--danger);
+    color: #ffffff;
     border: none;
     border-radius: 12px;
     cursor: pointer;
     font-weight: 600;
     font-size: 14px;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, transform 0.2s ease;
     white-space: nowrap;
 }
 
 .clear-filter-btn:hover {
-    background: #DC2626;
+    opacity: 0.9;
+    transform: translateY(-1px);
 }
 
-/* =====================================================
-   4. DATA LOGS TABLE ARCHITECTURE
-===================================================== */
+/* Data Logs Table Architecture */
 .attendance-table {
-    background: white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,.08);
+    box-shadow: var(--shadow);
     box-sizing: border-box;
+    transition: background 0.3s ease, border-color 0.3s ease;
 }
 
 .attendance-table-responsive {
@@ -178,19 +200,20 @@
 }
 
 .attendance-table th {
-    background: #EEF2FF;
-    color: #4F46E5;
+    background: var(--background);
+    color: var(--primary);
     padding: 18px;
     text-align: left;
     font-size: 15px;
     font-weight: 600;
     white-space: nowrap;
+    border-bottom: 2px solid var(--border);
 }
 
 .attendance-table td {
     padding: 18px;
-    border-bottom: 1px solid #EDF2F7;
-    color: #334155;
+    border-bottom: 1px solid var(--border);
+    color: var(--text);
     font-size: 14.5px;
     white-space: nowrap;
 }
@@ -200,18 +223,18 @@
 }
 
 .attendance-table tr:hover {
-    background: #F8FAFC;
+    background: rgba(255, 255, 255, 0.03);
 }
 
 .employee-info {
-  display: flex;
-  flex-direction: column;
+    display: flex;
+    flex-direction: column;
 }
 
 .employee-email {
-  font-size: 12px;
-  color: #64748b;
-  margin-top: 2px;
+    font-size: 12px;
+    color: var(--secondary);
+    margin-top: 2px;
 }
 
 /* Status Badges */
@@ -224,24 +247,24 @@
 }
 
 .status.present {
-    background: #DCFCE7;
-    color: #15803D;
+    background: rgba(22, 163, 74, 0.15);
+    color: var(--success);
 }
 
 .status.late {
-    background: #FEF3C7;
-    color: #B45309;
+    background: rgba(217, 119, 6, 0.15);
+    color: var(--warning);
 }
 
 .status.absent {
-    background: #FEE2E2;
-    color: #DC2626;
+    background: rgba(220, 38, 38, 0.15);
+    color: var(--danger);
 }
 
 .view-btn {
     border: none;
-    background: #EEF2FF;
-    color: #4F46E5;
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--primary);
     padding: 10px 18px;
     border-radius: 10px;
     font-weight: 600;
@@ -251,13 +274,11 @@
 }
 
 .view-btn:hover {
-    background: #4F46E5;
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
 }
 
-/* =====================================================
-   5. PAGINATION COMPONENT SYSTEM
-===================================================== */
+/* Pagination Component System */
 .attendance-pagination {
     display: flex;
     justify-content: center;
@@ -270,31 +291,33 @@
     padding: 10px 18px;
     border: none;
     border-radius: 10px;
-    background: #2563eb;
-    color: white;
+    background: var(--primary);
+    color: #ffffff;
     cursor: pointer;
     font-size: 14px;
-    transition: .25s;
+    font-weight: 600;
+    transition: background-color 0.25s ease;
     white-space: nowrap;
 }
 
 .attendance-pagination button:hover:not(:disabled) {
-    background: #1d4ed8;
+    background: var(--primary-hover);
 }
 
 .attendance-pagination button:disabled {
-    background: #94a3b8;
+    background: var(--border);
+    color: var(--secondary);
     cursor: not-allowed;
+    opacity: 0.7;
 }
 
 .attendance-pagination span {
     font-size: 14px;
     font-weight: 600;
+    color: var(--text);
 }
 
-/* =====================================================
-   6. ATTENDANCE DETAILS MODAL COMPONENT
-===================================================== */
+/* Attendance Details Modal Component */
 .attendance-modal-overlay {
     position: fixed;
     inset: 0;
@@ -311,11 +334,12 @@
 .attendance-modal {
     width: 100%;
     max-width: 720px;                  
-    background: white;
+    background: var(--card);
+    border: 1px solid var(--border);
     border-radius: 20px;
     padding: 30px;
     box-sizing: border-box;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    box-shadow: var(--shadow);
     animation: popupModal 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
@@ -329,22 +353,22 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
-    border-bottom: 1px solid #F1F5F9;
+    border-bottom: 1px solid var(--border);
     padding-bottom: 15px;
 }
 
 .attendance-modal-header h2 {
     margin: 0;
     font-size: 22px;
-    color: #1E293B;
+    color: var(--text);
     font-weight: 700;
 }
 
 .attendance-modal-header button {
     border: none;
-    background: #F1F5F9;
+    background: var(--border);
     font-size: 16px;
-    color: #64748B;
+    color: var(--secondary);
     cursor: pointer;
     width: 34px;
     height: 34px;
@@ -356,8 +380,8 @@
 }
 
 .attendance-modal-header button:hover {
-    background: #E2E8F0;
-    color: #0F172A;
+    background: var(--secondary);
+    color: #ffffff;
     transform: rotate(90deg);
 }
 
@@ -371,10 +395,10 @@
     display: flex;
     gap: 16px;
     align-items: center;
-    background: #F8FAFC;
+    background: var(--background);
     padding: 18px;
     border-radius: 15px;
-    border: 1px solid #E2E8F0;
+    border: 1px solid var(--border);
     box-sizing: border-box;
 }
 
@@ -382,7 +406,7 @@
     width: 24px;
     height: 24px;
     font-size: 24px;
-    color: #4F46E5;
+    color: var(--primary);
     flex-shrink: 0; 
 }
 
@@ -393,7 +417,7 @@
 
 .detail-card label {
     font-size: 12px;
-    color: #64748B;
+    color: var(--secondary);
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
@@ -404,15 +428,12 @@
     margin: 4px 0 0 0;
     font-size: 16px;
     font-weight: 600;
-    color: #1E293B;
+    color: var(--text);
     overflow-wrap: break-word;
     word-break: break-word; 
 }
 
-
-/* =====================================================
-   7. HIGH FIDELITY MEDIA QUERIES (RE-ENGINEERED)
-===================================================== */
+/* High Fidelity Responsive Media Queries */
 
 /* Tablet & Smaller Desktop Screens */
 @media (max-width: 1024px) {
@@ -431,10 +452,9 @@
         font-size: 24px;
     }
 
-    /* REDEFINED: Transforms into a flawless 2-Column Pairing Grid Layout */
     .attendance-filters {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Sets a strict 2-2 structural pair grid */
+        grid-template-columns: 1fr 1fr;
         gap: 12px;
     }
 
@@ -452,14 +472,12 @@
         width: 100%;
     }
 
-    /* Fixed Clean Layout Size for the Clear button inside the grid block layout */
     .clear-filter-btn {
-        grid-column: span 1; /* Sits naturally as a 50% block next to the 5th filter element */
+        grid-column: span 1;
         justify-content: center;
         box-sizing: border-box;
     }
 
-    /* ZERO-SCROLL MICRO TABLE SPECIFICATIONS */
     .attendance-table-responsive {
         overflow-x: hidden; 
     }
@@ -490,7 +508,6 @@
         white-space: nowrap;
     }
 
-    /* MICRO VIEW BUTTON */
     .view-btn {
         padding: 4px 8px;      
         font-size: 10px;        
@@ -499,8 +516,7 @@
         letter-spacing: -0.1px; 
     }
 
-    /* FLUID PAGINATION SCALING */
-    .attendace-pagination {
+    .attendance-pagination {
         gap: 10px;
     }
 
@@ -513,7 +529,6 @@
         font-size: 13px;
     }
 
-    /* MODAL MID-STAGE RESTYLING */
     .attendance-modal {
         padding: 22px;
         border-radius: 16px;
@@ -559,7 +574,6 @@
         font-size: 13px;
     }
 
-    /* Tighter filter tracking optimized for micro panels */
     .attendance-filters {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -590,13 +604,13 @@
         border: none;
         outline: none;
         background: transparent;
-        color: #1e293b;
+        color: var(--text);
     }
 
     .filter-label {
         font-size: 10px;
         font-weight: 600;
-        color: #4f46e5;
+        color: var(--primary);
         margin-right: 4px;
         white-space: nowrap;
     }
@@ -631,7 +645,6 @@
         font-size: 20px;
     }
 
-    /* TABLE CRUNCH SAFEGUARDS */
     .attendance-table th,
     .attendance-table td {
         font-size: 9px;       
@@ -657,7 +670,6 @@
         white-space: nowrap;   
     }
     
-    /* COMPACT PAGINATION ARCHITECTURE */
     .attendance-pagination {
         display: flex;
         flex-direction: row;
@@ -679,7 +691,6 @@
         white-space: nowrap;
     }
 
-    /* MODAL BOTTOM-SHEET PATTERN */
     .attendance-modal-overlay {
         padding: 10px;
         align-items: flex-end; 
