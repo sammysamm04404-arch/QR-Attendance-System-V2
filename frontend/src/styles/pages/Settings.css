@@ -108,7 +108,7 @@
     font-size:14px;
 }
 
-.summary-icon{
+.setting-summary-icon{
     width:60px;
     height:60px;
     border-radius:16px;
@@ -308,12 +308,14 @@
     justify-content:space-between;
     align-items:center;
     gap:15px;
+    color: var(--text);
 }
 
 .form-group label{
+    display: block;
     font-size:14px;
     font-weight:600;
-    color: var(--text);
+    color: var(--text) !important;
 }
 
 .forgot-link{
@@ -820,7 +822,7 @@
 
     }
 
-    .summary-icon{
+    .setting-summary-icon{
 
         width:52px;
         height:52px;
@@ -859,7 +861,7 @@
 
     }
 
-    .summary-icon{
+    .setting-summary-icon{
 
         margin-bottom:8px;
 
