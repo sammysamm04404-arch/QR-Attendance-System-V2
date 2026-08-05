@@ -70,6 +70,9 @@ class AuthService:
 
         plain_token = generate_secure_token()
 
+        # Save naive UTC to avoid database driver +5:30 IST shift
+        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+
         token = PasswordResetToken(
 
             user_id=user.id,
@@ -78,9 +81,7 @@ class AuthService:
                 plain_token
             ),
 
-            expires_at=datetime.now(
-                timezone.utc
-            ) + timedelta(
+            expires_at=now_utc + timedelta(
                 minutes=15
             ),
 
@@ -118,6 +119,8 @@ class AuthService:
 
         plain_token = generate_secure_token()
 
+        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+
         token = EmailVerificationToken(
 
             user_id=user.id,
@@ -126,9 +129,7 @@ class AuthService:
                 plain_token
             ),
 
-            expires_at=datetime.now(
-                timezone.utc
-            ) + timedelta(
+            expires_at=now_utc + timedelta(
                 hours=24
             ),
 
@@ -246,7 +247,7 @@ class AuthService:
             "message": "Password reset email sent successfully."
         }
 
-        # Validate Reset Token
+    # Validate Reset Token
 
     @staticmethod
     def validate_reset_token(
@@ -273,7 +274,9 @@ class AuthService:
                 detail="This reset link has already been used."
             )
 
-        if reset_token.expires_at < datetime.now(timezone.utc):
+        # Naive UTC comparison matching DB column format
+        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+        if reset_token.expires_at < now_utc:
             raise HTTPException(
                 status_code=400,
                 detail="Reset link has expired."
@@ -323,7 +326,9 @@ class AuthService:
                 detail="This reset link has already been used."
             )
 
-        if reset_token.expires_at < datetime.now(timezone.utc):
+        # Naive UTC comparison matching DB column format
+        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+        if reset_token.expires_at < now_utc:
             raise HTTPException(
                 status_code=400,
                 detail="Reset link has expired."
@@ -428,7 +433,8 @@ class AuthService:
                 detail="This verification link has already been used."
             )
 
-        if verification_token.expires_at < datetime.now(timezone.utc):
+        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+        if verification_token.expires_at < now_utc:
             raise HTTPException(
                 status_code=400,
                 detail="Verification link has expired."

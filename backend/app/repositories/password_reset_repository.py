@@ -1,19 +1,15 @@
 from datetime import datetime, timezone
-
 from sqlalchemy.orm import Session
-
 from app.models.password_reset_token import PasswordResetToken
 
 
 class PasswordResetRepository:
 
     @staticmethod
-    def create(db, token):
-
+    def create(db: Session, token):
         db.add(token)
         db.commit()
         db.refresh(token)
-
         return token
 
     @staticmethod
@@ -21,7 +17,6 @@ class PasswordResetRepository:
         db: Session,
         token_hash: str
     ):
-
         return (
             db.query(PasswordResetToken)
             .filter(
@@ -35,13 +30,15 @@ class PasswordResetRepository:
         db: Session,
         user_id: int
     ):
+        # Use timezone-naive UTC to prevent Postgres from shifting parameters by +5:30
+        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
 
         return (
             db.query(PasswordResetToken)
             .filter(
                 PasswordResetToken.user_id == user_id,
                 PasswordResetToken.used == False,
-                PasswordResetToken.expires_at > datetime.now(timezone.utc)
+                PasswordResetToken.expires_at > now_utc
             )
             .first()
         )
@@ -51,20 +48,20 @@ class PasswordResetRepository:
         db: Session,
         token
     ):
-
         token.used = True
-
         db.commit()
 
     @staticmethod
     def delete_expired_tokens(
         db: Session
     ):
+        # Use timezone-naive UTC to safely clean up expired records
+        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
 
         db.query(
             PasswordResetToken
         ).filter(
-            PasswordResetToken.expires_at < datetime.now(timezone.utc)
+            PasswordResetToken.expires_at < now_utc
         ).delete()
 
         db.commit()
