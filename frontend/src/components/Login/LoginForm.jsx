@@ -95,7 +95,7 @@ function LoginForm({
                     onClick={handleForgotPassword}
                     disabled={sendingReset}
                 >
-                    {sendingReset ? "Sending..." : "Forgot Password?"}
+                    {sendingReset ? "Sending Reset password link..." : "Forgot Password?"}
                 </button>
             </div>
 
