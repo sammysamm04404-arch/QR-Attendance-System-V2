@@ -60,7 +60,6 @@ def create_incomplete_attendance_notification(
             Notification.user_id == user.id,
             Notification.type == "attendance",
             Notification.attendance_date == datetime.combine(yesterday, datetime.min.time()),
-            Notification.is_closed == False
             
         )
         .first()
