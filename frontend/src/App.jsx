@@ -21,6 +21,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Settings from "./pages/Settings";
 import Notifications from "./components/Notifications";
 import CorrectionRequests from "./pages/CorrectionRequests";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
 
@@ -48,6 +49,11 @@ function App() {
                 <Route 
                     path="/reset-password"
                     element={<ResetPassword />}
+                />
+
+                <Route
+                    path="/verify-email"
+                    element={<VerifyEmail />}
                 />
 
                 <Route
