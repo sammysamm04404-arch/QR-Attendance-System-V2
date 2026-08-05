@@ -13,6 +13,25 @@ function LoginForm({
     handleLogin
 }) {
 
+    const [sendingReset, setSendingReset] = useState(false);
+
+    const handleForgotPassword = async () => {
+        if (!email) {
+            toast.error("Please enter your email address first.");
+            return;
+        }
+
+        try {
+            setSendingReset(true);
+            const response = await api.post("/auth/forgot-password", { email });
+            toast.success(response.data.message || "Reset link sent successfully.");
+        } catch (error) {
+            toast.error(error.response?.data?.detail || "Unable to send reset email.");
+        } finally {
+            setSendingReset(false);
+        }
+    };
+
     return (
 
         <div className="login-form-container">
@@ -80,6 +99,10 @@ function LoginForm({
                 }
 
             </div>
+
+            <button type="button" className="forgot-link" onClick={handleForgotPassword}>
+              Forgot Password?
+            </button>
 
             <button
                 className="login-btn"
