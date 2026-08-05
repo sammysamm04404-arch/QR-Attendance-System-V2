@@ -119,7 +119,6 @@ function ResetPassword() {
 
     const handleResetPassword = async (e) => {
         e.preventDefault();
-        setAlert({ type: "", message: "" });
 
         if (passwordData.newPassword !== passwordData.confirmPassword) {
             toast.error("Password do not match.");

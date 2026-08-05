@@ -1,6 +1,10 @@
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from sqlalchemy.orm import Session
 from app.models.password_reset_token import PasswordResetToken
+
+
+def get_local_now():
+    return (datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)).replace(tzinfo=None)
 
 
 class PasswordResetRepository:
@@ -26,19 +30,24 @@ class PasswordResetRepository:
         )
 
     @staticmethod
+    def delete_user_tokens(db: Session, user_id: int):
+        """Cleans up previous tokens for this user so a new request always gets a fresh token."""
+        db.query(PasswordResetToken).filter(
+            PasswordResetToken.user_id == user_id
+        ).delete()
+        db.commit()
+
+    @staticmethod
     def get_active_token(
         db: Session,
         user_id: int
     ):
-        # Use timezone-naive UTC to prevent Postgres from shifting parameters by +5:30
-        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
-
         return (
             db.query(PasswordResetToken)
             .filter(
                 PasswordResetToken.user_id == user_id,
                 PasswordResetToken.used == False,
-                PasswordResetToken.expires_at > now_utc
+                PasswordResetToken.expires_at > get_local_now()
             )
             .first()
         )
@@ -55,13 +64,10 @@ class PasswordResetRepository:
     def delete_expired_tokens(
         db: Session
     ):
-        # Use timezone-naive UTC to safely clean up expired records
-        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
-
         db.query(
             PasswordResetToken
         ).filter(
-            PasswordResetToken.expires_at < now_utc
+            PasswordResetToken.expires_at < get_local_now()
         ).delete()
 
         db.commit()

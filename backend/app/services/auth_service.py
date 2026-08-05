@@ -24,6 +24,11 @@ from app.core.security import (
 )
 
 
+def get_local_now():
+    """Returns current local time (+5:30 offset) as a naive datetime object."""
+    return (datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)).replace(tzinfo=None)
+
+
 class AuthService:
 
     # Common Helper Methods
@@ -53,25 +58,11 @@ class AuthService:
         user: User
     ):
 
-        PasswordResetRepository.delete_expired_tokens(
-            db
-        )
-
-        existing_token = (
-            PasswordResetRepository.get_active_token(
-                db,
-                user.id
-            )
-        )
-
-        if existing_token:
-
-            return None
+        # 1. Delete previous tokens for this user so old links don't conflict
+        PasswordResetRepository.delete_user_tokens(db, user.id)
 
         plain_token = generate_secure_token()
-
-        # Save naive UTC to avoid database driver +5:30 IST shift
-        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+        local_now = get_local_now()
 
         token = PasswordResetToken(
 
@@ -81,7 +72,9 @@ class AuthService:
                 plain_token
             ),
 
-            expires_at=now_utc + timedelta(
+            created_at=local_now,
+
+            expires_at=local_now + timedelta(
                 minutes=15
             ),
 
@@ -118,8 +111,7 @@ class AuthService:
             return None
 
         plain_token = generate_secure_token()
-
-        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
+        local_now = get_local_now()
 
         token = EmailVerificationToken(
 
@@ -129,7 +121,9 @@ class AuthService:
                 plain_token
             ),
 
-            expires_at=now_utc + timedelta(
+            created_at=local_now,
+
+            expires_at=local_now + timedelta(
                 hours=24
             ),
 
@@ -274,9 +268,8 @@ class AuthService:
                 detail="This reset link has already been used."
             )
 
-        # Naive UTC comparison matching DB column format
-        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
-        if reset_token.expires_at < now_utc:
+        # Checked against local IST naive time
+        if reset_token.expires_at < get_local_now():
             raise HTTPException(
                 status_code=400,
                 detail="Reset link has expired."
@@ -326,9 +319,8 @@ class AuthService:
                 detail="This reset link has already been used."
             )
 
-        # Naive UTC comparison matching DB column format
-        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
-        if reset_token.expires_at < now_utc:
+        # Checked against local IST naive time
+        if reset_token.expires_at < get_local_now():
             raise HTTPException(
                 status_code=400,
                 detail="Reset link has expired."
@@ -433,8 +425,8 @@ class AuthService:
                 detail="This verification link has already been used."
             )
 
-        now_utc = datetime.now(timezone.utc).replace(tzinfo=None)
-        if verification_token.expires_at < now_utc:
+        # Checked against local IST naive time
+        if verification_token.expires_at < get_local_now():
             raise HTTPException(
                 status_code=400,
                 detail="Verification link has expired."
