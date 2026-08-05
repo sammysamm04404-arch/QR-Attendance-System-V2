@@ -217,7 +217,6 @@ function Settings({ onLogout }) {
   return (
     <>
       <Navbar />
-      <Loader />
 
       <div className="settings-page">
         <div className="settings-hero">
