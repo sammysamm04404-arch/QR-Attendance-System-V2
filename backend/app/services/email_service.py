@@ -1,5 +1,6 @@
 import os
 import smtplib
+from email.utils import formatdate, make_msgid
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from dotenv import load_dotenv
