@@ -101,8 +101,8 @@ function LoginForm({
 
             </div>
 
-            <button type="button" className="forgot-link" onClick={handleForgotPassword}>
-              Forgot Password?
+            <button type="button" className="forgot-link" onClick={handleForgotPassword} disabled={sendingReset}>
+                {sendingReset ? "Sending..." : "Forgot Password?"}
             </button>
 
             <button
