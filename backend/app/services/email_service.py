@@ -39,6 +39,11 @@ class EmailService:
         message["To"] = recipient
         message["Subject"] = subject
 
+        message["Date"] = formatdate(localtime=True)
+        message["Message-ID"] = make_msgid()
+        message["Reply-To"] = EMAIL_FROM
+        message["X-Mailer"] = "QR Attendance System"
+
         # 3. Attach plain text FIRST, HTML SECOND (Standard RFC requirement)
         message.attach(MIMEText(plain_text, "plain", "utf-8"))
         message.attach(MIMEText(html, "html", "utf-8"))
@@ -87,7 +92,7 @@ class EmailService:
 
         EmailService.send_email(
             recipient=user.email,
-            subject="Verify Your Email",
+            subject="Verify Your Email Address",
             html=html,
             plain_text=plain_text
         )
