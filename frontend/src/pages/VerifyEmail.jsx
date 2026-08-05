@@ -10,7 +10,7 @@ import {
 import { toast } from "react-toastify";
 
 import api from "../services/api";
-import Loader from "../components/Loader";
+import Loader from "../components/Loader/Loader";
 
 import "../styles/pages/VerifyEmail.css";
 
