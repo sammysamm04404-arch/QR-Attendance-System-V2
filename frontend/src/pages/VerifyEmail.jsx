@@ -7,7 +7,7 @@ import {
     FiArrowRight,
     FiHome,
 } from "react-icons/fi";
-import { toast } from "react-toastify";
+import toast from "react-hot-toast";
 
 import api from "../services/api";
 import Loader from "../components/Loader/Loader";
