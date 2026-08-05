@@ -27,24 +27,28 @@ const getErrorMessage = (error, fallbackMessage) => {
 
   if (!detail) return fallbackMessage;
 
-  // Handle FastAPI array of validation error objects
   if (Array.isArray(detail)) {
     return detail.map((err) => err.msg || JSON.stringify(err)).join(", ");
   }
 
-  // Handle single error object
   if (typeof detail === "object") {
     return detail.msg || JSON.stringify(detail);
   }
 
-  // Handle standard string error
   return detail;
 };
 
 function Settings({ onLogout }) {
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
-  const [loading, setLoading] = useState(false);
+
+  // Individual loading states for distinct async actions
+  const [forgotLoading, setForgotLoading] = useState(false);
+  const [sendingVerification, setSendingVerification] = useState(false);
+  const [changingPassword, setChangingPassword] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
+
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
 
   const [passwordData, setPasswordData] = useState({
     currentPassword: "",
@@ -64,10 +68,6 @@ function Settings({ onLogout }) {
     color: "#ef4444"
   });
 
-  const [sendingVerification, setSendingVerification] = useState(false);
-  const [changingPassword, setChangingPassword] = useState(false);
-  const [showLogoutModal, setShowLogoutModal] = useState(false);
-
   const { darkMode, toggleTheme } = useTheme();
 
   useEffect(() => {
@@ -83,23 +83,11 @@ function Settings({ onLogout }) {
     if (/[^A-Za-z0-9]/.test(password)) score++;
 
     if (score <= 2) {
-      setPasswordStrength({
-        label: "Weak",
-        percentage: 35,
-        color: "#ef4444"
-      });
+      setPasswordStrength({ label: "Weak", percentage: 35, color: "#ef4444" });
     } else if (score === 3 || score === 4) {
-      setPasswordStrength({
-        label: "Medium",
-        percentage: 70,
-        color: "#f59e0b"
-      });
+      setPasswordStrength({ label: "Medium", percentage: 70, color: "#f59e0b" });
     } else {
-      setPasswordStrength({
-        label: "Strong",
-        percentage: 100,
-        color: "#22c55e"
-      });
+      setPasswordStrength({ label: "Strong", percentage: 100, color: "#22c55e" });
     }
   };
 
@@ -149,7 +137,7 @@ function Settings({ onLogout }) {
         new_password: passwordData.newPassword
       });
 
-      toast.success(response.data.message || "Password updated successfully.");
+      toast.success(response.data?.message || "Password updated successfully.");
 
       setPasswordData({
         currentPassword: "",
@@ -167,21 +155,21 @@ function Settings({ onLogout }) {
 
   const handleForgotPassword = async () => {
     if (!user?.email) {
-      toast.error("User email not found.");
+      toast.error("User email address not found.");
       return;
     }
 
     try {
-      setLoading(true);
+      setForgotLoading(true);
       const response = await api.post("/auth/forgot-password", {
         email: user.email
       });
 
-      toast.success(response.data.message || "Reset link sent successfully.");
+      toast.success(response.data?.message || "Reset link sent to your email!");
     } catch (error) {
       toast.error(getErrorMessage(error, "Unable to send reset email."));
     } finally {
-      setLoading(false);
+      setForgotLoading(false);
     }
   };
 
@@ -189,7 +177,7 @@ function Settings({ onLogout }) {
     try {
       setSendingVerification(true);
       const response = await api.post("/auth/send-verification-email");
-      toast.success(response.data.message);
+      toast.success(response.data?.message || "Verification email sent!");
     } catch (error) {
       toast.error(getErrorMessage(error, "Unable to send verification email."));
     } finally {
@@ -197,12 +185,20 @@ function Settings({ onLogout }) {
     }
   };
 
-  const confirmLogout = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("user");
+  const confirmLogout = async () => {
+    try {
+      setLoggingOut(true);
+      // Optional backend logout notification - ignored if backend has no route or token already invalidated
+      await api.post("/auth/logout").catch(() => {});
+    } finally {
+      localStorage.removeItem("access_token");
+      localStorage.removeItem("user");
+      setShowLogoutModal(false);
+      setLoggingOut(false);
 
-    if (onLogout) {
-      onLogout();
+      if (onLogout) {
+        onLogout();
+      }
     }
   };
 
@@ -225,9 +221,7 @@ function Settings({ onLogout }) {
               <FiSettings />
             </div>
             <h1>Settings</h1>
-            <p>
-              Manage your account security, appearance and preferences.
-            </p>
+            <p>Manage your account security, appearance, and preferences.</p>
           </div>
 
           <div className="hero-right">
@@ -255,9 +249,7 @@ function Settings({ onLogout }) {
             </div>
             <div>
               <h3>Email</h3>
-              <p>
-                {user?.email_verified ? "Verified" : "Verification Pending"}
-              </p>
+              <p>{user?.email_verified ? "Verified" : "Verification Pending"}</p>
             </div>
           </div>
 
@@ -290,9 +282,7 @@ function Settings({ onLogout }) {
               </div>
               <div>
                 <h2>Change Password</h2>
-                <p>
-                  Update your account password to keep your account secure.
-                </p>
+                <p>Update your account password to keep your account secure.</p>
               </div>
             </div>
 
@@ -300,8 +290,13 @@ function Settings({ onLogout }) {
               <div className="form-group">
                 <div className="label-row">
                   <label>Current Password</label>
-                  <button type="button" className="forgot-link" onClick={handleForgotPassword}>
-                    Forgot Password?
+                  <button
+                    type="button"
+                    className="forgot-link"
+                    onClick={handleForgotPassword}
+                    disabled={forgotLoading}
+                  >
+                    {forgotLoading ? "Sending reset link..." : "Forgot Password?"}
                   </button>
                 </div>
 
@@ -387,7 +382,7 @@ function Settings({ onLogout }) {
                   className="primary-btn"
                   disabled={changingPassword}
                 >
-                  {changingPassword ? "Updating..." : "Update Password"}
+                  {changingPassword ? "Updating Password..." : "Update Password"}
                 </button>
               </div>
             </form>
@@ -423,9 +418,7 @@ function Settings({ onLogout }) {
                         <FiAlertCircle />
                         Verification Pending
                       </span>
-                      <small>
-                        Please verify your email to improve account security.
-                      </small>
+                      <small>Please verify your email to improve account security.</small>
                     </>
                   )}
                 </div>
@@ -436,7 +429,7 @@ function Settings({ onLogout }) {
                     onClick={sendVerificationEmail}
                     disabled={sendingVerification}
                   >
-                    {sendingVerification ? "Sending..." : "Send Verification Email"}
+                    {sendingVerification ? "Sending Email..." : "Send Verification Email"}
                   </button>
                 )}
               </div>
@@ -484,8 +477,9 @@ function Settings({ onLogout }) {
               <button
                 className="setting-logout-btn"
                 onClick={() => setShowLogoutModal(true)}
+                disabled={loggingOut}
               >
-                Logout Account
+                {loggingOut ? "Logging out..." : "Logout Account"}
               </button>
             </div>
           </div>
@@ -495,11 +489,11 @@ function Settings({ onLogout }) {
       <ConfirmationModal
         isOpen={showLogoutModal}
         title="Logout"
-        message="Are you sure you want to logout from this device?"
-        confirmText="Logout"
+        message="Are you sure you want to logout from the QR Attendance System?"
+        confirmText={loggingOut ? "Logging out..." : "Logout"}
         cancelText="Cancel"
         onConfirm={confirmLogout}
-        onCancel={() => setShowLogoutModal(false)}
+        onCancel={() => !loggingOut && setShowLogoutModal(false)}
       />
     </>
   );
