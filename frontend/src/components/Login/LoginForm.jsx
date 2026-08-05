@@ -1,6 +1,8 @@
+import React, { useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import toast from "react-hot-toast";
+import api from "../services/api";
 import "./LoginForm.css";
-import toast  from "react-hot-toast";
 
 function LoginForm({
     email,
@@ -13,7 +15,6 @@ function LoginForm({
     loading,
     handleLogin
 }) {
-
     const [sendingReset, setSendingReset] = useState(false);
 
     const handleForgotPassword = async () => {
@@ -34,9 +35,7 @@ function LoginForm({
     };
 
     return (
-
         <div className="login-form-container">
-
             <h2>Welcome Back</h2>
 
             <p className="login-description">
@@ -44,7 +43,6 @@ function LoginForm({
             </p>
 
             <div className="input-group">
-
                 <label>Email Address *</label>
 
                 <input
@@ -55,21 +53,17 @@ function LoginForm({
                     placeholder="Enter your email"
                 />
 
-                {
-                    errors.email &&
+                {errors.email && (
                     <span className="error-text">
                         {errors.email}
                     </span>
-                }
-
+                )}
             </div>
 
             <div className="input-group">
-
                 <label>Password *</label>
 
                 <div className="password-wrapper">
-
                     <input
                         type={showPassword ? "text" : "password"}
                         value={password}
@@ -83,44 +77,37 @@ function LoginForm({
                         className="eye-btn"
                         onClick={() => setShowPassword(!showPassword)}
                     >
-                        {
-                            showPassword
-                                ? <FaEyeSlash />
-                                : <FaEye />
-                        }
+                        {showPassword ? <FaEyeSlash /> : <FaEye />}
                     </button>
-
                 </div>
 
-                {
-                    errors.password &&
+                {errors.password && (
                     <span className="error-text">
                         {errors.password}
                     </span>
-                }
-
+                )}
             </div>
 
-            <button type="button" className="forgot-link" onClick={handleForgotPassword} disabled={sendingReset}>
-                {sendingReset ? "Sending..." : "Forgot Password?"}
-            </button>
+            <div className="forgot-password-row">
+                <button
+                    type="button"
+                    className="forgot-link"
+                    onClick={handleForgotPassword}
+                    disabled={sendingReset}
+                >
+                    {sendingReset ? "Sending..." : "Forgot Password?"}
+                </button>
+            </div>
 
             <button
                 className="login-btn"
                 onClick={handleLogin}
                 disabled={loading}
             >
-                {
-                    loading
-                        ? "Signing In..."
-                        : "Sign In"
-                }
+                {loading ? "Signing In..." : "Sign In"}
             </button>
-
         </div>
-
     );
-
 }
 
 export default LoginForm;
