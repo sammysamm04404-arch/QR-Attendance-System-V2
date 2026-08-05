@@ -21,32 +21,24 @@ import Navbar from "../components/Navbar";
 import { useTheme } from "../theme/ThemeContext";
 import toast from "react-hot-toast";
 
-// Helper function to safely extract error messages and prevent React Error #31
+// Helper function to extract API error messages safely
 const getErrorMessage = (error, fallbackMessage) => {
   const detail = error?.response?.data?.detail;
-
   if (!detail) return fallbackMessage;
 
   if (Array.isArray(detail)) {
     return detail.map((err) => err.msg || JSON.stringify(err)).join(", ");
   }
-
   if (typeof detail === "object") {
     return detail.msg || JSON.stringify(detail);
   }
-
   return detail;
 };
 
-function Settings({ onLogout }) {
+function Settings() {
   const [user, setUser] = useState(null);
   const [loadingUser, setLoadingUser] = useState(true);
-
-  // Individual loading states for distinct async actions
-  const [forgotLoading, setForgotLoading] = useState(false);
-  const [sendingVerification, setSendingVerification] = useState(false);
-  const [changingPassword, setChangingPassword] = useState(false);
-  const [loggingOut, setLoggingOut] = useState(false);
+  const [actionLoading, setActionLoading] = useState(false); // Unified Loader state
 
   const [showLogoutModal, setShowLogoutModal] = useState(false);
 
@@ -130,7 +122,7 @@ function Settings({ onLogout }) {
     }
 
     try {
-      setChangingPassword(true);
+      setActionLoading(true);
 
       const response = await api.post("/auth/change-password", {
         current_password: passwordData.currentPassword,
@@ -149,7 +141,7 @@ function Settings({ onLogout }) {
     } catch (error) {
       toast.error(getErrorMessage(error, "Unable to change password."));
     } finally {
-      setChangingPassword(false);
+      setActionLoading(false);
     }
   };
 
@@ -160,7 +152,7 @@ function Settings({ onLogout }) {
     }
 
     try {
-      setForgotLoading(true);
+      setActionLoading(true);
       const response = await api.post("/auth/forgot-password", {
         email: user.email
       });
@@ -169,42 +161,35 @@ function Settings({ onLogout }) {
     } catch (error) {
       toast.error(getErrorMessage(error, "Unable to send reset email."));
     } finally {
-      setForgotLoading(false);
+      setActionLoading(false);
     }
   };
 
   const sendVerificationEmail = async () => {
     try {
-      setSendingVerification(true);
+      setActionLoading(true);
       const response = await api.post("/auth/send-verification-email");
       toast.success(response.data?.message || "Verification email sent!");
     } catch (error) {
       toast.error(getErrorMessage(error, "Unable to send verification email."));
     } finally {
-      setSendingVerification(false);
+      setActionLoading(false);
     }
   };
 
-  const confirmLogout = async () => {
-    try {
-      setLoggingOut(true);
-      // Optional backend logout notification - ignored if backend has no route or token already invalidated
-      await api.post("/auth/logout").catch(() => {});
-    } finally {
-      localStorage.removeItem("access_token");
-      localStorage.removeItem("user");
-      setShowLogoutModal(false);
-      setLoggingOut(false);
-
-      if (onLogout) {
-        onLogout();
-      }
-    }
+  const confirmLogout = () => {
+    setShowLogoutModal(false);
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("user_role");
+    toast.success("Logged out successfully");
+    window.location.href = "/login";
   };
 
-  if (loadingUser) {
+  // Immediate Loader display during initial fetch OR active actions
+  if (loadingUser || actionLoading) {
     return (
-      <div className="settings-loading">
+      <div>
+        <Navbar />
         <Loader />
       </div>
     );
@@ -294,9 +279,8 @@ function Settings({ onLogout }) {
                     type="button"
                     className="forgot-link"
                     onClick={handleForgotPassword}
-                    disabled={forgotLoading}
                   >
-                    {forgotLoading ? "Sending reset link..." : "Forgot Password?"}
+                    Forgot Password?
                   </button>
                 </div>
 
@@ -377,12 +361,8 @@ function Settings({ onLogout }) {
               </div>
 
               <div className="password-actions">
-                <button
-                  type="submit"
-                  className="primary-btn"
-                  disabled={changingPassword}
-                >
-                  {changingPassword ? "Updating Password..." : "Update Password"}
+                <button type="submit" className="primary-btn">
+                  Update Password
                 </button>
               </div>
             </form>
@@ -427,9 +407,8 @@ function Settings({ onLogout }) {
                   <button
                     className="primary-btn"
                     onClick={sendVerificationEmail}
-                    disabled={sendingVerification}
                   >
-                    {sendingVerification ? "Sending Email..." : "Send Verification Email"}
+                    Send Verification Email
                   </button>
                 )}
               </div>
@@ -477,9 +456,8 @@ function Settings({ onLogout }) {
               <button
                 className="setting-logout-btn"
                 onClick={() => setShowLogoutModal(true)}
-                disabled={loggingOut}
               >
-                {loggingOut ? "Logging out..." : "Logout Account"}
+                Logout Account
               </button>
             </div>
           </div>
@@ -490,10 +468,10 @@ function Settings({ onLogout }) {
         isOpen={showLogoutModal}
         title="Logout"
         message="Are you sure you want to logout from the QR Attendance System?"
-        confirmText={loggingOut ? "Logging out..." : "Logout"}
+        confirmText="Logout"
         cancelText="Cancel"
         onConfirm={confirmLogout}
-        onCancel={() => !loggingOut && setShowLogoutModal(false)}
+        onCancel={() => setShowLogoutModal(false)}
       />
     </>
   );
