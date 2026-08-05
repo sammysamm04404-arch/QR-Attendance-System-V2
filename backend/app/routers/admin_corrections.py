@@ -1,5 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from datetime import datetime, timezone
 
 from app.database.session import get_db
 from app.dependencies.auth import get_current_user
@@ -20,7 +21,6 @@ def get_requests(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-
     if current_user.role != "Admin":
         raise HTTPException(
             status_code=403,
@@ -56,12 +56,12 @@ def get_requests(
 
     return result
 
+
 @router.get("/pending-count")
 def pending_count(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-
     if current_user.role != "Admin":
         raise HTTPException(
             status_code=403,
@@ -80,6 +80,7 @@ def pending_count(
         "count": count
     }
 
+
 # Get Single Request
 @router.get("/{request_id}")
 def request_details(
@@ -87,7 +88,6 @@ def request_details(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-
     correction = (
         db.query(AttendanceCorrection)
         .filter(
@@ -158,6 +158,7 @@ def request_details(
         "status": correction.status
     }
 
+
 # Approve Request
 @router.put("/{request_id}/approve")
 def approve_request(
@@ -165,7 +166,6 @@ def approve_request(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-
     correction = (
         db.query(AttendanceCorrection)
         .filter(
@@ -225,7 +225,9 @@ def approve_request(
 
     db.add(new_checkout)
 
+    # Update status and set action timestamp in reviewed_at
     correction.status = "Approved"
+    correction.reviewed_at = datetime.now(timezone.utc)
 
     notification = (
         db.query(Notification)
@@ -257,6 +259,7 @@ def approve_request(
         "message": "Attendance updated successfully."
     }
 
+
 # Reject Request
 @router.put("/{request_id}/reject")
 def reject_request(
@@ -265,7 +268,6 @@ def reject_request(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user)
 ):
-
     correction = (
         db.query(AttendanceCorrection)
         .filter(
@@ -280,7 +282,10 @@ def reject_request(
             detail="Correction not found."
         )
 
+    # Update status, store remark, and set action timestamp in reviewed_at
     correction.status = "Rejected"
+    correction.admin_remark = remarks
+    correction.reviewed_at = datetime.now(timezone.utc)
 
     old_notification = (
         db.query(Notification)

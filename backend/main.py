@@ -29,6 +29,7 @@ from app.routers.profile_router import router as profile_router
 from app.routers.qr_router import router as qr_router
 from app.routers.user_router import router as user_router
 from app.services.notification_scheduler import notification_scheduler
+from app.services.correction_scheduler import correction_scheduler
 
 # Create Database Tables
 Base.metadata.create_all(bind=engine)
@@ -37,6 +38,7 @@ Base.metadata.create_all(bind=engine)
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     asyncio.create_task(notification_scheduler())
+    asyncio.create_task(correction_scheduler())
     yield
 
 
