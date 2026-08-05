@@ -1,5 +1,6 @@
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import "./LoginForm.css";
+import toast  from "react-hot-toast";
 
 function LoginForm({
     email,
