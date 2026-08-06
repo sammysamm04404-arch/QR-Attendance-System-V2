@@ -6,7 +6,7 @@ from app.database.session import SessionLocal
 from app.models.attendance_correction import AttendanceCorrection
 
 
-async def correction_cleanup_scheduler():
+async def correction_scheduler():
     while True:
         db: Session = SessionLocal()
         try:
