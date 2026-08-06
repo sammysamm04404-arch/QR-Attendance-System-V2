@@ -527,7 +527,7 @@
     width: fit-content;
     padding: 8px 16px;
     border-radius: 999px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 600;
     line-height: 1;
     white-space: nowrap;
@@ -558,7 +558,6 @@
     color:#64748B;
     font-size:13px;
     line-height:1.6;
-    text-align: center;
 }
 
 /* APPEARANCE */
