@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import api from "../services/api";
+import Loader from "./Loader/Loader";
 
 function AuthRedirect() {
 
@@ -42,7 +43,7 @@ function AuthRedirect() {
 
     if (loading) {
 
-        return <h2 style={{ padding: "40px" }}>Checking Session...</h2>;
+        <Loader />
 
     }
 
