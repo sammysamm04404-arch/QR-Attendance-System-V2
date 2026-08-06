@@ -524,7 +524,6 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px;
     width: fit-content;
     padding: 8px 16px;
     border-radius: 999px;
@@ -537,8 +536,8 @@
 .status-badge svg{
     width: 16px;
     height: 16px;
+    margin-right: 8px;
     flex-shrink: 0;
-    display: block;
 }
 
 .status-badge.verified{
