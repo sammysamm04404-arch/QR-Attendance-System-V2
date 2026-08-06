@@ -34,12 +34,6 @@ function QuickAdminActions() {
         },
 
         {
-            title: "Reports",
-            icon: <FaChartBar />,
-            path: "/reports"
-        },
-
-        {
             title: "Settings",
             icon: <FaCog />,
             path: "/settings"
