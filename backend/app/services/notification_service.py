@@ -5,6 +5,7 @@ from sqlalchemy.orm import Session
 from app.models.attendance import Attendance
 from app.models.notification import Notification
 from app.models.user import User
+from app.models.attendance_correction import AttendanceCorrection
 
 
 def create_incomplete_attendance_notification(
@@ -13,6 +14,10 @@ def create_incomplete_attendance_notification(
 ):
 
     yesterday = datetime.now().date() - timedelta(days=1)
+    attendance_date = datetime.combine(
+        yesterday,
+        datetime.min.time(),
+    )
 
     records = (
     db.query(Attendance)
@@ -52,6 +57,19 @@ def create_incomplete_attendance_notification(
     if not check_in or check_out:
         return
 
+    pending_correction = (
+        db.query(AttendanceCorrection)
+        .filter(
+            AttendanceCorrection.user_id == user.id,
+            AttendanceCorrection.attendance_date == attendance_date,
+            AttendanceCorrection.status == "Pending",
+        )
+        .first()
+    )
+
+    if pending_correction:
+        return
+
     existing = (
 
         db.query(Notification)
@@ -59,7 +77,7 @@ def create_incomplete_attendance_notification(
 
             Notification.user_id == user.id,
             Notification.type == "attendance",
-            Notification.attendance_date == datetime.combine(yesterday, datetime.min.time()),
+            Notification.attendance_date == attendance_date,
             
         )
         .first()
@@ -78,10 +96,7 @@ def create_incomplete_attendance_notification(
 
         type="attendance",
 
-        attendance_date=datetime.combine(
-            yesterday,
-            datetime.min.time(),
-        )
+        attendance_date=attendance_date
 
     )
 
