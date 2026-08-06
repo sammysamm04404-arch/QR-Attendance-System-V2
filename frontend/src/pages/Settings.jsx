@@ -86,6 +86,7 @@ function Settings() {
   const fetchProfile = async () => {
     try {
       const response = await api.get("/profile");
+      console.log(response.data);
       setUser(response.data);
     } catch (error) {
       toast.error(getErrorMessage(error, "Unable to load profile"));
