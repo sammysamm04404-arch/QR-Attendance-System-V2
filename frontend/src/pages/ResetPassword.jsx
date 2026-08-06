@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-    FiLock,
-    FiEye,
-    FiEyeOff,
-    FiCheckCircle,
-    FiAlertCircle
-} from "react-icons/fi";
+import { FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -21,6 +15,7 @@ function ResetPassword() {
     const [loading, setLoading] = useState(true);
     const [validToken, setValidToken] = useState(false);
     const [userEmail, setUserEmail] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
 
     const [passwordData, setPasswordData] = useState({
         newPassword: "",
@@ -42,27 +37,34 @@ function ResetPassword() {
 
     useEffect(() => {
         if (!token) {
-            toast.error("Invalid password reset link.")
+            setErrorMessage("Invalid or missing password reset token.");
+            toast.error("Invalid password reset link.");
             setLoading(false);
             return;
         }
 
         validateToken();
-    }, []);
+    }, [token]);
+
+    // Helper to safely format error messages from backend
+    const getErrorMessage = (error, defaultMsg) => {
+        const detail = error.response?.data?.detail;
+        if (typeof detail === "string") return detail;
+        if (Array.isArray(detail) && detail[0]?.msg) return detail[0].msg;
+        return defaultMsg;
+    };
 
     const validateToken = async () => {
         try {
-            const response = await api.get(
-                `/auth/validate-reset-token/${token}`
-            );
+            const response = await api.get(`/auth/validate-reset-token/${token}`);
             setValidToken(true);
-            setUserEmail(response.data.email);
-        } 
-        catch (error) {
+            setUserEmail(response.data.email || "");
+        } catch (error) {
             setValidToken(false);
-            toast.error(error.response?.data?.detail || "Reset link has expired or is invalid.")
-        } 
-        finally {
+            const msg = getErrorMessage(error, "Reset link has expired or is invalid.");
+            setErrorMessage(msg);
+            toast.error(msg);
+        } finally {
             setLoading(false);
         }
     };
@@ -88,15 +90,13 @@ function ResetPassword() {
                 percentage: 35,
                 color: "#ef4444"
             });
-        } 
-        else if (score <= 4) {
+        } else if (score <= 4) {
             setresetPasswordStrength({
                 label: "Medium",
                 percentage: 70,
                 color: "#f59e0b"
             });
-        } 
-        else {
+        } else {
             setresetPasswordStrength({
                 label: "Strong",
                 percentage: 100,
@@ -121,30 +121,32 @@ function ResetPassword() {
         e.preventDefault();
 
         if (passwordData.newPassword !== passwordData.confirmPassword) {
-            toast.error("Password do not match.");
+            toast.error("Passwords do not match.");
             return;
         }
 
         try {
             setSubmitting(true);
-            const response = await api.post(
-                "/auth/reset-password",
-                {
-                    token,
-                    new_password: passwordData.newPassword
-                }
-            );
+            const response = await api.post("/auth/reset-password", {
+                token,
+                new_password: passwordData.newPassword
+            });
 
-            toast.success(response.data.message || "Password reset successfully.");
+            toast.success(response.data?.message || "Password reset successfully. Logging out...");
 
+            // 1. Clear local tokens and user session data
+            localStorage.removeItem("token");
+            localStorage.removeItem("user");
+            sessionStorage.clear();
+
+            // 2. Redirect to login after 2 seconds
             setTimeout(() => {
-                navigate("/login");
-            }, 3000);
-        } 
-        catch (error) {
-            toast.error(error.response?.data?.detail || "Unable to reset password.");
-        } 
-        finally {
+                navigate("/login", { replace: true });
+            }, 2000);
+        } catch (error) {
+            const msg = getErrorMessage(error, "Unable to reset password.");
+            toast.error(msg);
+        } finally {
             setSubmitting(false);
         }
     };
@@ -158,7 +160,7 @@ function ResetPassword() {
         );
     }
 
-    // 2. Invalid Token State (Renders Error Card)
+    // 2. Invalid Token State
     if (!validToken) {
         return (
             <div className="reset-page">
@@ -168,7 +170,7 @@ function ResetPassword() {
                             <FiLock />
                         </div>
                         <h1>Invalid or Expired Link</h1>
-                        <p>{alert.message || "This password reset link is invalid or has expired."}</p>
+                        <p>{errorMessage || "This password reset link is invalid or has expired."}</p>
                     </div>
                     <div className="login-link" style={{ marginTop: "20px" }}>
                         <button type="button" className="reset-primary-btn" onClick={() => navigate("/login")}>
@@ -180,7 +182,7 @@ function ResetPassword() {
         );
     }
 
-    // 3. Valid Token State (Renders Form)
+    // 3. Valid Token State
     return (
         <div className="reset-page">
             <div className="reset-card">
@@ -213,8 +215,8 @@ function ResetPassword() {
 
                     <div className="password-reset-strength">
                         <div className="reset-strength-bar">
-                            <div 
-                                className="reset-strength-fill" 
+                            <div
+                                className="reset-strength-fill"
                                 style={{ width: `${resetpasswordStrength.percentage}%`, background: resetpasswordStrength.color }}
                             />
                         </div>

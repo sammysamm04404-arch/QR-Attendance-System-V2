@@ -222,6 +222,23 @@ class AuthService:
                 "message": "If an account with that email exists, a password reset link has been sent."
             }
 
+        twenty_four_hours_ago = get_local_now() - timedelta(hours=24)
+
+        recent_requests_count = (
+            db.query(PasswordResetToken)
+            .filter(
+                PasswordResetToken.user_id == user.id,
+                PasswordResetToken.created_at >= twenty_four_hours_ago
+            )
+            .count()
+        )
+
+        if recent_requests_count >= 2:
+            raise HTTPException(
+                status_code=429,
+                detail="You have reached the limit of password reset requests per day. Please try again tomorrow."
+            )
+
         token = AuthService.generate_password_reset_token(
             db,
             user
