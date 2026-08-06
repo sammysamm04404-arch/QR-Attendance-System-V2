@@ -17,5 +17,8 @@ def get_me(
         "id": current_user.id,
         "name": current_user.name,
         "email": current_user.email,
-        "email_verified": current_user.email_verified
+        "email_verified": current_user.email_verified,
+        "role": current_user.role,
+        "status": current_user.status,
+        "created_at": current_user.created_at
     }

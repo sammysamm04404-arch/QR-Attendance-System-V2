@@ -85,7 +85,7 @@ function Settings() {
 
   const fetchProfile = async () => {
     try {
-      const response = await api.get("/profile");
+      const response = await api.get("/users/me");
       console.log(response.data);
       setUser(response.data);
     } catch (error) {
