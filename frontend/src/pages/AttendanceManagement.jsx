@@ -38,6 +38,44 @@ function AttendanceManagement() {
         toDate
     ]);
 
+    const [exporting, setExporting] = useState(false);
+
+    const handleExportExcel = async () => {
+        try {
+            setExporting(true);
+
+            const params = new URLSearchParams();
+            if (search) params.append("search", search);
+            if (status !== "All") params.append("status", status);
+            if (singleDate) params.append("single_date", singleDate);
+            if (fromDate) params.append("from_date", fromDate);
+            if (toDate) params.append("to_date", toDate);
+
+            const response = await api.get(
+                `/admin/attendance/export?${params.toString()}`,
+                { responseType: "blob" }
+            );
+
+            const url = window.URL.createObjectURL(new Blob([response.data]));
+            const link = document.createElement("a");
+            link.href = url;
+            link.setAttribute("download", `Attendance_Report_${new Date().toISOString().split("T")[0]}.xlsx`);
+            document.body.appendChild(link);
+            link.click();
+            link.remove();
+            window.URL.revokeObjectURL(url);
+
+            toast.success("Excel report downloaded successfully!");
+        } 
+        catch (error) {
+            console.error("Export error:", error);
+            toast.error("Failed to export attendance data.");
+        } 
+        finally {
+            setExporting(false);
+        }
+    };
+
     const fetchAttendance = async (showLoader = true) => {
         if (showLoader) {
             setLoading(true);
@@ -83,7 +121,10 @@ function AttendanceManagement() {
             <Navbar />
 
             <div className="attendance-page">
-                <AttendanceHeader />
+                <AttendanceHeader 
+                    onExport={handleExportExcel}
+                    exporting={exporting}
+                />
 
                 <AttendanceSummary
                     atmsummary={atmsummary}

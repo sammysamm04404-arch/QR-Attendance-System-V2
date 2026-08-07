@@ -1,21 +1,24 @@
-function AttendanceHeader(){
+import React from "react";
 
-    return(
-
+function AttendanceHeader({ onExport, exporting }) {
+    return (
         <div className="attendance-header">
+            <div>
+                <h1>Attendance Management</h1>
+                <p>View and manage all employee attendance.</p>
+            </div>
 
-            <h1>
-                Attendance Management
-            </h1>
-
-            <p>
-                View and manage all employee attendance.
-            </p>
-
+            {onExport && (
+                <button
+                    className="primary-btn export-btn"
+                    onClick={onExport}
+                    disabled={exporting}
+                >
+                    {exporting ? "Exporting..." : "Export Excel"}
+                </button>
+            )}
         </div>
-
     );
-
 }
 
 export default AttendanceHeader;

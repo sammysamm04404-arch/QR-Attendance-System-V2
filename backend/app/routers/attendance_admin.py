@@ -1,5 +1,8 @@
+import io
 from datetime import date, datetime, timedelta
 from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi.responses import StreamingResponse
+import pandas as pd
 from sqlalchemy import func
 from sqlalchemy.orm import Session
 
@@ -22,26 +25,21 @@ def working_hours(cin, cout):
     return f"{h:02d}h {m:02d}m"
 
 
-@router.get("/attendance")
-def get_attendance(
-    page: int = Query(1, ge=1),
-    limit: int = Query(10, ge=1),
+def build_attendance_rows(
+    db: Session,
     search: str = "",
     status: str = "All",
     single_date: date | None = None,
     from_date: date | None = None,
     to_date: date | None = None,
-    db: Session = Depends(get_db),
-    current_user=Depends(get_current_user),
 ):
-    
+    """Helper function to build attendance rows based on active filters."""
     if single_date:
         target_dates = [single_date]
     elif from_date and to_date:
         delta = (to_date - from_date).days
         target_dates = [from_date + timedelta(days=i) for i in range(delta + 1)]
     else:
-        
         all_scans = db.query(Attendance.scan_time).all()
         if all_scans:
             target_dates = sorted(
@@ -51,7 +49,6 @@ def get_attendance(
             target_dates = [date.today()]
 
     users = db.query(User).all()
-
     rows = []
 
     for user in users:
@@ -128,6 +125,29 @@ def get_attendance(
         rows = [row for row in rows if row["status"] == status]
 
     rows.sort(key=lambda x: x["date"], reverse=True)
+    return rows
+
+
+@router.get("/attendance")
+def get_attendance(
+    page: int = Query(1, ge=1),
+    limit: int = Query(10, ge=1),
+    search: str = "",
+    status: str = "All",
+    single_date: date | None = None,
+    from_date: date | None = None,
+    to_date: date | None = None,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    rows = build_attendance_rows(
+        db=db,
+        search=search,
+        status=status,
+        single_date=single_date,
+        from_date=from_date,
+        to_date=to_date,
+    )
 
     total = len(rows)
     start = (page - 1) * limit
@@ -147,6 +167,61 @@ def get_attendance(
         "total_pages": (total + limit - 1) // limit if limit else 1,
         "total": total,
     }
+
+
+@router.get("/attendance/export")
+def export_attendance_excel(
+    search: str = "",
+    status: str = "All",
+    single_date: date | None = None,
+    from_date: date | None = None,
+    to_date: date | None = None,
+    db: Session = Depends(get_db),
+    current_user=Depends(get_current_user),
+):
+    # Fetch all matching records without pagination
+    rows = build_attendance_rows(
+        db=db,
+        search=search,
+        status=status,
+        single_date=single_date,
+        from_date=from_date,
+        to_date=to_date,
+    )
+
+    # Clean data structure for Excel columns
+    export_data = []
+    for r in rows:
+        export_data.append({
+            "Employee": r["employee"],
+            "Email": r["email"],
+            "Role": r["role"],
+            "Date": r["date"],
+            "Status": r["status"],
+            "Check In": r["check_in"],
+            "Check Out": r["check_out"],
+            "Working Hours": r["working_hours"],
+        })
+
+    # Create Excel stream using Pandas
+    df = pd.DataFrame(export_data)
+    output = io.BytesIO()
+
+    with pd.ExcelWriter(output, engine="openpyxl") as writer:
+        df.to_excel(writer, index=False, sheet_name="Attendance Report")
+
+    output.seek(0)
+
+    filename = f"Attendance_Report_{date.today()}.xlsx"
+    headers = {
+        "Content-Disposition": f'attachment; filename="{filename}"'
+    }
+
+    return StreamingResponse(
+        output,
+        headers=headers,
+        media_type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+    )
 
 
 @router.get("/attendance/{user_id}/{attendance_date}")
