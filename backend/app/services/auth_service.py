@@ -225,7 +225,7 @@ class AuthService:
         if not getattr(user, "email_verified", False):
             raise HTTPException(
                 status_code = 400,
-                detail = "Your email is not verified. Please verify your email address before requesting a password reset." 
+                detail = "Your email is not verified. Please verify your email address" 
             )
 
         twenty_four_hours_ago = get_local_now() - timedelta(hours=24)
