@@ -704,7 +704,7 @@
 
     /* Ultra-compact button dimensions */
     .export-btn {
-        width: 30px;
+        width: auto !important;
         padding: 5px 10px !important;
         font-size: 11px !important;
         height: 30px !important;
