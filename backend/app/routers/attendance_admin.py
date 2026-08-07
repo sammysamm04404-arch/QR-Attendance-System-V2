@@ -29,28 +29,30 @@ def working_hours(cin, cout):
 
 
 def calculate_break_hours(day_records) -> str:
-    """Calculates cumulative total break duration across single or multiple breaks in a day."""
+    """Calculates cumulative total break duration using 'Break' and 'Break Over' actions."""
     if not day_records:
         return "--"
 
     total_seconds = 0
     current_break_start = None
 
-    # Ensure records are sorted chronologically
     sorted_records = sorted(day_records, key=lambda x: x.scan_time)
 
     for r in sorted_records:
-        action = r.action.strip().lower() if r.action else ""
+        if not r.action:
+            continue
 
-        # Matches 'Break In' or 'Break Start'
-        if action in ("break in", "break start"):
+        act = r.action.strip().lower()
+
+        # Start of a break
+        if act == "break":
             current_break_start = r.scan_time
 
-        # Matches 'Break Out' or 'Break End' and pairs with the open break start
-        elif action in ("break out", "break end") and current_break_start:
+        # End of a break
+        elif act == "break over" and current_break_start is not None:
             if r.scan_time > current_break_start:
                 total_seconds += int((r.scan_time - current_break_start).total_seconds())
-            current_break_start = None
+            current_break_start = None  # Reset for next possible break
 
     if total_seconds <= 0:
         return "--"
@@ -114,13 +116,13 @@ def build_attendance_rows(
                 cout = None
             else:
                 cin = next(
-                    (x for x in day_records if x.action == "Check In"), None
+                    (x for x in day_records if x.action and x.action.strip().lower() == "check in"), None
                 )
                 cout = next(
                     (
                         x
                         for x in reversed(day_records)
-                        if x.action == "Check Out"
+                        if x.action and x.action.strip().lower() == "check out"
                     ),
                     None,
                 )
@@ -287,10 +289,10 @@ def get_attendance_details(
     day_records.sort(key=lambda x: x.scan_time)
 
     check_in = next(
-        (r for r in day_records if r.action == "Check In"), None
+        (r for r in day_records if r.action and r.action.strip().lower() == "check in"), None
     )
     check_out = next(
-        (r for r in reversed(day_records) if r.action == "Check Out"), None
+        (r for r in reversed(day_records) if r.action and r.action.strip().lower() == "check out"), None
     )
 
     return {
