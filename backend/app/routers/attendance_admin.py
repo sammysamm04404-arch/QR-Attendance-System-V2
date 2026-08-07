@@ -14,24 +14,19 @@ from app.models.user import User
 router = APIRouter(prefix="/admin", tags=["Attendance Management"])
 
 
-def working_hours(cin, cout):
-    if not cin or not cout:
-        return "--"
-
-    seconds = int((cout - cin).total_seconds())
+def format_duration(seconds: int) -> str:
+    """Formats total seconds into '00h 00m' format."""
     if seconds <= 0:
         return "--"
-
     h = seconds // 3600
     m = (seconds % 3600) // 60
-
     return f"{h:02d}h {m:02d}m"
 
 
-def calculate_break_hours(day_records) -> str:
-    """Calculates cumulative total break duration using 'Break' and 'Break Over' actions."""
+def get_break_seconds(day_records) -> int:
+    """Calculates cumulative total break duration in seconds using 'Break' and 'Break Over' actions."""
     if not day_records:
-        return "--"
+        return 0
 
     total_seconds = 0
     current_break_start = None
@@ -44,22 +39,28 @@ def calculate_break_hours(day_records) -> str:
 
         act = r.action.strip().lower()
 
-        # Start of a break
         if act == "break":
             current_break_start = r.scan_time
-
-        # End of a break
         elif act == "break over" and current_break_start is not None:
             if r.scan_time > current_break_start:
                 total_seconds += int((r.scan_time - current_break_start).total_seconds())
-            current_break_start = None  # Reset for next possible break
+            current_break_start = None
 
-    if total_seconds <= 0:
+    return total_seconds
+
+
+def working_hours(cin, cout, break_seconds: int = 0) -> str:
+    """Calculates Net Working Hours by subtracting total break time from total gross hours."""
+    if not cin or not cout:
         return "--"
 
-    h = total_seconds // 3600
-    m = (total_seconds % 3600) // 60
-    return f"{h:02d}h {m:02d}m"
+    gross_seconds = int((cout - cin).total_seconds())
+    net_seconds = gross_seconds - break_seconds
+
+    if net_seconds <= 0:
+        return "00h 00m"
+
+    return format_duration(net_seconds)
 
 
 def build_attendance_rows(
@@ -137,6 +138,17 @@ def build_attendance_rows(
                 else:
                     attendance_status = "Absent"
 
+            # Compute break duration in seconds and format string
+            break_sec = get_break_seconds(day_records)
+            break_str = format_duration(break_sec)
+
+            # Compute net working hours (Gross minus Break)
+            net_work_str = working_hours(
+                cin.scan_time if cin else None,
+                cout.scan_time if cout else None,
+                break_seconds=break_sec,
+            )
+
             attendance_row = {
                 "user_id": user.id,
                 "employee": user.name,
@@ -149,11 +161,8 @@ def build_attendance_rows(
                 "check_out": (
                     cout.scan_time.strftime("%I:%M %p") if cout else "--"
                 ),
-                "working_hours": working_hours(
-                    cin.scan_time if cin else None,
-                    cout.scan_time if cout else None,
-                ),
-                "break_hours": calculate_break_hours(day_records),
+                "working_hours": net_work_str,
+                "break_hours": break_str,
                 "status": attendance_status,
             }
 
@@ -295,6 +304,8 @@ def get_attendance_details(
         (r for r in reversed(day_records) if r.action and r.action.strip().lower() == "check out"), None
     )
 
+    break_sec = get_break_seconds(day_records)
+
     return {
         "employee": {
             "id": user.id,
@@ -310,7 +321,8 @@ def get_attendance_details(
             "working_hours": working_hours(
                 check_in.scan_time if check_in else None,
                 check_out.scan_time if check_out else None,
+                break_seconds=break_sec,
             ),
-            "break_hours": calculate_break_hours(day_records),
+            "break_hours": format_duration(break_sec),
         },
     }
