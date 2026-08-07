@@ -22,10 +22,6 @@ router = APIRouter(
 def get_profile(
     current_user: User = Depends(get_current_user)
 ):
-    """
-    Returns the logged-in user's profile.
-    """
-
     return current_user
 
 
@@ -38,11 +34,7 @@ def update_profile(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user)
 ):
-    """
-    Update logged-in user's profile.
-    """
 
-    # Check if email already exists
     existing_user = (
         db.query(User)
         .filter(
@@ -58,8 +50,11 @@ def update_profile(
             detail="Email is already registered."
         )
 
+    if current_user.email != profile.email:
+        current_user.email = profile.email
+        current_user.email_verified = False
+
     current_user.name = profile.name
-    current_user.email = profile.email
 
     db.commit()
     db.refresh(current_user)

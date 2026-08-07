@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FiLock, FiEye, FiEyeOff } from "react-icons/fi";
+import { FiLock, FiEye, FiEyeOff, FiAlertCircle } from "react-icons/fi";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import toast from "react-hot-toast";
 
@@ -117,10 +117,15 @@ function ResetPassword() {
         }
     };
 
+    // Real-time check if new password and confirm password do not match
+    const isPasswordMismatch =
+        passwordData.confirmPassword.length > 0 &&
+        passwordData.newPassword !== passwordData.confirmPassword;
+
     const handleResetPassword = async (e) => {
         e.preventDefault();
 
-        if (passwordData.newPassword !== passwordData.confirmPassword) {
+        if (isPasswordMismatch) {
             toast.error("Passwords do not match.");
             return;
         }
@@ -240,10 +245,31 @@ function ResetPassword() {
                                 {showPassword.confirm ? <FiEyeOff /> : <FiEye />}
                             </button>
                         </div>
+
+                        {/* Real-time Mismatch Error Message */}
+                        {isPasswordMismatch && (
+                            <span
+                                className="error-text"
+                                style={{
+                                    color: "#ef4444",
+                                    fontSize: "0.85rem",
+                                    marginTop: "6px",
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "4px"
+                                }}
+                            >
+                                <FiAlertCircle /> Passwords do not match
+                            </span>
+                        )}
                     </div>
 
                     <div className="reset-actions">
-                        <button type="submit" className="reset-primary-btn" disabled={submitting}>
+                        <button 
+                            type="submit" 
+                            className="reset-primary-btn" 
+                            disabled={submitting || isPasswordMismatch}
+                        >
                             {submitting ? "Updating Password..." : "Reset Password"}
                         </button>
                     </div>
