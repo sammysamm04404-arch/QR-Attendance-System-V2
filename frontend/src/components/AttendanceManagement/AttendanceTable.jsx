@@ -20,6 +20,7 @@ function AttendanceTable({
                         <th>Check In</th>
                         <th>Check Out</th>
                         <th>Hours</th>
+                        <th>Break</th>
                         <th>Status</th>
                         <th>Action</th>
 
@@ -49,6 +50,7 @@ function AttendanceTable({
                                 <td>{row.check_in}</td>
                                 <td>{row.check_out}</td>
                                 <td>{row.working_hours}</td>
+                                <td>{row.break_hours}</td>
                                 <td>
                                     <span
                                         className={`status ${row.status.toLowerCase()}`}>

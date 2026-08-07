@@ -19,9 +19,44 @@ def working_hours(cin, cout):
         return "--"
 
     seconds = int((cout - cin).total_seconds())
+    if seconds <= 0:
+        return "--"
+
     h = seconds // 3600
     m = (seconds % 3600) // 60
 
+    return f"{h:02d}h {m:02d}m"
+
+
+def calculate_break_hours(day_records) -> str:
+    """Calculates cumulative total break duration across single or multiple breaks in a day."""
+    if not day_records:
+        return "--"
+
+    total_seconds = 0
+    current_break_start = None
+
+    # Ensure records are sorted chronologically
+    sorted_records = sorted(day_records, key=lambda x: x.scan_time)
+
+    for r in sorted_records:
+        action = r.action.strip().lower() if r.action else ""
+
+        # Matches 'Break In' or 'Break Start'
+        if action in ("break in", "break start"):
+            current_break_start = r.scan_time
+
+        # Matches 'Break Out' or 'Break End' and pairs with the open break start
+        elif action in ("break out", "break end") and current_break_start:
+            if r.scan_time > current_break_start:
+                total_seconds += int((r.scan_time - current_break_start).total_seconds())
+            current_break_start = None
+
+    if total_seconds <= 0:
+        return "--"
+
+    h = total_seconds // 3600
+    m = (total_seconds % 3600) // 60
     return f"{h:02d}h {m:02d}m"
 
 
@@ -116,6 +151,7 @@ def build_attendance_rows(
                     cin.scan_time if cin else None,
                     cout.scan_time if cout else None,
                 ),
+                "break_hours": calculate_break_hours(day_records),
                 "status": attendance_status,
             }
 
@@ -179,7 +215,6 @@ def export_attendance_excel(
     db: Session = Depends(get_db),
     current_user=Depends(get_current_user),
 ):
-    # Fetch all matching records without pagination
     rows = build_attendance_rows(
         db=db,
         search=search,
@@ -189,7 +224,6 @@ def export_attendance_excel(
         to_date=to_date,
     )
 
-    # Clean data structure for Excel columns
     export_data = []
     for r in rows:
         export_data.append({
@@ -201,9 +235,9 @@ def export_attendance_excel(
             "Check In": r["check_in"],
             "Check Out": r["check_out"],
             "Working Hours": r["working_hours"],
+            "Break Hours": r["break_hours"],
         })
 
-    # Create Excel stream using Pandas
     df = pd.DataFrame(export_data)
     output = io.BytesIO()
 
@@ -275,5 +309,6 @@ def get_attendance_details(
                 check_in.scan_time if check_in else None,
                 check_out.scan_time if check_out else None,
             ),
+            "break_hours": calculate_break_hours(day_records),
         },
     }
