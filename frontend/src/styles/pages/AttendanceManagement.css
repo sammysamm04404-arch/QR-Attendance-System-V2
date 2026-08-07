@@ -209,7 +209,7 @@
 
 /* Enhanced Date Picker Controls & Cross-Theme Calendar Visibility */
 .filter-group input[type="date"] {
-    color-scheme: light; /* Forces dark calendar icon on light background */
+    color-scheme: light;
     font-family: inherit;
 }
 
@@ -237,7 +237,7 @@
 [data-theme="dark"] .filter-group input[type="date"]::-webkit-calendar-picker-indicator,
 .dark .filter-group input[type="date"]::-webkit-calendar-picker-indicator,
 .dark-mode .filter-group input[type="date"]::-webkit-calendar-picker-indicator {
-    filter: invert(1); /* Ensures white calendar icon on dark background */
+    filter: invert(1);
 }
 
 .filter-group select option {
@@ -524,9 +524,8 @@
     word-break: break-word; 
 }
 
-/* High Fidelity Responsive Media Queries */
+/* Responsive Media Queries */
 
-/* Tablet & Smaller Desktop Screens */
 @media (max-width: 1024px) {
     .attendance-atmsummary {
         grid-template-columns: repeat(2, 1fr);
@@ -540,16 +539,27 @@
     }
 
     .attendance-header {
-        align-items: flex-start;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 12px;
     }
 
     .attendance-header h1 {
-        font-size: 24px;
+        font-size: 22px;
+    }
+
+    .attendance-header p {
+        font-size: 13px;
+        margin-top: 4px;
     }
 
     .export-btn {
-        padding: 10px 16px;
-        font-size: 13px;
+        padding: 8px 14px;
+        font-size: 12.5px;
+        border-radius: 9px;
+        gap: 6px;
     }
 
     .attendance-filters {
@@ -667,24 +677,32 @@
 /* Extra Small Phones (480px and down) */
 @media (max-width: 480px) {
     .attendance-header {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 12px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 20px;
     }
 
     .attendance-header h1 {
-        font-size: 20px;
+        font-size: 18px;
+        line-height: 1.2;
     }
 
     .attendance-header p {
-        font-size: 13px;
+        font-size: 12px;
+        margin-top: 3px;
     }
 
+    /* Small, right-aligned compact button */
     .export-btn {
-        width: 100%;
-        padding: 10px 14px;
-        font-size: 13px;
-        border-radius: 10px;
+        width: auto !important;
+        padding: 6px 12px;
+        font-size: 11.5px;
+        border-radius: 8px;
+        gap: 5px;
+        flex-shrink: 0;
     }
 
     .attendance-filters {
