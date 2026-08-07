@@ -37,4 +37,4 @@ async def correction_scheduler():
             db.close()
 
         # Check every 1 hour (3600 seconds)
-        await asyncio.sleep(3600)
+        await asyncio.sleep(100)
