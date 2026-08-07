@@ -10,7 +10,7 @@ function AttendanceHeader({ onExport, exporting }) {
 
             {onExport && (
                 <button
-                    className="primary-btn export-btn"
+                    className="export-btn"
                     onClick={onExport}
                     disabled={exporting}
                 >
