@@ -37,10 +37,19 @@ Base.metadata.create_all(bind=engine)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    asyncio.create_task(notification_scheduler())
-    asyncio.create_task(correction_scheduler())
+    notification_task = asyncio.create_task(notification_scheduler())
+    correction_task = asyncio.create_task(correction_scheduler())
+
     yield
 
+    notification_task.cancel()
+    correction_task.cancel()
+
+    await asyncio.gather(
+        notification_task, 
+        correction_task, 
+        return_exceptions=True
+    )
 
 app = FastAPI(
     lifespan=lifespan,

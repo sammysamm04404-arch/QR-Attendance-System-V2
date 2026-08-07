@@ -79,7 +79,8 @@ def scan_attendance(
         user_id=current_user.id,
         action=attendance_data.action,
         location_name=attendance_data.location_name,
-        scan_time=local_now
+        scan_time=local_now,
+        created_at = local_now
     )
 
     db.add(attendance)

@@ -7,6 +7,8 @@ from app.models.notification import Notification
 from app.models.user import User
 from app.models.attendance_correction import AttendanceCorrection
 
+def get_local_now():
+    return (datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)).replace(tzinfo=None)
 
 def create_incomplete_attendance_notification(
     db: Session,
@@ -89,14 +91,11 @@ def create_incomplete_attendance_notification(
     notification = Notification(
 
         user_id=user.id,
-
         title="Attendance Incomplete",
-
         message=f"Your attendance for {yesterday.strftime('%d %b %Y')} is incomplete. Please resolve it.",
-
         type="attendance",
-
-        attendance_date=attendance_date
+        attendance_date=attendance_date,
+        created_at = get_local_now()
 
     )
 

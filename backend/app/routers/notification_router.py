@@ -12,6 +12,8 @@ router = APIRouter(
     tags=["Notifications"]
 )
 
+def get_local_now():
+    return (datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)).replace(tzinfo=None)
 
 @router.get("")
 def get_notifications(
@@ -20,7 +22,7 @@ def get_notifications(
 ):
 
     # Delete closed notifications older than 24 hours
-    expiry = datetime.now(timezone.utc) - timedelta(hours=24)
+    expiry = get_local_now() - timedelta(hours=24)
 
     db.query(Notification).filter(
         Notification.user_id == current_user.id,

@@ -1,13 +1,12 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from datetime import datetime, timezone
+from datetime import datetime
 
 from app.database.session import get_db
 from app.dependencies.auth import get_current_user
 
 from app.models.notification import Notification
 from app.models.attendance_correction import AttendanceCorrection
-
 from app.schemas.attendance_correction_schema import AttendanceCorrectionRequest
 
 router = APIRouter(
@@ -38,20 +37,21 @@ def create_correction_request(
             detail="Notification not found."
         )
 
-    # Make sure attendance_date exists
-    if not hasattr(notification, "attendance_date"):
+    # Prevent using an already closed or processed notification
+    if getattr(notification, "is_closed", False):
         raise HTTPException(
-            status_code=500,
-            detail="Notification model is missing attendance_date column."
+            status_code=400,
+            detail="A request has already been submitted for this notification."
         )
 
-    if notification.attendance_date is None:
+    if not hasattr(notification, "attendance_date") or notification.attendance_date is None:
         raise HTTPException(
             status_code=400,
             detail="Attendance date was not stored with this notification."
         )
 
-    attendance_date = notification.attendance_date.date()
+    # Standardize to date object for DB queries and storage
+    attendance_date = notification.attendance_date.date() if isinstance(notification.attendance_date, datetime) else notification.attendance_date
 
     checkout_time = datetime.strptime(
         correction.checkout_time,
@@ -63,11 +63,12 @@ def create_correction_request(
         checkout_time
     )
 
+    # Check using the extracted date object, not the full datetime
     existing = (
         db.query(AttendanceCorrection)
         .filter(
             AttendanceCorrection.user_id == current_user.id,
-            AttendanceCorrection.attendance_date == notification.attendance_date,
+            AttendanceCorrection.attendance_date == attendance_date,
             AttendanceCorrection.status == "Pending"
         )
         .first()
@@ -81,7 +82,7 @@ def create_correction_request(
 
     request = AttendanceCorrection(
         user_id=current_user.id,
-        attendance_date=notification.attendance_date,
+        attendance_date=attendance_date,  # Save clean date object
         requested_checkout=checkout_datetime,
         reason=correction.reason,
         notes=correction.notes,
@@ -94,29 +95,8 @@ def create_correction_request(
     notification.is_closed = True
 
     db.commit()
-
     db.refresh(request)
 
     return {
         "message": "Attendance correction request submitted successfully."
     }
-
-
-@router.get("/my")
-def my_requests(
-    db: Session = Depends(get_db),
-    current_user=Depends(get_current_user)
-):
-
-    requests = (
-        db.query(AttendanceCorrection)
-        .filter(
-            AttendanceCorrection.user_id == current_user.id
-        )
-        .order_by(
-            AttendanceCorrection.created_at.desc()
-        )
-        .all()
-    )
-
-    return requests

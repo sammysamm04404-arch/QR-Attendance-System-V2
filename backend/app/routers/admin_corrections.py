@@ -1,6 +1,6 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 from app.database.session import get_db
 from app.dependencies.auth import get_current_user
@@ -14,6 +14,9 @@ router = APIRouter(
     prefix="/admin/corrections",
     tags=["Admin Corrections"]
 )
+
+def get_local_now():
+    return (datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)).replace(tzinfo=None)
 
 # Get All Requests
 @router.get("")
@@ -248,7 +251,8 @@ def approve_request(
         title="Attendance Correction Approved",
         message=f"Your attendance correction for {correction.attendance_date.strftime('%d %b %Y')} request has been approved.",
         type="attendance",
-        attendance_date=correction.attendance_date
+        attendance_date=correction.attendance_date,
+        created_at = get_local_now()
     )
 
     db.add(new_notification)
@@ -306,7 +310,8 @@ def reject_request(
         title="Attendance Correction Rejected",
         message=f"Your attendance correction for {correction.attendance_date.strftime('%d %b %Y')} was rejected.\nReason: {remarks}",
         type="attendance",
-        attendance_date=correction.attendance_date
+        attendance_date=correction.attendance_date,
+        created_at = get_local_now()
     )
 
     db.add(notification)
