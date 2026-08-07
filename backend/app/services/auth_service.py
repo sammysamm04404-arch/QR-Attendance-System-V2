@@ -222,6 +222,12 @@ class AuthService:
                 "message": "If an account with that email exists, a password reset link has been sent."
             }
 
+        if not getattr(user, "email_verified", False):
+            raise HTTPException(
+                status_code = 400,
+                detail = "Your email is not verified. Please verify your email address before requesting a password reset." 
+            )
+
         twenty_four_hours_ago = get_local_now() - timedelta(hours=24)
 
         recent_requests_count = (

@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import datetime, timezone, timedelta
 
 from sqlalchemy.orm import Session
 
@@ -6,6 +6,8 @@ from app.models.email_verification_token import (
     EmailVerificationToken
 )
 
+def get_local_now():
+    return (datetime.now(timezone.utc) + timedelta(hours=5, minutes=30)).replace(tzinfo=None)
 
 class EmailVerificationRepository:
 
@@ -14,6 +16,9 @@ class EmailVerificationRepository:
         db: Session,
         token: EmailVerificationToken
     ):
+        if not getattr(token, "created_at", None):
+            token.created_at = get_local_now()
+
         db.add(token)
         db.commit()
         db.refresh(token)
@@ -43,7 +48,7 @@ class EmailVerificationRepository:
             .filter(
                 EmailVerificationToken.user_id == user_id,
                 EmailVerificationToken.used == False,
-                EmailVerificationToken.expires_at > datetime.now(timezone.utc)
+                EmailVerificationToken.expires_at > get_local_now()
             )
             .first()
         )
@@ -63,7 +68,7 @@ class EmailVerificationRepository:
         (
             db.query(EmailVerificationToken)
             .filter(
-                EmailVerificationToken.expires_at < datetime.now(timezone.utc)
+                EmailVerificationToken.expires_at < get_local_now()
             )
             .delete()
         )
@@ -75,6 +80,9 @@ class EmailVerificationRepository:
         db: Session,
         token: EmailVerificationToken
     ):
+        if not getattr(token, "created_at", None):
+            token.created_at = get_local_now()
+            
         db.add(token)
         db.commit()
         db.refresh(token)

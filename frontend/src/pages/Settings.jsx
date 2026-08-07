@@ -86,7 +86,6 @@ function Settings() {
   const fetchProfile = async () => {
     try {
       const response = await api.get("/profile");
-      console.log(response.data);
       setUser(response.data);
     } catch (error) {
       toast.error(getErrorMessage(error, "Unable to load profile"));
@@ -114,10 +113,15 @@ function Settings() {
     }));
   };
 
+  // Real-time check if new password and confirm password do not match
+  const isPasswordMismatch =
+    passwordData.confirmPassword.length > 0 &&
+    passwordData.newPassword !== passwordData.confirmPassword;
+
   const handleChangePassword = async (e) => {
     e.preventDefault();
 
-    if (passwordData.newPassword !== passwordData.confirmPassword) {
+    if (isPasswordMismatch) {
       toast.error("Passwords do not match");
       return;
     }
@@ -186,7 +190,6 @@ function Settings() {
     window.location.href = "/login";
   };
 
-  // Immediate Loader display during initial fetch OR active actions
   if (loadingUser || actionLoading) {
     return (
       <div>
@@ -359,10 +362,31 @@ function Settings() {
                     {showPassword.confirm ? <FiEyeOff /> : <FiEye />}
                   </button>
                 </div>
+
+                {/* Real-time Mismatch Error Message */}
+                {isPasswordMismatch && (
+                  <span
+                    className="error-text"
+                    style={{
+                      color: "#ef4444",
+                      fontSize: "0.85rem",
+                      marginTop: "6px",
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "4px"
+                    }}
+                  >
+                    <FiAlertCircle /> Passwords do not match
+                  </span>
+                )}
               </div>
 
               <div className="password-actions">
-                <button type="submit" className="primary-btn">
+                <button
+                  type="submit"
+                  className="primary-btn"
+                  disabled={isPasswordMismatch}
+                >
                   Update Password
                 </button>
               </div>

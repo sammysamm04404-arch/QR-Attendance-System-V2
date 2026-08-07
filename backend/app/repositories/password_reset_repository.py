@@ -11,6 +11,9 @@ class PasswordResetRepository:
 
     @staticmethod
     def create(db: Session, token):
+        if not getattr(token, "created_at", None):
+            token.created_at = get_local_now()
+
         db.add(token)
         db.commit()
         db.refresh(token)
@@ -31,7 +34,6 @@ class PasswordResetRepository:
 
     @staticmethod
     def delete_user_tokens(db: Session, user_id: int):
-        """Cleans up previous tokens for this user so a new request always gets a fresh token."""
         db.query(PasswordResetToken).filter(
             PasswordResetToken.user_id == user_id
         ).delete()
